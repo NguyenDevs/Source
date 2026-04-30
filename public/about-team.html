@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về chúng tôi — KPMTXQ 24-36T</title>
+    <meta name="description" content="Thông tin về nhóm nghiên cứu đề tài khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <style>
+        /* Custom styles for About Team Page */
+        .page-header-minimal {
+            background-color: var(--color-bg);
+            padding: 40px 0 60px;
+            border-bottom: 1px solid var(--color-border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header-minimal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .breadcrumb-pill {
+            display: inline-flex;
+            align-items: center;
+            background: var(--color-primary-light);
+            padding: 6px 16px;
+            border-radius: 100px;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-pill a, .breadcrumb-pill span {
+            font-size: 11px;
+            font-weight: var(--weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-primary);
+        }
+
+        .breadcrumb-pill .sep {
+            opacity: 0.3;
+        }
+
+        .info-card-glass {
+            background: white;
+            border-radius: var(--radius-2xl);
+            padding: 48px;
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+        }
+
+        .info-card-glass:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary-light);
+        }
+
+        .team-profile-card {
+            background: white;
+            border-radius: var(--radius-2xl);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid var(--color-border-light);
+            transition: all var(--transition-base);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-primary-light);
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-base);
+        }
+
+        .team-profile-card:hover .profile-avatar {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .member-role {
+            font-size: var(--text-xs);
+            font-weight: var(--weight-bold);
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+            border-radius: var(--radius-2xl);
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('assets/images/bg/pattern.png');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--color-primary);
+            border: 1px solid white;
+        }
+
+        .btn-white:hover {
+            background: var(--color-bg-alt);
+            color: var(--color-primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline-white:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header-section d-none d-xl-block sticky-header">
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col d-flex justify-content-center">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="index.html">Trang Chủ</a></li>
+                                <li><a href="concepts.html">Khái niệm</a></li>
+                                <li><a href="objectives.html">Mục tiêu</a></li>
+                                <li><a href="significance.html">Ý nghĩa</a></li>
+                                <li><a href="content.html">Nội dung</a></li>
+                                <li><a href="resources.html">Kho học liệu AI</a></li>
+                                <li><a class="active" href="about-team.html">Về chúng tôi</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto">
+                        <div id="navRight" class="header-action-link"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header-section d-xl-none">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    <a href="index.html" class="header-logo"><img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo"></a>
+                </div>
+                <div class="col-auto">
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobileNavOverlay" class="offcanvas-overlay" onclick="toggleMobileMenu()"></div>
+    <div id="mobileNav" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <button class="close-btn" onclick="toggleMobileMenu()">×</button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="index.html">Trang Chủ</a>
+            <a href="concepts.html">Khái niệm</a>
+            <a href="objectives.html">Mục tiêu</a>
+            <a href="significance.html">Ý nghĩa</a>
+            <a href="content.html">Nội dung</a>
+            <a href="resources.html">Kho học liệu AI</a>
+            <a href="about-team.html" class="active">Về chúng tôi</a>
+        </nav>
+        <div id="mobileNavRight" class="mobile-menu-footer"></div>
+    </div>
+
+    <!-- COMPACT HEADER -->
+    <div class="page-header-minimal">
+        <div class="container relative z-10">
+            <div class="animate-up">
+                <div class="breadcrumb-pill">
+                    <a href="index.html">Trang chủ</a>
+                    <span class="sep">/</span>
+                    <span>Thông tin nhóm nghiên cứu</span>
+                </div>
+                <h1 class="display-2 font-bold mb-0">Đội Ngũ Phát Triển</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <section class="section py-20 bg-light">
+        <div class="container">
+            <!-- Project Info Box -->
+            <div class="info-card-glass mb-20 animate-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <h6 class="text-primary font-bold uppercase tracking-widest mb-4">Thông tin đề tài</h6>
+                        <h2 class="h2 mb-6">Khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi</h2>
+                        <div class="grid grid-2 grid-gap-lg mb-0">
+                            <div>
+                                <p class="mb-1 text-xs text-muted uppercase tracking-wider">Mã đề tài</p>
+                                <p class="font-bold text-xl text-primary">38-ĐATN</p>
+                            </div>
+                            <div>
+                                <p class="mb-1 text-xs text-muted uppercase tracking-wider">Lĩnh vực</p>
+                                <p class="font-bold text-xl text-primary">Giáo dục — AI</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 mt-10 mt-lg-0">
+                        <div class="bg-light p-8 rounded-xl border border-dashed border-primary">
+                            <p class="text-sm text-muted mb-4 italic">Hệ thống học liệu số được tối ưu hóa bằng trí tuệ nhân tạo.</p>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <span class="text-primary">✉️</span>
+                                <span class="text-sm">daihocvinh@gmail.com</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="text-primary">📍</span>
+                                <span class="text-sm">Đại học Vinh, Nghệ An</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div class="text-center mb-16 animate-up">
+                <h2 class="h1">Nhóm Nghiên Cứu 38-ĐATN</h2>
+                <div class="title-separator mx-auto mt-6"></div>
+            </div>
+
+            <div class="row g-8" style="margin-bottom: 120px;">
+                <!-- Member 1 -->
+                <div class="col-md-4">
+                    <div class="team-profile-card animate-up" style="animation-delay: 0.1s;">
+                        <div class="profile-avatar">HT</div>
+                        <span class="member-role">Nhóm trưởng</span>
+                        <h3 class="h4 mb-4">Huyền Trang</h3>
+                        <p class="text-sm text-muted leading-relaxed">Điều phối nhóm, nghiên cứu tổng hợp và biên soạn báo cáo khoa học cho đề tài.</p>
+                    </div>
+                </div>
+                <!-- Member 2 -->
+                <div class="col-md-4">
+                    <div class="team-profile-card animate-up" style="animation-delay: 0.2s;">
+                        <div class="profile-avatar" style="background: #2d3748;">HT</div>
+                        <span class="member-role">Thành viên</span>
+                        <h3 class="h4 mb-4">Hà Trang</h3>
+                        <p class="text-sm text-muted leading-relaxed">Thiết kế học liệu AI, xây dựng nội dung số và quản trị hệ thống học liệu trực tuyến.</p>
+                    </div>
+                </div>
+                <!-- Member 3 -->
+                <div class="col-md-4">
+                    <div class="team-profile-card animate-up" style="animation-delay: 0.3s;">
+                        <div class="profile-avatar" style="background: #2d3748;">TT</div>
+                        <span class="member-role">Thành viên</span>
+                        <h3 class="h4 mb-4">Thị Tuyết</h3>
+                        <p class="text-sm text-muted leading-relaxed">Khảo sát thực địa, thu thập dữ liệu và đánh giá tác động của đề tài tại cơ sở.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA BANNER -->
+            <div class="cta-banner animate-up">
+                <h3 class="h2 text-white mb-6">Bạn cần hỗ trợ thêm?</h3>
+                <p class="text-lg text-white opacity-80 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Đội ngũ nghiên cứu luôn sẵn sàng lắng nghe các ý kiến đóng góp và giải đáp mọi thắc mắc của bạn về dự án.
+                </p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-5">
+                    <a href="contact-us.html" class="btn btn-white px-10 py-4 font-bold shadow-lg" style="border-radius: 100px; color: var(--color-primary); min-width: 200px;">
+                        GỬI YÊU CẦU
+                    </a>
+                    <a href="resources.html" class="btn btn-outline-white px-10 py-4 font-bold" style="border-radius: 100px; border-width: 2px; min-width: 200px;">
+                        KHO HỌC LIỆU
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
+                    </a>
+                    <p>Đề tài nghiên cứu: "Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi". Một giải pháp giáo dục hiện đại cho trẻ thơ.</p>
+                    <div class="footer-social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100090118347358" class="footer-social-btn" target="_blank">f</a>
+                        <a href="https://x.com/daihocvinh" class="footer-social-btn" target="_blank">t</a>
+                        <a href="#" class="footer-social-btn">y</a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="footer-column-title">Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="concepts.html">Khái niệm</a></li>
+                        <li><a href="objectives.html">Mục tiêu</a></li>
+                        <li><a href="significance.html">Ý nghĩa</a></li>
+                        <li><a href="resources.html">Kho học liệu AI</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="footer-column-title">Học Liệu</h4>
+                    <ul class="footer-links">
+                        <li><a href="content.html">Nội dung giáo dục</a></li>
+                        <li><a href="about-team.html">Về chúng tôi</a></li>
+                        <li><a href="news.html">Tin tức & Sự kiện</a></li>
+                        <li><a href="contact-us.html">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div>
+                    <h4 class="footer-column-title">Liên Hệ</h4>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">📍</div>
+                        <div class="footer-contact-text">
+                            <span>Địa chỉ</span>
+                            số 182, đường Lê Duẩn, phường Trường Vinh, tỉnh Nghệ An
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">📞</div>
+                        <div class="footer-contact-text">
+                            <span>Điện thoại</span>
+                            0837 864 763
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">✉️</div>
+                        <div class="footer-contact-text">
+                            <span>Email</span>
+                            daihocvinh@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm 38-ĐATN</a>.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="mr-4">Chính sách bảo mật</a>
+                    <a href="#">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        const API = '/api';
+        async function checkSession() {
+            try { const res = await fetch(API + '/auth/session', { credentials: 'include' }); const data = await res.json(); updateNavUI(data.user ? data.user : null); }
+            catch (e) { updateNavUI(null); }
+        }
+        function updateNavUI(user) {
+            const nr = document.getElementById('navRight');
+            if (!nr) return;
+            if (user) {
+                const roleLabel = { admin: 'ADMIN', teacher: 'GV', student: 'HS', user: 'USER' }[user.role] || 'USER';
+                const roleClass = 'badge-' + (user.role || 'user');
+                nr.innerHTML = `<div class="flex"><span class="text-sm font-semibold">${escHtml(user.username)}</span><span class="badge ${roleClass}">${roleLabel}</span><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button></div>`;
+            } else {
+                nr.innerHTML = `<div class="flex"><a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a><a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a></div>`;
+            }
+            const mnr = document.getElementById('mobileNavRight');
+            if (mnr) {
+                if (user) mnr.innerHTML = `<div class="user-info"><strong>${escHtml(user.username)}</strong><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button></div>`;
+                else mnr.innerHTML = `<a href="login.html" class="btn btn-primary w-100">Đăng nhập</a>`;
+            }
+        }
+        async function doLogout() { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'include' }); window.location.reload(); }
+        function toggleMobileMenu() { 
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.getElementById('mobileNavOverlay').classList.toggle('active');
+        }
+        function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
+        checkSession();
+    </script>
+</body>
+
+</html>

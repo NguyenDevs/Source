@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPMTXQ 24-36T — Khám Phá Môi Trường Xung Quanh</title>
+    <meta name="description" content="Đề tài nghiên cứu: Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header-section d-none d-xl-block">
+        <div class="header-wrapper">
+            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <div class="main-menu menu-color--black menu-hover-color--golden">
+                                <nav>
+                                    <ul>
+                                        <li><a class="active main-menu-link" href="index.html">Trang Chủ</a></li>
+                                        <li><a href="khai-niem.html">Khái niệm</a></li>
+                                        <li><a href="muc-tieu.html">Mục tiêu</a></li>
+                                        <li><a href="y-nghia.html">Ý nghĩa</a></li>
+                                        <li><a href="noi-dung.html">Nội dung</a></li>
+                                        <li><a href="kho-hoc-lieu.html">Kho học liệu AI</a></li>
+                                        <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div id="navRight" class="header-action-link action-color--black action-hover-color--golden"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header-section d-xl-none">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a href="index.html">
+                        <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo" style="height:36px;width:auto;">
+                    </a>
+                </div>
+                <div class="col-6 text-right">
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileNav" class="mobile-menu" style="display:none;">
+            <a href="index.html">Trang Chủ</a>
+            <a href="khai-niem.html">Khái niệm</a>
+            <a href="muc-tieu.html">Mục tiêu</a>
+            <a href="y-nghia.html">Ý nghĩa</a>
+            <a href="noi-dung.html">Nội dung</a>
+            <a href="kho-hoc-lieu.html">Kho học liệu AI</a>
+            <a href="ve-chung-toi.html">Về chúng tôi</a>
+            <div id="mobileNavRight" style="margin-top:8px; padding-top:8px; border-top:1px solid var(--color-border-light);"></div>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+    <div id="search" class="search-modal">
+        <button type="button" class="close" aria-label="Đóng tìm kiếm">×</button>
+        <form>
+            <input type="search" placeholder="Nhập thông tin tại đây">
+            <button type="submit" class="btn btn-golden btn-lg">Tìm Kiếm</button>
+        </form>
+    </div>
+    <div class="offcanvas-overlay"></div>
+
+    <!-- HERO SLIDER -->
+    <div class="hero-slider-section">
+        <div class="hero-slider-active swiper-container">
+            <div class="swiper-wrapper">
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider1.jpg" alt="Trường THPT Quỳnh Lưu IV">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider2.jpg" alt="Hoạt động ngoại khóa">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider3.jpg" alt="Học sinh THPT Quỳnh Lưu IV">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider4.jpg" alt="Khai giảng năm học">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider5.jpg" alt="Sự kiện trường">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider6.jpg" alt="Hoạt động thể thao">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider7.jpg" alt="Giáo dục mầm non">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider8.jpg" alt="Công trình trường học">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider9.jpg" alt="Khuôn viên trường">
+                    </div>
+                </div>
+                <div class="hero-single-slider-item swiper-slide">
+                    <div class="hero-slider-bg">
+                        <img src="assets/images/hero-slider/heroslider10.jpg" alt="Sinh hoạt ngoại khóa">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination active-color-golden"></div>
+            <div class="swiper-button-prev d-none d-lg-block"></div>
+            <div class="swiper-button-next d-none d-lg-block"></div>
+        </div>
+    </div>
+
+    <!-- BANNER SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="row mb-6" style="margin-bottom: var(--space-6);">
+                <div class="col-lg-6 mb-6 mb-lg-0">
+                    <div class="banner-single-item banner-style-1 banner-animation img-responsive" data-aos="fade-up" data-aos-delay="0">
+                        <div class="image">
+                            <img src="assets/images/banner/banner-style-1-img-1.jpg" alt="Trường THPT Quỳnh Lưu IV">
+                        </div>
+                        <div class="content">
+                            <h4 class="title">TRƯỜNG THPT</h4>
+                            <h5 class="sub-title">QUỲNH LƯU IV</h5>
+                            <a href="ve-chung-toi.html" class="btn btn-outline-golden btn-lg">
+                                Khám Phá Ngay
+                                <i class="ion-ios-arrow-thin-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-6 mb-6">
+                            <div class="banner-single-item banner-style-2 banner-animation img-responsive" data-aos="fade-up" data-aos-delay="100">
+                                <div class="image">
+                                    <img src="assets/images/banner/banner-style-2-img-1.jpg" alt="50 năm thành lập">
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">1975<br>2025</h4>
+                                    <a href="ve-chung-toi.html" class="link-text"><span>50 năm</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-6">
+                            <div class="banner-single-item banner-style-2 banner-animation img-responsive" data-aos="fade-up" data-aos-delay="200">
+                                <div class="image">
+                                    <img src="assets/images/banner/banner-style-2-img-2.jpg" alt="Tin tức xuân 2025">
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">Tin tức<br>Xuân 2025</h4>
+                                    <a href="news.html" class="link-text"><span>Xem ngay</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2">
+                    <div class="banner-single-item banner-style-3 banner-animation img-responsive" data-aos="fade-up" data-aos-delay="0">
+                        <div class="image">
+                            <img class="img-fluid" src="assets/images/banner/banner-style-3-img-1.jpg" alt="Năm học mới">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS SECTION -->
+    <section class="section section-inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-content-gap" data-aos="fade-up" data-aos-delay="0" style="margin-bottom: var(--space-10);">
+                        <h2 class="section-title text-center" style="font-family:var(--font-heading);color:var(--color-primary);font-size:var(--text-3xl);margin-bottom:var(--space-3);">
+                            TIN TỨC NÓNG GẦN ĐÂY
+                        </h2>
+                        <p class="text-muted text-center" style="margin:0;font-size:var(--text-lg);">
+                            Điểm mục những tin tức tại Trường THPT Quỳnh Lưu 4
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="product-default-slider-default-1row default-slider-nav-arrow">
+                <div class="swiper-container product-default-slider-4grid-1row">
+                    <div class="swiper-wrapper">
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-9.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-10.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left">
+                                        <a href="#" data-bs-toggle="modal">Xem bài viết</a>
+                                    </div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Buổi học đầu tiên của năm mới Ất Tỵ — 2025</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="empty"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right">
+                                    <span>QL4</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-11.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-3.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Sơ kết các CLB, đội — nhóm</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="empty"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-5.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-7.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Hội thi Xuân yêu thương — Tết</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-2.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Người đẹp và các gian hàng</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-4.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-6.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Ủng hộ HS nghèo, khó khăn ăn Tết</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-8.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-12.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Tết sớm về bản Ất Tỵ — 2025</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-13.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-14.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Gala Táo quân — Gặp nhau cuối năm 2024</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-15.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-16.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">Sinh hoạt chi đoàn tháng 12</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+
+                        <div class="product-default-single-item product-color--golden swiper-slide">
+                            <div class="image-box">
+                                <a href="#" class="image-link">
+                                    <img src="assets/images/product/default/home-1/default-17.jpg" alt="">
+                                    <img src="assets/images/product/default/home-1/default-18.jpg" alt="">
+                                </a>
+                                <div class="action-link">
+                                    <div class="action-link-left"><a href="#" data-bs-toggle="modal">Xem bài viết</a></div>
+                                    <div class="action-link-right">
+                                        <a href="#"><i class="icon-heart"></i></a>
+                                        <a href="#"><i class="icon-share"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-left">
+                                    <h6 class="title"><a href="#">RECAP Giải kéo co 2024</a></h6>
+                                    <ul class="review-star">
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                        <li class="empty"><i class="ion-android-star"></i></li>
+                                        <li class="empty"><i class="ion-android-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="content-right"><span>QL4</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section" style="background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-light) 100%);">
+        <div class="container text-center">
+            <h2 style="color:#fff;font-family:var(--font-heading);margin-bottom:var(--space-4);">
+                Khám Phá Kho Học Liệu AI
+            </h2>
+            <p style="color:rgba(255,255,255,0.85);font-size:var(--text-lg);max-width:600px;margin:0 auto var(--space-8);">
+                Tìm hiểu thêm về hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi qua kho học liệu AI của chúng tôi.
+            </p>
+            <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
+                <a href="kho-hoc-lieu.html" class="btn btn-lg" style="background:#fff;color:var(--color-primary);border-color:#fff;">
+                    Xem Kho Học Liệu
+                </a>
+                <a href="khai-niem.html" class="btn btn-lg" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);">
+                    Tìm Hiểu Thêm
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        <div class="footer-wrapper">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="0">
+                                <h5 class="title">THÔNG TIN</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="index.html">Trang Chủ</a></li>
+                                    <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
+                                    <li><a href="news.html">Tin tức sự kiện</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="100">
+                                <h5 class="title">TÀI KHOẢN</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="login.html">Giáo viên đăng nhập</a></li>
+                                    <li><a href="register.html">Học sinh đăng ký</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="200">
+                                <h5 class="title">NỘI DUNG</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="khai-niem.html">Khái niệm</a></li>
+                                    <li><a href="muc-tieu.html">Mục tiêu</a></li>
+                                    <li><a href="y-nghia.html">Ý nghĩa</a></li>
+                                    <li><a href="noi-dung.html">Nội dung</a></li>
+                                    <li><a href="kho-hoc-lieu.html">Kho học liệu AI</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="300">
+                                <h5 class="title">THÔNG TIN VỀ CHÚNG TÔI</h5>
+                                <div class="footer-about">
+                                    <p>Đề tài: 38-ĐATN — KPMTXQ 24-36T</p>
+                                    <address class="address">
+                                        <span>Địa chỉ: 65, Xóm Tuần A, Xã Quỳnh Châu, Huyện Quỳnh Lưu, Nghệ An</span>
+                                        <span>Điện thoại: 0837 864 763</span>
+                                        <span>Email: thptquynhluu4@gmail.com</span>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-center">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-6">
+                            <div class="footer-social" data-aos="fade-up" data-aos-delay="0">
+                                <h4 class="title">Theo Dõi Chúng Tôi</h4>
+                                <ul class="footer-social-link">
+                                    <li><a href="https://www.facebook.com/profile.php?id=100090118347358" target="_blank" rel="noopener"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://x.com/thptquynhluu4" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center flex-column flex-md-row mb-n6">
+                        <div class="col-auto mb-6">
+                            <div class="footer-copyright">
+                                <p class="copyright-text">
+                                    &copy; 2026 <a href="index.html">KPMTXQ 24-36T</a>. Bản quyền thuộc về <a href="ve-chung-toi.html" target="_blank">Nhóm 38-ĐATN</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+    const API = '/api';
+    async function checkSession() {
+        try {
+            const res = await fetch(API + '/auth/session', { credentials: 'include' });
+            const data = await res.json();
+            updateNavUI(data.user ? data.user : null);
+        } catch (e) { updateNavUI(null); }
+    }
+    function updateNavUI(user) {
+        const nr = document.getElementById('navRight');
+        if (!nr) return;
+        if (user) {
+            const roleLabel = { admin: 'ADMIN', teacher: 'GV', student: 'HS', user: 'USER' }[user.role] || 'USER';
+            nr.innerHTML =
+                '<span style="color:var(--color-text);font-size:var(--text-sm);font-weight:var(--weight-semibold);white-space:nowrap;">' + escHtml(user.username) + '</span> ' +
+                '<span class="badge badge-primary" style="white-space:nowrap;">' + roleLabel + '</span>' +
+                (user.role === 'admin' ? ' <a href="admin.html" class="btn btn-sm" style="background:var(--color-primary);color:#fff;padding:4px 12px;border-radius:var(--radius-md);font-size:var(--text-xs);font-weight:var(--weight-bold);text-decoration:none;">Quản trị</a>' : '') +
+                ' <a href="#" onclick="doLogout()" style="color:var(--color-text-muted);font-size:var(--text-sm);text-decoration:none;padding:4px 8px;">Đăng xuất</a>';
+        } else {
+            nr.innerHTML =
+                '<a href="login.html" class="btn btn-sm btn-ghost" style="font-size:var(--text-sm);">Đăng nhập</a>' +
+                '<a href="register.html" class="btn btn-sm btn-primary" style="font-size:var(--text-sm);">Đăng ký</a>';
+        }
+
+        // Mobile nav
+        const mnr = document.getElementById('mobileNavRight');
+        if (mnr) {
+            if (user) {
+                mnr.innerHTML = '<strong style="color:var(--color-primary);font-size:var(--text-sm);">' + escHtml(user.username) + '</strong> <a href="#" onclick="doLogout()" style="color:var(--color-text-muted);font-size:var(--text-sm);">Đăng xuất</a>';
+            } else {
+                mnr.innerHTML = '<a href="login.html" style="color:var(--color-primary);font-size:var(--text-sm);font-weight:var(--weight-semibold);">Đăng nhập</a>';
+            }
+        }
+    }
+    async function doLogout() { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'include' }); window.location.reload(); }
+    function toggleMobileMenu() { const m = document.getElementById('mobileNav'); m.style.display = m.style.display === 'none' ? 'block' : 'none'; }
+    function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
+    checkSession();
+    </script>
+</body>
+</html>

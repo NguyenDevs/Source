@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khái niệm — KPMTXQ 24-36T</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <style>
+        .user-info { color: white; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .user-info .role { background: #b19361; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .admin-panel-btn { background: #b19361; color: white; padding: 4px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
+        .login-btn { background: #b19361; color: white; padding: 4px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
+        .content-block { padding: 40px 0; }
+        .content-block h2 { color: #b19361; font-size: 24px; margin-bottom: 15px; }
+        .content-block h3 { color: #333; font-size: 18px; margin: 20px 0 10px; }
+        .content-block p { color: #444; line-height: 1.8; margin-bottom: 12px; text-align: justify; }
+        .content-block ul { padding-left: 25px; margin-bottom: 15px; }
+        .content-block li { color: #444; line-height: 1.8; margin-bottom: 6px; }
+        .breadcrumb-custom { padding: 20px 0; background: #faf8f5; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <header class="header-section d-none d-xl-block">
+        <div class="header-wrapper">
+            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-between">
+                            <div class="header-logo"><div class="logo"><a href="index.html"><img src="assets/images/logo/logo_black.png" alt=""></a></div></div>
+                            <div class="main-menu menu-color--black menu-hover-color--golden">
+                                <nav><ul>
+                                    <li><a href="index.html">Trang Chủ</a></li>
+                                    <li><a class="active main-menu-link" href="khai-niem.html">Khái niệm</a></li>
+                                    <li><a href="muc-tieu.html">Mục tiêu</a></li>
+                                    <li><a href="y-nghia.html">Ý nghĩa</a></li>
+                                    <li><a href="noi-dung.html">Nội dung</a></li>
+                                    <li><a href="kho-hoc-lieu.html">Kho học liệu AI</a></li>
+                                    <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
+                                </ul></nav>
+                            </div>
+                            <div id="navRight" class="header-action-link action-color--black action-hover-color--golden d-flex align-items-center gap-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-header-section d-xl-none">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6"><div class="header-logo"><a href="index.html"><img src="assets/images/logo/logo_black.png" alt=""></a></div></div>
+                <div class="col-6 text-right"><button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button></div>
+            </div>
+        </div>
+        <div id="mobileNav" class="mobile-menu" style="display:none;">
+            <a href="index.html">Trang Chủ</a>
+            <a href="khai-niem.html">Khái niệm</a>
+            <a href="muc-tieu.html">Mục tiêu</a>
+            <a href="y-nghia.html">Ý nghĩa</a>
+            <a href="noi-dung.html">Nội dung</a>
+            <a href="kho-hoc-lieu.html">Kho học liệu AI</a>
+            <a href="ve-chung-toi.html">Về chúng tôi</a>
+        </div>
+    </div>
+
+    <div class="search-modal" id="search">
+        <button type="button" class="close">×</button>
+        <form><input type="search" placeholder="Nhập thông tin tại đây" /><button type="submit" class="btn btn-lg btn-golden">Tìm Kiếm</button></form>
+    </div>
+    <div class="offcanvas-overlay"></div>
+
+    <!-- Breadcrumb -->
+    <div class="shop-section breadcrumb-custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="shop-breadcrumb d-flex align-items-center gap-2" style="font-size:14px; color:#666;">
+                        <a href="index.html" style="color:#b19361;">Trang chủ</a> / <span>Khái niệm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="about-section">
+        <div class="about-top">
+            <div class="container">
+                <div class="row section-top-gap-100 align-items-center">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="section-content" data-aos="fade-up" data-aos-delay="0">
+                            <h2 class="section-title" style="color:#b19361; font-size:28px; margin-bottom:30px;">1.2. MỘT SỐ KHÁI NIỆM CƠ BẢN</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-list-item section-top-gap-100 section-inner-bg">
+            <div class="container">
+                <div class="row align-items-center content-block">
+                    <div class="col-lg-12">
+                        <div data-aos="fade-up" data-aos-delay="0">
+                            <h2 style="color:#b19361; font-size:20px; margin-bottom:20px;">1.2.1. Môi trường xung quanh</h2>
+                            <p>Môi trường xung quanh là tổng hợp các yếu tố tự nhiên và xã hội tác động đến sự phát triển của trẻ mầm non. Đối với trẻ 24-36 tháng tuổi, môi trường xung quanh bao gồm:</p>
+                            <ul>
+                                <li><strong>Môi trường tự nhiên:</strong> cây cối, động vật, thời tiết, đất, nước, ánh sáng, không khí trong lành.</li>
+                                <li><strong>Môi trường xã hội:</strong> gia đình, thầy cô, bạn bè, cộng đồng xung quanh trường mầm non.</li>
+                                <li><strong>Môi trường học tập:</strong> đồ chơi, sách tranh, tranh ảnh, các góc học tập trong lớp.</li>
+                                <li><strong>Môi trường văn hóa:</strong> các lễ hội, phong tục tập quán địa phương, truyện cổ tích, câu đố.</li>
+                            </ul>
+
+                            <p>Việc tổ chức cho trẻ 24-36 tháng tuổi khám phá môi trường xung quanh giúp trẻ:</p>
+                            <ul>
+                                <li>Nhận biết và gọi tên các sự vật, hiện tượng trong cuộc sống hàng ngày.</li>
+                                <li>Phát triển ngôn ngữ, tư duy và kỹ năng quan sát.</li>
+                                <li>Hình thành tình yêu thiên nhiên, ý thức bảo vệ môi trường từ sớm.</li>
+                                <li>Rèn luyện kỹ năng vận động thô và vận động tinh.</li>
+                            </ul>
+                        </div>
+
+                        <div data-aos="fade-up" data-aos-delay="200">
+                            <h2 style="color:#b19361; font-size:20px; margin:40px 0 20px;">1.2.2. Khám phá môi trường xung quanh</h2>
+                            <p>Khám phá môi trường xung quanh là hoạt động giáo dục mà trẻ mầm non được tiếp xúc, quan sát, tìm hiểu và trải nghiệm trực tiếp với các sự vật, hiện tượng trong tự nhiên và đời sống xã hội. Đối với trẻ 24-36 tháng tuổi, hoạt động này cần:</p>
+                            <ul>
+                                <li>Tổ chức dưới nhiều hình thức: tham quan ngoài trời, quan sát trong lớp, trò chuyện, trải nghiệm thực tế.</li>
+                                <li>Sử dụng phương pháp trực quan sinh động, gần gũi với cuộc sống của trẻ.</li>
+                                <li>Kết hợp giáo dục STEM và AI để nâng cao hiệu quả, tạo hứng thú cho trẻ.</li>
+                                <li>Đảm bảo an toàn, phù hợp với lứa tuổi và khả năng nhận thức của trẻ.</li>
+                            </ul>
+                        </div>
+
+                        <div data-aos="fade-up" data-aos-delay="400">
+                            <h2 style="color:#b19361; font-size:20px; margin:40px 0 20px;">1.2.3. Giáo dục mầm non ứng dụng AI</h2>
+                            <p>Giáo dục mầm non ứng dụng AI là việc sử dụng các công cụ, phần mềm và nền tảng trí tuệ nhân tạo để hỗ trợ việc tổ chức các hoạt động giáo dục cho trẻ mầm non, đặc biệt là hoạt động khám phá môi trường xung quanh. Các ứng dụng AI phổ biến trong giáo dục mầm non bao gồm:</p>
+                            <ul>
+                                <li><strong>Video học tập tương tác:</strong> các video có nội dung giáo dục, âm thanh, hình ảnh sinh động, có thể tương tác với trẻ.</li>
+                                <li><strong>Phần mềm nhận diện:</strong> giúp trẻ nhận biết động vật, thực vật, màu sắc, hình dạng qua camera.</li>
+                                <li><strong>Game giáo dục:</strong> các trò chơi có tính giáo dục cao, phù hợp với lứa tuổi 24-36 tháng.</li>
+                                <li><strong>Thư viện học liệu số:</strong> kho tài nguyên phong phú về hình ảnh, âm thanh, video phục vụ giáo dục.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section footer-bg section-top-gap-100">
+        <div class="footer-wrapper">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="0">
+                                <h5 class="title">THÔNG TIN</h5>
+                                <ul class="footer-nav"><li><a href="index.html">TRANG CHỦ</a></li></ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="200">
+                                <h5 class="title">TÀI KHOẢN</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="login.html">● GIÁO VIÊN ĐĂNG NHẬP</a></li>
+                                    <li><a href="register.html">● HỌC SINH ĐĂNG KÝ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="400">
+                                <h5 class="title">DANH MỤC</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="khai-niem.html">● KHÁI NIỆM</a></li>
+                                    <li><a href="muc-tieu.html">● MỤC TIÊU</a></li>
+                                    <li><a href="y-nghia.html">● Ý NGHĨA</a></li>
+                                    <li><a href="noi-dung.html">● NỘI DUNG</a></li>
+                                    <li><a href="kho-hoc-lieu.html">● KHO HỌC LIỆU AI</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 mb-6">
+                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="600">
+                                <h5 class="title">THÔNG TIN VỀ CHÚNG TÔI</h5>
+                                <div class="footer-about">
+                                    <p>Đề tài: 38-ĐATN — KPMTXQ 24-36T</p>
+                                    <address class="address">
+                                        <span>● Đề tài: Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi</span><br>
+                                        <span>● Nhóm 38: Nguyễn Thị Huyền Trang, Phan Hà Trang, Phạm Thị Tuyết</span>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-center">
+                <div class="container">
+                    <div class="row mb-n6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-6">
+                            <div class="footer-social" data-aos="fade-up" data-aos-delay="0">
+                                <h4 class="title">Theo Dõi Chúng Tôi</h4>
+                                <ul class="footer-social-link">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center flex-column flex-md-row mb-n6">
+                        <div class="col-auto mb-6">
+                            <div class="footer-copyright">
+                                <p class="copyright-text">&copy; 2026 <a href="index.html">KPMTXQ 24-36T</a>. Bản quyền thuộc về <a href="ve-chung-toi.html">Nhóm 38-ĐATN</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+    const API = '/api';
+    async function checkSession() {
+        try {
+            const res = await fetch(API + '/auth/session', { credentials: 'include' });
+            const data = await res.json();
+            updateNavUI(data.user ? data.user : null);
+        } catch (e) { updateNavUI(null); }
+    }
+    function updateNavUI(user) {
+        const nr = document.getElementById('navRight');
+        if (!nr) return;
+        if (user) {
+            const roleLabel = { admin: 'ADMIN', teacher: 'GV', student: 'HS', user: 'USER' }[user.role] || 'USER';
+            nr.innerHTML = '<span class="user-info"><strong>' + escHtml(user.username) + '</strong> <span class="role">' + roleLabel + '</span></span>' +
+                (user.role === 'admin' ? '<a href="admin.html" class="admin-panel-btn">⚙️</a>' : '') +
+                '<a href="#" onclick="doLogout()" class="login-btn">Đăng xuất</a>';
+        } else {
+            nr.innerHTML = '<a href="login.html" class="login-btn">Đăng nhập</a><a href="register.html" class="admin-panel-btn">Đăng ký</a>';
+        }
+    }
+    async function doLogout() { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'include' }); window.location.reload(); }
+    function toggleMobileMenu() { const m = document.getElementById('mobileNav'); m.style.display = m.style.display === 'none' ? 'block' : 'none'; }
+    function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
+    checkSession();
+    </script>
+</body>
+</html>

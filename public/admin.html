@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — KPMTXQ 24-36T</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <style>
+        .admin-wrap { max-width: 1100px; margin: 0 auto; padding: 30px 15px; }
+        .admin-wrap h2 { color: #b19361; margin-bottom: 20px; }
+        .admin-wrap h3 { color: #333; margin: 20px 0 10px; font-size: 18px; }
+        .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.08); text-align: center; }
+        .stat-card .num { font-size: 36px; font-weight: 800; color: #b19361; }
+        .stat-card .label { color: #888; font-size: 14px; margin-top: 5px; }
+        .admin-section { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-bottom: 20px; }
+        .admin-section h3 { display: flex; align-items: center; gap: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        table th { background: #b19361; color: white; padding: 10px 12px; text-align: left; }
+        table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+        table tr:hover { background: #faf8f5; }
+        .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .badge-admin { background: #b19361; color: white; }
+        .badge-teacher { background: #2c7a7b; color: white; }
+        .badge-student { background: #805ad5; color: white; }
+        .badge-user { background: #718096; color: white; }
+        .badge-published { background: #48bb78; color: white; }
+        .badge-draft { background: #ed8936; color: white; }
+        .badge-pending { background: #ed8936; color: white; }
+        .badge-approved { background: #48bb78; color: white; }
+        .btn-sm { padding: 4px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; border: none; font-weight: 600; }
+        .btn-danger { background: #e53e3e; color: white; }
+        .btn-primary { background: #b19361; color: white; }
+        .btn-select { background: #2c7a7b; color: white; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 9999; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-box { background: white; border-radius: 12px; padding: 30px; width: 500px; max-width: 95vw; }
+        .modal-box h3 { margin-bottom: 15px; }
+        .modal-box input, .modal-box textarea, .modal-box select { width: 100%; padding: 8px 10px; border: 2px solid #e2e2e2; border-radius: 6px; margin-bottom: 12px; font-size: 14px; box-sizing: border-box; }
+        .modal-box textarea { resize: vertical; min-height: 80px; }
+        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+        .not-admin { min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px; text-align: center; }
+    </style>
+</head>
+
+<body>
+    <header class="header-section d-none d-xl-block">
+        <div class="header-wrapper">
+            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-between">
+                            <div class="header-logo">
+                                <div class="logo"><a href="index.html"><img src="assets/images/logo/logo_black.png" alt=""></a></div>
+                            </div>
+                            <div class="main-menu menu-color--black menu-hover-color--golden">
+                                <nav><ul>
+                                    <li><a href="index.html">Trang Chủ</a></li>
+                                    <li><a href="khai-niem.html">Khái niệm</a></li>
+                                    <li><a href="muc-tieu.html">Mục tiêu</a></li>
+                                    <li><a href="y-nghia.html">Ý nghĩa</a></li>
+                                    <li><a href="noi-dung.html">Nội dung</a></li>
+                                    <li><a href="kho-hoc-lieu.html">Kho học liệu AI</a></li>
+                                    <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
+                                </ul></nav>
+                            </div>
+                            <div class="header-action-link action-color--black action-hover-color--golden">
+                                <a href="index.html" style="color:#b19361; font-weight:600;">← Về trang chủ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-wrap" id="adminContent" style="display:none;">
+
+        <h2>⚙️ Admin Dashboard</h2>
+
+        <!-- Stats -->
+        <div class="stat-row">
+            <div class="stat-card"><div class="num" id="statNews">-</div><div class="label">Bài viết</div></div>
+            <div class="stat-card"><div class="num" id="statVideos">-</div><div class="label">Video</div></div>
+            <div class="stat-card"><div class="num" id="statUsers">-</div><div class="label">Người dùng</div></div>
+        </div>
+
+        <!-- News -->
+        <div class="admin-section">
+            <h3>📰 Quản lý Bài viết Tin tức <button class="btn-sm btn-primary" onclick="openNewsModal()">+ Thêm bài viết</button></h3>
+            <div style="overflow-x:auto;">
+            <table>
+                <thead><tr><th>ID</th><th>Tiêu đề</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th>Thao tác</th></tr></thead>
+                <tbody id="newsTable"></tbody>
+            </table>
+            </div>
+        </div>
+
+        <!-- Users -->
+        <div class="admin-section">
+            <h3>👥 Quản lý Người dùng</h3>
+            <div style="overflow-x:auto;">
+            <table>
+                <thead><tr><th>ID</th><th>Tên đăng nhập</th><th>Email</th><th>Vai trò</th><th>Ngày tạo</th><th>Đổi vai trò</th><th>Xóa</th></tr></thead>
+                <tbody id="usersTable"></tbody>
+            </table>
+            </div>
+        </div>
+
+        <!-- Videos -->
+        <div class="admin-section">
+            <h3>🎬 Quản lý Video</h3>
+            <div style="overflow-x:auto;">
+            <table>
+                <thead><tr><th>ID</th><th>Tiêu đề</th><th>Người tải</th><th>Dung lượng</th><th>Ngày</th><th>Tải về</th><th>Xóa</th></tr></thead>
+                <tbody id="videosTable"></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="not-admin" id="notAdminMsg" style="display:none;">
+        <div style="font-size:64px;">🔐</div>
+        <h2 style="color:#c0392b;">Không có quyền truy cập</h2>
+        <p>Chỉ tài khoản Admin mới được vào trang này.</p>
+        <a href="index.html" class="btn-sm btn-primary">← Quay về trang chủ</a>
+    </div>
+
+    <!-- News Modal -->
+    <div class="modal" id="newsModal">
+        <div class="modal-box">
+            <h3>📰 Thêm Bài viết Mới</h3>
+            <input type="text" id="newsTitle" placeholder="Tiêu đề bài viết *">
+            <select id="newsCategory"></select>
+            <textarea id="newsSummary" placeholder="Tóm tắt (tùy chọn)"></textarea>
+            <textarea id="newsContent" placeholder="Nội dung bài viết (HTML được hỗ trợ) *" style="min-height:200px;"></textarea>
+            <div class="modal-actions">
+                <button class="btn-sm btn-primary" onclick="submitNews()">Đăng bài</button>
+                <button class="btn-sm btn-danger" onclick="closeNewsModal()">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+    const API = '/api';
+
+    async function checkAdmin() {
+        try {
+            const res = await fetch(API + '/auth/session', { credentials: 'include' });
+            const data = await res.json();
+            if (!data.success || !data.user || data.user.role !== 'admin') {
+                document.getElementById('adminContent').style.display = 'none';
+                document.getElementById('notAdminMsg').style.display = 'flex';
+                return;
+            }
+            document.getElementById('adminContent').style.display = 'block';
+            document.getElementById('notAdminMsg').style.display = 'none';
+            loadAll();
+        } catch (e) {
+            document.getElementById('notAdminMsg').style.display = 'flex';
+        }
+    }
+
+    async function loadAll() {
+        loadStats();
+        loadNews();
+        loadUsers();
+        loadVideos();
+        loadCategories();
+    }
+
+    async function loadStats() {
+        try {
+            const res = await fetch(API + '/stats', { credentials: 'include' });
+            const data = await res.json();
+            if (data.success) {
+                document.getElementById('statNews').textContent = data.stats.news || 0;
+                document.getElementById('statVideos').textContent = data.stats.videos || 0;
+                document.getElementById('statUsers').textContent = data.stats.users || 0;
+            }
+        } catch (e) {}
+    }
+
+    async function loadNews() {
+        try {
+            const res = await fetch(API + '/news?limit=50', { credentials: 'include' });
+            const data = await res.json();
+            const tb = document.getElementById('newsTable');
+            if (!data.news || data.news.length === 0) {
+                tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">Chưa có bài viết nào.</td></tr>';
+                return;
+            }
+            tb.innerHTML = data.news.map(n => {
+                const date = new Date(n.created_at).toLocaleDateString('vi-VN');
+                return '<tr>' +
+                    '<td>' + n.id + '</td>' +
+                    '<td><strong>' + escHtml(n.title) + '</strong></td>' +
+                    '<td><span class="badge badge-published">' + escHtml(n.category_name || 'Không') + '</span></td>' +
+                    '<td>' + escHtml(n.author_name || 'Không rõ') + '</td>' +
+                    '<td>' + date + '</td>' +
+                    '<td><button class="btn-sm btn-danger" onclick="deleteNews(' + n.id + ')">🗑 Xóa</button></td>' +
+                    '</tr>';
+            }).join('');
+        } catch (e) {}
+    }
+
+    async function loadUsers() {
+        try {
+            const res = await fetch(API + '/users', { credentials: 'include' });
+            const data = await res.json();
+            const tb = document.getElementById('usersTable');
+            if (!data.users || data.users.length === 0) {
+                tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">Chưa có người dùng nào.</td></tr>';
+                return;
+            }
+            tb.innerHTML = data.users.map(u => {
+                const roleClass = 'badge-' + u.role;
+                const date = new Date(u.created_at).toLocaleDateString('vi-VN');
+                return '<tr>' +
+                    '<td>' + u.id + '</td>' +
+                    '<td><strong>' + escHtml(u.username) + '</strong></td>' +
+                    '<td>' + escHtml(u.email || '-') + '</td>' +
+                    '<td><span class="badge ' + roleClass + '">' + escHtml(u.role) + '</span></td>' +
+                    '<td>' + date + '</td>' +
+                    '<td><select class="btn-sm" style="padding:4px 8px;border:1px solid #ddd;border-radius:6px;" onchange="changeRole(' + u.id + ',this.value)">' +
+                    '<option value="admin"' + (u.role==='admin'?' selected':'') + '>Admin</option>' +
+                    '<option value="teacher"' + (u.role==='teacher'?' selected':'') + '>Giáo viên</option>' +
+                    '<option value="student"' + (u.role==='student'?' selected':'') + '>Học sinh</option>' +
+                    '<option value="user"' + (u.role==='user'?' selected':'') + '>Người dùng</option>' +
+                    '</select></td>' +
+                    '<td><button class="btn-sm btn-danger" onclick="deleteUser(' + u.id + ')">🗑</button></td>' +
+                    '</tr>';
+            }).join('');
+        } catch (e) {}
+    }
+
+    async function loadVideos() {
+        try {
+            const res = await fetch(API + '/videos', { credentials: 'include' });
+            const data = await res.json();
+            const tb = document.getElementById('videosTable');
+            if (!data.videos || data.videos.length === 0) {
+                tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">Chưa có video nào.</td></tr>';
+                return;
+            }
+            tb.innerHTML = data.videos.map(v => {
+                const date = new Date(v.created_at).toLocaleDateString('vi-VN');
+                const size = (v.size / (1024*1024)).toFixed(1);
+                const dl = API + '/videos/download/' + encodeURIComponent(v.filename);
+                return '<tr>' +
+                    '<td>' + v.id + '</td>' +
+                    '<td><strong>' + escHtml(v.title) + '</strong></td>' +
+                    '<td>' + escHtml(v.uploader_name || 'Không rõ') + '</td>' +
+                    '<td>' + size + ' MB</td>' +
+                    '<td>' + date + '</td>' +
+                    '<td><a href="' + dl + '" class="btn-sm btn-primary" download>⬇ ' + v.downloads + '</a></td>' +
+                    '<td><button class="btn-sm btn-danger" onclick="deleteVideo(' + v.id + ')">🗑</button></td>' +
+                    '</tr>';
+            }).join('');
+        } catch (e) {}
+    }
+
+    async function loadCategories() {
+        try {
+            const res = await fetch(API + '/categories', { credentials: 'include' });
+            const data = await res.json();
+            const sel = document.getElementById('newsCategory');
+            sel.innerHTML = (data.categories || []).map(c =>
+                '<option value="' + c.id + '">' + escHtml(c.name) + '</option>').join('');
+        } catch (e) {}
+    }
+
+    async function changeRole(userId, role) {
+        await fetch(API + '/users/update-role', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include',
+            body: JSON.stringify({ userId, role })
+        });
+        loadUsers();
+    }
+
+    async function deleteUser(id) {
+        if (!confirm('Xóa người dùng này?')) return;
+        await fetch(API + '/users/delete/' + id, { method: 'POST', credentials: 'include' });
+        loadUsers();
+        loadStats();
+    }
+
+    async function deleteNews(id) {
+        if (!confirm('Xóa bài viết này?')) return;
+        await fetch(API + '/news/delete/' + id, { method: 'POST', credentials: 'include' });
+        loadNews();
+        loadStats();
+    }
+
+    async function deleteVideo(id) {
+        if (!confirm('Xóa video này?')) return;
+        await fetch(API + '/videos/delete/' + id, { method: 'POST', credentials: 'include' });
+        loadVideos();
+        loadStats();
+    }
+
+    function openNewsModal() {
+        document.getElementById('newsModal').classList.add('active');
+    }
+
+    function closeNewsModal() {
+        document.getElementById('newsModal').classList.remove('active');
+        document.getElementById('newsTitle').value = '';
+        document.getElementById('newsSummary').value = '';
+        document.getElementById('newsContent').value = '';
+    }
+
+    async function submitNews() {
+        const title = document.getElementById('newsTitle').value.trim();
+        const cat = document.getElementById('newsCategory').value;
+        const summary = document.getElementById('newsSummary').value.trim();
+        const content = document.getElementById('newsContent').value;
+        if (!title || !content) { alert('Tiêu đề và nội dung không được trống.'); return; }
+        const res = await fetch(API + '/news', {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, category_id: cat || null, summary, content })
+        });
+        const data = await res.json();
+        if (data.success) {
+            closeNewsModal();
+            loadNews();
+            loadStats();
+        } else {
+            alert(data.message || 'Lỗi.');
+        }
+    }
+
+    function escHtml(str) {
+        if (!str) return '';
+        const el = document.createElement('span');
+        el.textContent = str;
+        return el.innerHTML;
+    }
+
+    checkAdmin();
+    </script>
+</body>
+</html>

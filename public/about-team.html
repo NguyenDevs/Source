@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Về chúng tôi — KPMTXQ 24-36T</title>
-    <meta name="description" content="Thông tin về nhóm nghiên cứu đề tài khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi">
+    <title>Đội ngũ nghiên cứu — KPMTXQ 24-36T</title>
+    <meta name="description" content="Nhóm nghiên cứu đề tài khoa học về giáo dục mầm non và ứng dụng AI">
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,167 +15,246 @@
     <link rel="stylesheet" href="assets/css/style.min.css">
     <link rel="stylesheet" href="assets/css/design-system.css">
     <style>
-        /* Custom styles for About Team Page */
-        .page-header-minimal {
-            background-color: var(--color-bg);
-            padding: 40px 0 60px;
-            border-bottom: 1px solid var(--color-border-light);
+        /* RADICAL REDESIGN - ARTISTIC CINEMATIC STYLE */
+        :root {
+            --accent-glow: rgba(186, 26, 26, 0.15);
+        }
+
+        .team-hero-artistic {
+            background: #0f0f0f;
+            padding: 120px 0 240px;
             position: relative;
             overflow: hidden;
-        }
-
-        .page-header-minimal::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .breadcrumb-pill {
-            display: inline-flex;
-            align-items: center;
-            background: var(--color-primary-light);
-            padding: 6px 16px;
-            border-radius: 100px;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumb-pill a, .breadcrumb-pill span {
-            font-size: 11px;
-            font-weight: var(--weight-bold);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--color-primary);
-        }
-
-        .breadcrumb-pill .sep {
-            opacity: 0.3;
-        }
-
-        .info-card-glass {
-            background: white;
-            border-radius: var(--radius-2xl);
-            padding: 48px;
-            border: 1px solid var(--color-border-light);
-            box-shadow: var(--shadow-sm);
-            transition: all var(--transition-base);
-        }
-
-        .info-card-glass:hover {
-            box-shadow: var(--shadow-md);
-            border-color: var(--color-primary-light);
-        }
-
-        .team-profile-card {
-            background: white;
-            border-radius: var(--radius-2xl);
-            padding: 40px 30px;
-            text-align: center;
-            border: 1px solid var(--color-border-light);
-            transition: all var(--transition-base);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .team-profile-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--color-primary-light);
-        }
-
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 30px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-lg);
-            transition: all var(--transition-base);
+            z-index: 5;
         }
 
-        .team-profile-card:hover .profile-avatar {
-            transform: rotate(5deg) scale(1.05);
-        }
-
-        .member-role {
-            font-size: var(--text-xs);
-            font-weight: var(--weight-bold);
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .cta-banner {
-            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
-            border-radius: var(--radius-2xl);
-            padding: 60px 40px;
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-banner::after {
+        .team-hero-artistic::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('assets/images/bg/pattern.png');
-            opacity: 0.1;
+            background: radial-gradient(circle at 80% 20%, #300a0a 0%, transparent 40%),
+                        radial-gradient(circle at 10% 80%, #1a0505 0%, transparent 30%);
+            z-index: 0;
+        }
+
+        .abstract-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            width: 100%;
+            transform: rotate(-15deg);
+            z-index: 0;
             pointer-events: none;
         }
 
-        .btn-white {
-            background: white;
+        .breadcrumb-artistic {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 99;
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .breadcrumb-artistic a {
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb-artistic a:hover {
+            color: var(--color-primary-light);
+            text-decoration: none;
+        }
+
+        .breadcrumb-artistic .dot {
+            width: 2px;
+            height: 2px;
+            background: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        .breadcrumb-artistic .current {
+            color: white;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+        }
+
+        .hero-title-large {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 0.95;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-title-large span {
+            display: block;
             color: var(--color-primary);
-            border: 1px solid white;
+            -webkit-text-stroke: 1px var(--color-primary);
+            -webkit-text-fill-color: transparent;
         }
 
-        .btn-white:hover {
-            background: var(--color-bg-alt);
+        /* Project Info Section */
+        .project-overview-grid {
+            margin-top: -40px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .project-card-dark {
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-2xl);
+            padding: 60px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+
+        .meta-label-gold {
+            color: var(--color-primary-light);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Artistic Team Cards */
+        .member-grid-staggered {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 20px 0 100px;
+        }
+
+        .member-card-art {
+            position: relative;
+            padding-top: 60px;
+        }
+
+        .member-card-art:nth-child(2) {
+            margin-top: 80px;
+        }
+
+        .member-card-art .avatar-box {
+            width: 140px;
+            height: 180px;
+            background: var(--color-primary-dark);
+            border-radius: 20px;
+            position: relative;
+            margin-bottom: 32px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .member-card-art:hover .avatar-box {
+            transform: scale(1.05) rotate(-3deg);
+            box-shadow: 0 20px 40px rgba(139, 29, 29, 0.3);
+        }
+
+        .member-card-art .initials {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            line-height: 0.8;
+        }
+
+        .member-name-art {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .member-role-art {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .member-bio-art {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            border-left: 2px solid var(--color-border);
+            padding-left: 20px;
+        }
+
+        /* Final CTA */
+        .final-cta-dark {
+            background: #0f0f0f;
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 80px;
+        }
+
+        .final-cta-dark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #2a0505 0%, transparent 70%);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .btn-premium {
+            background: white;
+            color: black;
+            padding: 14px 36px;
+            border-radius: 100px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.1);
+            background: var(--color-primary-light);
             color: var(--color-primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .btn-outline-white {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-outline-white:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Animation */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-up {
-            animation: fadeInUp 0.6s ease-out forwards;
+        @media (max-width: 991px) {
+            .member-grid-staggered {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .member-card-art:nth-child(2) {
+                margin-top: 0;
+            }
         }
     </style>
 </head>
@@ -238,105 +317,107 @@
         <div id="mobileNavRight" class="mobile-menu-footer"></div>
     </div>
 
-    <!-- COMPACT HEADER -->
-    <div class="page-header-minimal">
+    <!-- ARTISTIC HERO -->
+    <section class="team-hero-artistic">
+        <div class="abstract-line" style="top: 20%;"></div>
+        <div class="abstract-line" style="top: 40%; transform: rotate(10deg);"></div>
+        
         <div class="container relative z-10">
+            <nav class="breadcrumb-artistic animate-up">
+                <a href="index.html">Trang chủ</a>
+                <div class="dot"></div>
+                <span class="current">Đội ngũ nghiên cứu</span>
+            </nav>
+            
             <div class="animate-up">
-                <div class="breadcrumb-pill">
-                    <a href="index.html">Trang chủ</a>
-                    <span class="sep">/</span>
-                    <span>Thông tin nhóm nghiên cứu</span>
+                <h1 class="hero-title-large">
+                    THE <span>RESOURCES</span> TEAM
+                </h1>
+                <p class="text-xl opacity-60 max-w-2xl leading-relaxed">
+                    Chúng tôi là những nhà nghiên cứu tâm huyết, kết nối trí tuệ nhân tạo với giáo dục mầm non để kiến tạo tương lai.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT INFO -->
+    <div class="container project-overview-grid">
+        <div class="project-card-dark animate-up">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <span class="meta-label-gold">Đề tài nghiên cứu</span>
+                    <h2 class="h1 text-white mb-8">Khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi</h2>
+                    <div class="row g-8">
+                        <div class="col-6">
+                            <span class="meta-label-gold opacity-50">Mã đề tài</span>
+                            <p class="h3 text-white mb-0">38-ĐATN</p>
+                        </div>
+                        <div class="col-6">
+                            <span class="meta-label-gold opacity-50">Lĩnh vực</span>
+                            <p class="h3 text-white mb-0">Giáo dục & AI</p>
+                        </div>
+                    </div>
                 </div>
-                <h1 class="display-2 font-bold mb-0">Đội Ngũ Phát Triển</h1>
+                <div class="col-lg-4 offset-lg-1 mt-12 mt-lg-0">
+                    <div class="p-8 rounded-xl" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
+                        <p class="text-sm text-white opacity-60 italic mb-6">"Công nghệ không thay thế giáo viên, nhưng công nghệ giúp giáo viên trở nên phi thường."</p>
+                        <div class="d-flex align-items-center gap-4 text-white">
+                            <span class="text-primary">📍</span>
+                            <span class="text-sm">Đại học Vinh, Nghệ An</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <section class="section py-20 bg-light">
+    <!-- STAGGERED TEAM GRID -->
+    <section class="section pb-20" style="padding-top: 60px;">
         <div class="container">
-            <!-- Project Info Box -->
-            <div class="info-card-glass mb-20 animate-up">
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <h6 class="text-primary font-bold uppercase tracking-widest mb-4">Thông tin đề tài</h6>
-                        <h2 class="h2 mb-6">Khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi</h2>
-                        <div class="grid grid-2 grid-gap-lg mb-0">
-                            <div>
-                                <p class="mb-1 text-xs text-muted uppercase tracking-wider">Mã đề tài</p>
-                                <p class="font-bold text-xl text-primary">38-ĐATN</p>
-                            </div>
-                            <div>
-                                <p class="mb-1 text-xs text-muted uppercase tracking-wider">Lĩnh vực</p>
-                                <p class="font-bold text-xl text-primary">Giáo dục — AI</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 mt-10 mt-lg-0">
-                        <div class="bg-light p-8 rounded-xl border border-dashed border-primary">
-                            <p class="text-sm text-muted mb-4 italic">Hệ thống học liệu số được tối ưu hóa bằng trí tuệ nhân tạo.</p>
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <span class="text-primary">✉️</span>
-                                <span class="text-sm">daihocvinh@gmail.com</span>
-                            </div>
-                            <div class="d-flex align-items-center gap-3">
-                                <span class="text-primary">📍</span>
-                                <span class="text-sm">Đại học Vinh, Nghệ An</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Section -->
             <div class="text-center mb-16 animate-up">
-                <h2 class="h1">Nhóm Nghiên Cứu 38-ĐATN</h2>
-                <div class="title-separator mx-auto mt-6"></div>
+                <span class="meta-label-gold" style="color: var(--color-primary);">Gương mặt tiêu biểu</span>
+                <h2 class="display-4 font-bold">Nhóm nghiên cứu 38-ĐATN</h2>
             </div>
 
-            <div class="row g-8" style="margin-bottom: 120px;">
+            <div class="member-grid-staggered">
                 <!-- Member 1 -->
-                <div class="col-md-4">
-                    <div class="team-profile-card animate-up" style="animation-delay: 0.1s;">
-                        <div class="profile-avatar">HT</div>
-                        <span class="member-role">Nhóm trưởng</span>
-                        <h3 class="h4 mb-4">Huyền Trang</h3>
-                        <p class="text-sm text-muted leading-relaxed">Điều phối nhóm, nghiên cứu tổng hợp và biên soạn báo cáo khoa học cho đề tài.</p>
+                <div class="member-card-art animate-up" style="animation-delay: 0.1s;">
+                    <div class="avatar-box">
+                        <div class="initials">HT</div>
                     </div>
+                    <span class="member-role-art">Nhóm trưởng</span>
+                    <h3 class="member-name-art">Huyền Trang</h3>
+                    <p class="member-bio-art">Điều phối dự án, chịu trách nhiệm chính trong việc tổng hợp dữ liệu khoa học và biên soạn báo cáo thực địa.</p>
                 </div>
                 <!-- Member 2 -->
-                <div class="col-md-4">
-                    <div class="team-profile-card animate-up" style="animation-delay: 0.2s;">
-                        <div class="profile-avatar" style="background: #2d3748;">HT</div>
-                        <span class="member-role">Thành viên</span>
-                        <h3 class="h4 mb-4">Hà Trang</h3>
-                        <p class="text-sm text-muted leading-relaxed">Thiết kế học liệu AI, xây dựng nội dung số và quản trị hệ thống học liệu trực tuyến.</p>
+                <div class="member-card-art animate-up" style="animation-delay: 0.2s;">
+                    <div class="avatar-box" style="background: #2d3748;">
+                        <div class="initials">HT</div>
                     </div>
+                    <span class="member-role-art">Thành viên</span>
+                    <h3 class="member-name-art">Hà Trang</h3>
+                    <p class="member-bio-art">Chuyên gia thiết kế nội dung số, phụ trách xây dựng kho học liệu ứng dụng AI và phát triển nền tảng tương tác.</p>
                 </div>
                 <!-- Member 3 -->
-                <div class="col-md-4">
-                    <div class="team-profile-card animate-up" style="animation-delay: 0.3s;">
-                        <div class="profile-avatar" style="background: #2d3748;">TT</div>
-                        <span class="member-role">Thành viên</span>
-                        <h3 class="h4 mb-4">Thị Tuyết</h3>
-                        <p class="text-sm text-muted leading-relaxed">Khảo sát thực địa, thu thập dữ liệu và đánh giá tác động của đề tài tại cơ sở.</p>
+                <div class="member-card-art animate-up" style="animation-delay: 0.3s;">
+                    <div class="avatar-box" style="background: #2d3748;">
+                        <div class="initials">TT</div>
                     </div>
+                    <span class="member-role-art">Thành viên</span>
+                    <h3 class="member-name-art">Thị Tuyết</h3>
+                    <p class="member-bio-art">Phụ trách khảo sát thực tế tại các cơ sở mầm non, thu thập phản hồi và đánh giá tính ứng dụng của đề tài.</p>
                 </div>
             </div>
 
-            <!-- CTA BANNER -->
-            <div class="cta-banner animate-up">
-                <h3 class="h2 text-white mb-6">Bạn cần hỗ trợ thêm?</h3>
-                <p class="text-lg text-white opacity-80 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Đội ngũ nghiên cứu luôn sẵn sàng lắng nghe các ý kiến đóng góp và giải đáp mọi thắc mắc của bạn về dự án.
+            <!-- FINAL CTA -->
+            <div class="final-cta-dark animate-up">
+                <h3 class="h2 text-white mb-6">Kiến tạo tương lai giáo dục</h3>
+                <p class="text-base text-white opacity-60 max-w-xl mx-auto mb-10">
+                    Chúng tôi luôn rộng mở cho các ý kiến đóng góp và sự hợp tác từ các chuyên gia giáo dục và công nghệ.
                 </p>
-                <div class="d-flex flex-column flex-sm-row justify-content-center gap-5">
-                    <a href="contact-us.html" class="btn btn-white px-10 py-4 font-bold shadow-lg" style="border-radius: 100px; color: var(--color-primary); min-width: 200px;">
-                        GỬI YÊU CẦU
-                    </a>
-                    <a href="resources.html" class="btn btn-outline-white px-10 py-4 font-bold" style="border-radius: 100px; border-width: 2px; min-width: 200px;">
-                        KHO HỌC LIỆU
-                    </a>
+                <div class="d-flex flex-wrap justify-content-center gap-5">
+                    <a href="contact-us.html" class="btn-premium">Kết nối ngay</a>
+                    <a href="resources.html" class="btn-premium" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.2);">Kho học liệu</a>
                 </div>
             </div>
         </div>

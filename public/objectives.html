@@ -309,9 +309,11 @@
         const nr = document.getElementById('navRight');
         if (!nr) return;
         if (user) {
-            const roleLabel = { admin: 'ADMIN', teacher: 'GV', student: 'HS', user: 'USER' }[user.role] || 'USER';
-            const roleClass = 'badge-' + (user.role || 'user');
-            nr.innerHTML = `<div class="flex"><span class="text-sm font-semibold">${escHtml(user.username)}</span><span class="badge ${roleClass}">${roleLabel}</span><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button></div>`;
+            nr.innerHTML = `
+                <span class="btn btn-primary btn-sm">${escHtml(user.username)}</span>
+                ${user.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
+                <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+            `;
         } else {
             nr.innerHTML = `<div class="flex"><a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a><a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a></div>`;
         }

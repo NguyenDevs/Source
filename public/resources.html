@@ -617,9 +617,7 @@
         const nr = document.getElementById('navRight');
         if (nr) {
             if (currentUser) {
-                const roleLabel = { admin: 'ADMIN', teacher: 'GV', student: 'HS', user: 'USER' }[currentUser.role] || 'USER';
-                const roleClass = 'badge-' + (currentUser.role || 'user');
-                nr.innerHTML = `<div class="flex"><span class="text-sm font-semibold">${escHtml(currentUser.username)}</span><span class="badge ${roleClass}">${roleLabel}</span><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button></div>`;
+                nr.innerHTML = `<span class="btn btn-primary btn-sm">${escHtml(currentUser.username)}</span><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>`;
             } else {
                 nr.innerHTML = `<div class="flex"><a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a><a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a></div>`;
             }

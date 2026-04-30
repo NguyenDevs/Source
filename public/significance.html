@@ -367,13 +367,37 @@
     function updateNavUI(user) {
         const nr = document.getElementById('navRight');
         if (!nr) return;
-        if (user) nr.innerHTML = `<button class="btn btn-ghost btn-sm">${user.username}</button>`;
-        else nr.innerHTML = `<a href="login.html" class="btn btn-primary btn-sm">Đăng nhập</a>`;
+        if (user) {
+            nr.innerHTML = `
+                <span class="btn btn-primary btn-sm">${escHtml(user.username)}</span>
+                ${user.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
+                <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+            `;
+        } else {
+            nr.innerHTML = `<div class="flex"><a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a><a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a></div>`;
+        }
+
+        // Mobile nav
+        const mnr = document.getElementById('mobileNavRight');
+        if (mnr) {
+            if (user) {
+                mnr.innerHTML = `
+                    <div class="user-info">
+                        <strong>${escHtml(user.username)}</strong>
+                        <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                    </div>
+                `;
+            } else {
+                mnr.innerHTML = `<a href="login.html" class="btn btn-primary w-100">Đăng nhập</a>`;
+            }
+        }
     }
+    async function doLogout() { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'include' }); window.location.reload(); }
     function toggleMobileMenu() { 
         document.getElementById('mobileNav').classList.toggle('active');
         document.getElementById('mobileNavOverlay').classList.toggle('active');
     }
+    function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
     checkSession();
     </script>
 </body>

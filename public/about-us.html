@@ -1,307 +1,426 @@
 <!DOCTYPE html>
-<html lang="zxx">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TRƯỜNG THPT QUỲNH LƯU IV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu — KPMTXQ 24-36T</title>
+    <meta name="description" content="Hành trình phát triển và sứ mệnh giáo dục mầm non tại Đại học Vinh">
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <style>
+        /* Custom styles for About Page */
+        .about-hero {
+            background: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('assets/images/about_hero_premium.png');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 160px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 40px 30px;
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .stat-card-glass:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--color-primary-light);
+        }
+
+        .stat-number {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary-light);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            font-weight: var(--weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        .timeline-modern {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-modern::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-primary), transparent);
+        }
+
+        .timeline-item-modern {
+            position: relative;
+            padding-bottom: 48px;
+        }
+
+        .timeline-item-modern::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 4px solid var(--color-bg);
+            box-shadow: 0 0 0 4px var(--color-primary-light);
+        }
+
+        .value-box {
+            background: white;
+            padding: 48px 40px;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            transition: all var(--transition-base);
+            border: 1px solid var(--color-border-light);
+        }
+
+        .value-box:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-8px);
+            border-color: var(--color-primary-light);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header-section d-none d-xl-block">
-        <div class="header-wrapper">
-            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 d-flex align-items-center justify-content-between">
-                            <div class="header-logo">
-                                <div class="logo">
-                                    <a href="index.html"><img src="assets/images/logo/logo_black.png" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="main-menu menu-color--black menu-hover-color--golden">
-                                <nav>
-                                    <ul>
-                                        <li class="has-dropdown">
-                                            <a class="active main-menu-link" href="index.html">Trang Chủ</a>
-                                        </li>
-                                        <li>
-                                            <a href="about-us.html">Giới thiệu</a>
-                                        </li>
-                                        <li>
-                                            <a href="news.html">Tin tức sự kiện</a>
-                                        </li>
-                                        <li>
-                                            <a href="contact-us.html">Liên Hệ</a>
-                                        </li>
-
-                                    </ul>
-                                </nav>
-                            </div>
-                            <ul class="header-action-link action-color--black action-hover-color--golden">
-                                <li>
-                                    <a href="#search">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
-                                        <i class="icon-menu"></i>
-                                    </a>
-                                </li>
+    <!-- HEADER -->
+    <header class="header-section d-none d-xl-block sticky-header">
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col d-flex justify-content-center">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="index.html">Trang Chủ</a></li>
+                                <li><a href="concepts.html">Khái niệm</a></li>
+                                <li><a href="objectives.html">Mục tiêu</a></li>
+                                <li><a href="significance.html">Ý nghĩa</a></li>
+                                <li><a href="content.html">Nội dung</a></li>
+                                <li><a href="resources.html">Kho học liệu AI</a></li>
+                                <li><a class="active" href="about-team.html">Về chúng tôi</a></li>
                             </ul>
-                        </div>
+                        </nav>
+                    </div>
+                    <div class="col-auto">
+                        <div id="navRight" class="header-action-link"></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <div id="offcanvas-about" class="offcanvas offcanvas-rightside offcanvas-mobile-about-section">
-        <div class="offcanvas-header text-right">
-            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
-        </div>
-        <div class="mobile-contact-info">
-            <div class="logo">
-                <a href="index.html"><img src="assets/images/logo/logo_white.png" alt=""></a>
-            </div>
 
-            <address class="address">
-                <span>Địa chỉ: 65, Xóm Tuần A, Xã Quỳnh Châu, Huyện Quỳnh Lưu, Nghệ An</span>
-                <span>Điện thoại: 0123456789, 0123456789</span>
-                <span>Email: truongthptql4@gmail.com</span>
-            </address>
-
-            <ul class="social-link">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-        </div>
-    </div>
-    <div id="search" class="search-modal">
-        <button type="button" class="close">×</button>
-        <form>
-            <input type="search" placeholder="Nhập thông tin tại đây" />
-            <button type="submit" class="btn btn-lg btn-golden">Tìm Kiếm</button>
-        </form>
-    </div>
-    <div class="offcanvas-overlay"></div>
-    <br>
-    <br>
-    <div class="about-top">
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header-section d-xl-none">
         <div class="container">
-            <div class="row d-flex align-items-center justify-content-between d-sm-column">
-                <div class="col-md-6">
-                    <div class="about-img" data-aos="fade-up" data-aos-delay="0">
-                        <div class="img-responsive">
-                            <img src="assets/images/hero-slider/467554690_511876168492990_8343882013333107029_n.jpg" alt="">
-                        </div>
-                    </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    <a href="index.html" class="header-logo"><img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo"></a>
                 </div>
-                <div class="col-md-6">
-                    <div class="content" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="title">VỀ TRƯỜNG THPT QUỲNH LƯU 4</h3>
-                        <h5 class="semi-title">Năm 1975, Quyết định của UBND tỉnh thành lập trường cấp 3 Vừa học vừa làm Quỳnh Lưu 4.</h5>
-                        <p>Đây là 1 quyết định đem lại sự phấn khởi cho nhân dân khu vực Tây Quỳnh Lưu, vùng bán sơn địa cực kì khó khăn . Những năm trước, các gia đình phải gửi con xuống Cầu Giát, Quỳnh Văn cực kỳ vất vả, tốn kém, lượng học sinh đi học
-                            rất ít. Ngày đầu mới thành lập vẫn còn nhiều khó khăn, học kì I năm học 1975-1976 chỉ với 2 lớp 8, trường phải mượn trường cấp 2 Quỳnh Châu 2 làm phòng học. Sang học kì 2, thầy trò mới dựng được 2 lán nứa để dạy và học. Năm
-                            học 1976- 1977, nhà trường mới xây được 3 dãy nhà ngói. Lúc này các phòng học xuống cấp trầm trọng, học sinh không có giáo viên chuyển trường gần hết. Nhiều ý kiến cho rằng nên giải tán trường, tuy nhiên, với sự xác định đúng
-                            đắn của UBND huyện Quỳnh Lưu, Sở GD&ĐT Nghệ An. Năm 1993 trường đã được sáp nhập với trường Cấp 2 Quỳnh Châu thành trường PTTH cấp 2-3 Quỳnh Lưu 4 với 2 cơ sở, giáo viên dạy xong bên này phải chuyển qua bên kia ngay cho kịp
-                            giờ. Tuy nhiên, quyết định đã giúp trường tồn tại và phát triển, người dân không phải trở lại cảnh ngày xưa, không có nơi để học. Vào năm 1997, giáo dục trở nên mạnh mẽ, UBND huyện Quỳnh Lưu, Sở GD&ĐT Nghệ An quyết định tách
-                            trường PTTH cấp 2-3 Quỳnh Lưu 4 thành hai trường là trường THPT Quỳnh Lưu 4 và trường THCS Quỳnh Châu. Đây là một quyết định đánh dấu bước trưởng thành của trường. Trải qua 47 năm tách thành trường độc lập, trường đã có diện
-                            mạo như ngày nay. .</p>
-                    </div>
+                <div class="col-auto">
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="progressbar-section section-top-gap-100 section-inner-bg">
+
+    <div id="mobileNavOverlay" class="offcanvas-overlay" onclick="toggleMobileMenu()"></div>
+    <div id="mobileNav" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <button class="close-btn" onclick="toggleMobileMenu()">×</button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="index.html">Trang Chủ</a>
+            <a href="concepts.html">Khái niệm</a>
+            <a href="objectives.html">Mục tiêu</a>
+            <a href="significance.html">Ý nghĩa</a>
+            <a href="content.html">Nội dung</a>
+            <a href="resources.html">Kho học liệu AI</a>
+            <a href="about-team.html" class="active">Về chúng tôi</a>
+        </nav>
+        <div id="mobileNavRight" class="mobile-menu-footer"></div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="animate-up">
+                <span class="badge badge-primary mb-6">Câu chuyện của chúng tôi</span>
+                <h1 class="display-1 text-white mb-6">Hành Trình Kiến Tạo Tri Thức</h1>
+                <p class="text-xl text-white opacity-80 max-w-3xl mx-auto leading-relaxed">
+                    Hơn 50 năm xây dựng và phát triển sự nghiệp giáo dục, Đại học Vinh tự hào là cái nôi nuôi dưỡng những tài năng mầm non tương lai.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK STATS (Glassmorphism Overlay) -->
+    <section class="section py-0" style="margin-top: -80px; position: relative; z-index: 10;">
+        <div class="container">
+            <div class="row g-6">
+                <div class="col-md-4">
+                    <div class="stat-card-glass animate-up" style="animation-delay: 0.1s;">
+                        <span class="stat-number">2013</span>
+                        <span class="stat-label">ĐẠT CHUẨN QUỐC GIA</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card-glass animate-up" style="animation-delay: 0.2s;">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">CÁN BỘ GIÁO VIÊN</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card-glass animate-up" style="animation-delay: 0.3s;">
+                        <span class="stat-number">1500+</span>
+                        <span class="stat-label">HỌC SINH HẰNG NĂM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & HISTORY -->
+    <section class="section section--lg">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="content" data-aos="fade-up" data-aos-delay="0">
-                        <h4 class="title">THÀNH TÍCH</h4>
-                        <p>Trường THPT Quỳnh Lưu 4, huyện Quỳnh Lưu đã đạt Giải tập thể tuần thi thứ Tư Giải khuyến khích ATGT cấp quốc gia Top 18 tỉnh HSG tỉnh 2025 Trong 47 năm xây dựng và phát triển Trường THPT Quỳnh Lưu 4 tỉnh Nghệ An đã gặt hái được
-                            nhiều thành tựu đáng ghi nhận. Đây là minh chứng đánh giá Trường THPT Quỳnh Lưu 4 có tốt không. Chất lượng đào tạo trường ngày càng nâng cao, số học sinh giỏi toàn tăng cao, Năm học 2007-2008, số lượng học sinh giỏi đứng thứ
-                            4 trên toàn tỉnh, số lượng học sinh giỏi năm học 2008-2009 của trường, đứng thứ 14 toàn tỉnh; tỷ lệ học sinh tốt nghiệp luôn ở mức 95% - 100%. Có được những thành tích như trên chính là sự cố gắng, tận tâm của các thế hệ cán
-                            bộ, giáo viên và học sinh trường Quỳnh Lưu 4. Nhà trường cũng luôn tập trung nâng cao chất lượng của đội ngũ giáo viên và tất cả các giáo viên của trường đều đạt chuẩn. Bên cạnh đó, trường cũng thường xuyên tổ chức các buổi
-                            sinh hoạt, các hoạt động ngoại khóa, các cuộc thi như: Rung chuông vàng, đường lên đỉnh olympia,.... nhằm bồi dưỡng thêm kiến thức cho học sinh theo cách mới. Trong 4 năm liền Trường luôn đạt danh hiệu tiên tiến cấp Tỉnh, chi
-                            bộ trường liên tục đạt danh hiệu chi bộ trong sạch vững mạnh, trường liên tục đạt danh hiệu tập thể lao động tiên tiến và đơn vị xuất sắc từ năm 2009 - 2015. Đặc biệt, vào năm 2013 trường đã được công nhận là trường đạt chuẩn
-                            quốc gia. Với sự phấn đấu nỗ lực không ngừng nghỉ của ban giám hiệu, các thế hệ thầy và trò, trường THPT Quỳnh Lưu 4 đang dần khẳng định được vai trò, vị thế của mình trong sự nghiệp giáo dục, dạy học của tỉnh nhà</p>
+                <div class="col-lg-6 mb-12 mb-lg-0">
+                    <div class="section-title-wrapper mb-12">
+                        <h2 class="h1 mb-6">Lịch sử & Sứ mệnh</h2>
+                        <div class="title-separator mb-8"></div>
+                        <p class="text-lg text-muted">Từ những ngày đầu gian khó đến khi trở thành điểm sáng của giáo dục tỉnh Nghệ An, chúng tôi luôn kiên định với sứ mệnh vì sự phát triển toàn diện của trẻ thơ.</p>
+                    </div>
+
+                    <div class="timeline-modern animate-up">
+                        <div class="timeline-item-modern">
+                            <h4 class="h5 font-bold text-primary mb-2">1975 — Khởi nguồn</h4>
+                            <p class="text-sm text-muted">Thành lập trường cấp 3 Vừa học vừa làm Đại học Vinh, đặt nền móng đầu tiên cho sự nghiệp giáo dục vùng Quỳnh Lưu.</p>
+                        </div>
+                        <div class="timeline-item-modern">
+                            <h4 class="h5 font-bold text-primary mb-2">1993 — Mở rộng quy mô</h4>
+                            <p class="text-sm text-muted">Sáp nhập với trường Cấp 2 Quỳnh Châu, nâng cao năng lực đào tạo và đa dạng hóa chương trình giảng dạy.</p>
+                        </div>
+                        <div class="timeline-item-modern" style="padding-bottom: 0;">
+                            <h4 class="h5 font-bold text-primary mb-2">Hiện tại — Vươn tầm</h4>
+                            <p class="text-sm text-muted">Phát triển thành Đại học Vinh hiện đại, tiên phong trong việc ứng dụng công nghệ AI vào giảng dạy mầm non.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="custom-progress m-t-40">
-                        <div class="skill-progressbar" data-aos="fade-up" data-aos-delay="0">
-                            <h6 class="font--semi-bold m-b-15">GIẢNG DẠY</h6>
-                            <div class="line-progressbar" data-percentage="91" data-progress-color="#b19361"></div>
-                        </div>
-                        <div class="skill-progressbar" data-aos="fade-up" data-aos-delay="200">
-                            <h6 class="font--semi-bold m-b-15">CHẤT LƯỢNG</h6>
-                            <div class="line-progressbar" data-percentage="86" data-progress-color="#b19361"></div>
-                        </div>
-                        <div class="skill-progressbar" data-aos="fade-up" data-aos-delay="400">
-                            <h6 class="font--semi-bold m-b-15">NỀ NẾP</h6>
-                            <div class="line-progressbar" data-percentage="97" data-progress-color="#b19361"></div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="relative animate-up" style="animation-delay: 0.2s;">
+                        <img src="assets/images/hero-slider/467554690_511876168492990_8343882013333107029_n.jpg" alt="Đại học Vinh" class="img-fluid rounded-2xl shadow-xl">
+                        <div class="bg-primary text-white p-8 rounded-xl shadow-lg absolute" style="bottom: -30px; left: -30px; max-width: 280px;">
+                            <p class="m-0 font-bold italic" style="font-size: 0.9rem;">"Nơi ươm mầm những tài năng và khát vọng vươn xa của thế hệ trẻ."</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <br>
-    <div class="banner-section">
-        <div class="banner-wrapper clearfix">
-            <div class="section-content-gap">
-                <div class="secton-content text-center">
-                    <h3 class="section-title">THÀNH TÍCH NỔI BẬT</h3>
-                </div>
-            </div>
-            <div class="banner-single-item banner-style-4 banner-animation banner-color--golden float-left img-responsive" data-aos="fade-up" data-aos-delay="0">
-                <div class="image">
-                    <img class="img-fluid" src="assets/images/hero-slider/463859920_490658860614721_3251734559088046925_n.jpg" alt="">
-                </div>
-                <a href="product-details-default.html" class="content">
-                    <div class="inner">
-                        <h4 class="title" style="color:white">Giải bóng chuyền nữ</h4>
-                        <!--
-                        <h6 class="sub-title">chú thích ngắn gọn</h6>-->
-                    </div>
-                    <span class="round-btn"><i class="ion-ios-arrow-thin-right"></i></span>
-                </a>
-            </div>
-            <div class="banner-single-item banner-style-4 banner-animation banner-color--golden float-left img-responsive" data-aos="fade-up" data-aos-delay="200">
-                <div class="image">
-                    <img class="img-fluid" src="assets/images/hero-slider/1.jpg" alt="">
-                </div>
-                <a href="product-details-default.html" class="content">
-                    <div class="inner">
-                        <h4 class="title" style="color:white">Khai giảng năm học 2024</h4>
-                        <!--
-                        <h6 class="sub-title">chú thích ngắn gọn</h6>-->
-                    </div>
-                    <span class="round-btn"><i class="ion-ios-arrow-thin-right"></i></span>
-                </a>
-            </div>
-            <div class="banner-single-item banner-style-4 banner-animation banner-color--golden float-left img-responsive" data-aos="fade-up" data-aos-delay="400">
-                <div class="image">
-                    <img class="img-fluid" src="assets/images/hero-slider/2.jpg" alt="">
-                </div>
-                <a href="product-details-default.html" class="content">
-                    <div class="inner">
-                        <h4 class="title" style="color:white">Giúp đỡ bà con khó khăn</h4>
-                        <!--
-                        <h6 class="sub-title">chú thích ngắn gọn</h6>-->
-                    </div>
-                    <span class="round-btn"><i class="ion-ios-arrow-thin-right"></i></span>
-                </a>
-            </div>
-            <div class="banner-single-item banner-style-4 banner-animation banner-color--golden float-left img-responsive" data-aos="fade-up" data-aos-delay="600">
-                <div class="image">
-                    <img class="img-fluid" src="assets/images/hero-slider/3.jpg" alt="">
-                </div>
-                <a href="product-details-default.html" class="content">
-                    <div class="inner">
-                        <h4 class="title" style="color:white">Hội chợ trường 2025</h4>
-                        <!--
-                        <h6 class="sub-title">chú thích ngắn gọn</h6>-->
-                    </div>
-                    <span class="round-btn"><i class="ion-ios-arrow-thin-right"></i></span>
-                </a>
-            </div>
+    </section>
 
+    <!-- CORE VALUES -->
+    <section class="section section--lg bg-alt">
+        <div class="container">
+            <div class="text-center mb-16 animate-up">
+                <h2 class="h1">Giá Trị Cốt Lõi</h2>
+                <div class="title-separator mx-auto mt-6"></div>
+            </div>
+            <div class="row g-8">
+                <div class="col-md-4">
+                    <div class="value-box animate-up" style="animation-delay: 0.1s;">
+                        <span class="value-icon">🎓</span>
+                        <h4 class="h3 mb-4">Chất lượng</h4>
+                        <p class="text-muted leading-relaxed">Luôn đặt chất lượng giáo dục lên hàng đầu, không ngừng cải tiến phương pháp dạy và học để trẻ phát triển tốt nhất.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-box animate-up" style="animation-delay: 0.2s;">
+                        <span class="value-icon">🤝</span>
+                        <h4 class="h3 mb-4">Đoàn kết</h4>
+                        <p class="text-muted leading-relaxed">Xây dựng môi trường giáo dục thân thiện, gắn kết chặt chẽ giữa Nhà trường — Gia đình — Xã hội.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-box animate-up" style="animation-delay: 0.3s;">
+                        <span class="value-icon">🚀</span>
+                        <h4 class="h3 mb-4">Đổi mới</h4>
+                        <p class="text-muted leading-relaxed">Tiên phong trong việc nghiên cứu và ứng dụng các giải pháp công nghệ hiện đại, đặc biệt là AI vào giáo dục trẻ thơ.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <footer class="footer-section footer-bg section-top-gap-100">
-        <div class="footer-wrapper">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row mb-n6">
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="0">
-                                <h5 class="title">THÔNG TIN</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="index.html">TRANG CHỦ</a></li>
-                                </ul>
-                            </div>
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
+                    </a>
+                    <p>Đề tài nghiên cứu: "Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi". Một giải pháp giáo dục hiện đại cho trẻ thơ.</p>
+                    <div class="footer-social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100090118347358" class="footer-social-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="https://x.com/daihocvinh" class="footer-social-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                        </a>
+                        <a href="#" class="footer-social-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="footer-column-title">Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="concepts.html">Khái niệm</a></li>
+                        <li><a href="objectives.html">Mục tiêu</a></li>
+                        <li><a href="significance.html">Ý nghĩa</a></li>
+                        <li><a href="resources.html">Kho học liệu AI</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="footer-column-title">Học Liệu</h4>
+                    <ul class="footer-links">
+                        <li><a href="content.html">Nội dung giáo dục</a></li>
+                        <li><a href="about-team.html">Về chúng tôi</a></li>
+                        <li><a href="news.html">Tin tức & Sự kiện</a></li>
+                        <li><a href="contact-us.html">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div>
+                    <h4 class="footer-column-title">Liên Hệ</h4>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="200">
-                                <h5 class="title">TÀI KHOẢN</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">● GIÁO VIÊN ĐĂNG NHẬP</a></li>
-                                    <li><a href="#">● HỌC SINH ĐĂNG NHẬP</a></li>
-                                </ul>
-                            </div>
+                        <div class="footer-contact-text">
+                            <span>Địa chỉ</span>
+                            Số 182, đường Lê Duẩn, phường Trường Vinh, TP. Vinh, Nghệ An
                         </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="400">
-                                <h5 class="title">DANH MỤC</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">● TIN TỨC TRONG TUẦN</a></li>
-                                    <li><a href="contact-us.html">● LIÊN HỆ</a></li>
-                                    <li><a href="#">● ĐĂNG KÝ NHẬP HỌC</a></li>
-                                    <li><a href="news.html">● SỰ KIỆN CHÍNH</a></li>
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                         </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="footer-widget-single-item footer-widget-color--golden" data-aos="fade-up" data-aos-delay="600">
-                                <h5 class="title">THÔNG TIN VỀ CHÚNG TÔI</h5>
-                                <div class="footer-about">
-                                    <p>Trường THPT Quỳnh Lưu IV .</p>
-                                    <address class="address">
-                                        <span>● Địa chỉ: 65, Xóm Tuần A, Xã Quỳnh Châu, Huyện Quỳnh Lưu, Nghệ An</span><br>
-                                        <span>● Sđt: 0837 864 763</span><br>
-                                        <span>● Email: thptquynhluu4@gmail.com</span>
-                                    </address>
-                                </div>
-                            </div>
+                        <div class="footer-contact-text">
+                            <span>Điện thoại</span>
+                            0837 864 763
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div class="footer-contact-text">
+                            <span>Email</span>
+                            daihocvinh@gmail.com
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="footer-center">
-                <div class="container">
-                    <div class="row mb-n6">
-                        <div class="col-xl-3 col-lg-4 col-md-6 mb-6">
-                            <div class="footer-social" data-aos="fade-up" data-aos-delay="0">
-                                <h4 class="title">Theo Dõi Chúng Tôi</h4>
-                                <ul class="footer-social-link">
-                                    <li><a href="https://www.facebook.com/profile.php?id=100090118347358"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="https://x.com/thptquynhluu4"><i class="fa fa-twitter"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="footer-bottom">
-                <div class="container">
-                    <div class="row justify-content-between align-items-center align-items-center flex-column flex-md-row mb-n6">
-                        <div class="col-auto mb-6">
-                            <div class="footer-copyright">
-                                <p class="copyright-text">
-                                    &copy; 2025 <a href="index.html">THPT QUỲNH LƯU IV</a>. Bản quyền thuộc về <a href="#" target="_blank">LỚP 12A1 TỔ I</a>
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="footer-copyright">
+                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm 38-ĐATN</a>.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="mr-4">Chính sách bảo mật</a>
+                    <a href="#">Điều khoản sử dụng</a>
                 </div>
             </div>
         </div>
     </footer>
+
     <script src="assets/js/vendor/vendor.min.js"></script>
     <script src="assets/js/plugins/plugins.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        const API = '/api';
+        async function checkSession() {
+            try { const res = await fetch(API + '/auth/session', { credentials: 'include' }); const data = await res.json(); updateNavUI(data.user ? data.user : null); }
+            catch (e) { updateNavUI(null); }
+        }
+        function updateNavUI(user) {
+            const nr = document.getElementById('navRight');
+            if (!nr) return;
+            if (user) {
+                nr.innerHTML = `
+                    <span class="btn btn-primary btn-sm">${escHtml(user.username)}</span>
+                    ${user.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
+                    <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                `;
+            } else {
+                nr.innerHTML = `<div class="flex"><a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a><a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a></div>`;
+            }
+            const mnr = document.getElementById('mobileNavRight');
+            if (mnr) {
+                if (user) mnr.innerHTML = `<div class="user-info"><strong>${escHtml(user.username)}</strong><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button></div>`;
+                else mnr.innerHTML = `<a href="login.html" class="btn btn-primary w-100">Đăng nhập</a>`;
+            }
+        }
+        async function doLogout() { await fetch(API + '/auth/logout', { method: 'POST', credentials: 'include' }); window.location.reload(); }
+        function toggleMobileMenu() { 
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.getElementById('mobileNavOverlay').classList.toggle('active');
+        }
+        function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
+        checkSession();
+    </script>
+
 </body>
 
 </html>

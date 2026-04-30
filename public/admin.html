@@ -1,76 +1,42 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — KPMTXQ 24-36T</title>
+    <meta name="robots" content="noindex, nofollow">
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
-    <style>
-        .admin-wrap { max-width: 1100px; margin: 0 auto; padding: 30px 15px; }
-        .admin-wrap h2 { color: #b19361; margin-bottom: 20px; }
-        .admin-wrap h3 { color: #333; margin: 20px 0 10px; font-size: 18px; }
-        .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .stat-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.08); text-align: center; }
-        .stat-card .num { font-size: 36px; font-weight: 800; color: #b19361; }
-        .stat-card .label { color: #888; font-size: 14px; margin-top: 5px; }
-        .admin-section { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-bottom: 20px; }
-        .admin-section h3 { display: flex; align-items: center; gap: 8px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
-        table th { background: #b19361; color: white; padding: 10px 12px; text-align: left; }
-        table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
-        table tr:hover { background: #faf8f5; }
-        .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .badge-admin { background: #b19361; color: white; }
-        .badge-teacher { background: #2c7a7b; color: white; }
-        .badge-student { background: #805ad5; color: white; }
-        .badge-user { background: #718096; color: white; }
-        .badge-published { background: #48bb78; color: white; }
-        .badge-draft { background: #ed8936; color: white; }
-        .badge-pending { background: #ed8936; color: white; }
-        .badge-approved { background: #48bb78; color: white; }
-        .btn-sm { padding: 4px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; border: none; font-weight: 600; }
-        .btn-danger { background: #e53e3e; color: white; }
-        .btn-primary { background: #b19361; color: white; }
-        .btn-select { background: #2c7a7b; color: white; }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 9999; align-items: center; justify-content: center; }
-        .modal.active { display: flex; }
-        .modal-box { background: white; border-radius: 12px; padding: 30px; width: 500px; max-width: 95vw; }
-        .modal-box h3 { margin-bottom: 15px; }
-        .modal-box input, .modal-box textarea, .modal-box select { width: 100%; padding: 8px 10px; border: 2px solid #e2e2e2; border-radius: 6px; margin-bottom: 12px; font-size: 14px; box-sizing: border-box; }
-        .modal-box textarea { resize: vertical; min-height: 80px; }
-        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
-        .not-admin { min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px; text-align: center; }
-    </style>
+    <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
-
 <body>
-    <header class="header-section d-none d-xl-block">
-        <div class="header-wrapper">
-            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 d-flex align-items-center justify-content-between">
-                            <div class="header-logo">
-                                <div class="logo"><a href="index.html"><img src="assets/images/logo/logo_black.png" alt=""></a></div>
-                            </div>
-                            <div class="main-menu menu-color--black menu-hover-color--golden">
-                                <nav><ul>
-                                    <li><a href="index.html">Trang Chủ</a></li>
-                                    <li><a href="khai-niem.html">Khái niệm</a></li>
-                                    <li><a href="muc-tieu.html">Mục tiêu</a></li>
-                                    <li><a href="y-nghia.html">Ý nghĩa</a></li>
-                                    <li><a href="noi-dung.html">Nội dung</a></li>
-                                    <li><a href="kho-hoc-lieu.html">Kho học liệu AI</a></li>
-                                    <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
-                                </ul></nav>
-                            </div>
-                            <div class="header-action-link action-color--black action-hover-color--golden">
-                                <a href="index.html" style="color:#b19361; font-weight:600;">← Về trang chủ</a>
-                            </div>
+    <!-- HEADER -->
+    <header class="header-section sticky-header">
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col d-flex justify-content-center">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="index.html">Trang Chủ</a></li>
+                                <li><a href="concepts.html">Khái niệm</a></li>
+                                <li><a href="objectives.html">Mục tiêu</a></li>
+                                <li><a href="significance.html">Ý nghĩa</a></li>
+                                <li><a href="content.html">Nội dung</a></li>
+                                <li><a href="resources.html">Kho học liệu AI</a></li>
+                                <li><a href="about-team.html">Về chúng tôi</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto">
+                        <div class="header-action-link">
+                            <a href="index.html" class="btn btn-ghost btn-sm">← Trang chủ</a>
                         </div>
                     </div>
                 </div>
@@ -78,72 +44,231 @@
         </div>
     </header>
 
-    <div class="admin-wrap" id="adminContent" style="display:none;">
-
-        <h2>⚙️ Admin Dashboard</h2>
+    <!-- ADMIN CONTENT -->
+    <main class="container py-12" id="adminContent" style="display:none;">
+        <div class="animate-in mb-10">
+            <div class="flex items-center gap-6">
+                <div class="icon-circle bg-primary text-white" style="width: 64px; height: 64px; font-size: 1.5rem;">⚙️</div>
+                <div>
+                    <h1 class="h2 text-primary m-0">Admin Dashboard</h1>
+                    <p class="text-muted m-0">Hệ thống quản trị nội dung và người dùng</p>
+                </div>
+            </div>
+        </div>
 
         <!-- Stats -->
-        <div class="stat-row">
-            <div class="stat-card"><div class="num" id="statNews">-</div><div class="label">Bài viết</div></div>
-            <div class="stat-card"><div class="num" id="statVideos">-</div><div class="label">Video</div></div>
-            <div class="stat-card"><div class="num" id="statUsers">-</div><div class="label">Người dùng</div></div>
-        </div>
-
-        <!-- News -->
-        <div class="admin-section">
-            <h3>📰 Quản lý Bài viết Tin tức <button class="btn-sm btn-primary" onclick="openNewsModal()">+ Thêm bài viết</button></h3>
-            <div style="overflow-x:auto;">
-            <table>
-                <thead><tr><th>ID</th><th>Tiêu đề</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th>Thao tác</th></tr></thead>
-                <tbody id="newsTable"></tbody>
-            </table>
+        <div class="grid grid-3 mb-10 animate-in stagger-1">
+            <div class="card text-center py-8">
+                <div class="h2 text-primary mb-2" id="statNews">-</div>
+                <div class="text-xs font-bold tracking-widest text-muted uppercase">BÀI VIẾT</div>
+            </div>
+            <div class="card text-center py-8">
+                <div class="h2 text-primary mb-2" id="statVideos">-</div>
+                <div class="text-xs font-bold tracking-widest text-muted uppercase">VIDEO</div>
+            </div>
+            <div class="card text-center py-8">
+                <div class="h2 text-primary mb-2" id="statUsers">-</div>
+                <div class="text-xs font-bold tracking-widest text-muted uppercase">NGƯỜI DÙNG</div>
             </div>
         </div>
 
-        <!-- Users -->
-        <div class="admin-section">
-            <h3>👥 Quản lý Người dùng</h3>
-            <div style="overflow-x:auto;">
-            <table>
-                <thead><tr><th>ID</th><th>Tên đăng nhập</th><th>Email</th><th>Vai trò</th><th>Ngày tạo</th><th>Đổi vai trò</th><th>Xóa</th></tr></thead>
-                <tbody id="usersTable"></tbody>
-            </table>
+        <!-- News Section -->
+        <div class="card mb-10 animate-in stagger-2">
+            <div class="flex items-center justify-between mb-8 border-b pb-4">
+                <h2 class="h4 text-primary m-0 flex items-center gap-2">📰 Quản lý Bài viết</h2>
+                <button class="btn btn-primary btn-sm" onclick="openNewsModal()">+ Thêm bài viết</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Danh mục</th>
+                            <th>Tác giả</th>
+                            <th>Ngày</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newsTable"></tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Videos -->
-        <div class="admin-section">
-            <h3>🎬 Quản lý Video</h3>
-            <div style="overflow-x:auto;">
-            <table>
-                <thead><tr><th>ID</th><th>Tiêu đề</th><th>Người tải</th><th>Dung lượng</th><th>Ngày</th><th>Tải về</th><th>Xóa</th></tr></thead>
-                <tbody id="videosTable"></tbody>
-            </table>
+        <!-- Users Section -->
+        <div class="card mb-10 animate-in stagger-3">
+            <div class="flex items-center justify-between mb-8 border-b pb-4">
+                <h2 class="h4 text-primary m-0 flex items-center gap-2">👥 Quản lý Người dùng</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Vai trò</th>
+                            <th>Ngày tạo</th>
+                            <th>Đổi vai trò</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Videos Section -->
+        <div class="card animate-in stagger-4">
+            <div class="flex items-center justify-between mb-8 border-b pb-4">
+                <h2 class="h4 text-primary m-0 flex items-center gap-2">🎬 Quản lý Video</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Người tải</th>
+                            <th>Dung lượng</th>
+                            <th>Tải về</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="videosTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- NOT ADMIN MESSAGE -->
+    <div class="flex flex-column items-center justify-center py-24 text-center" id="notAdminMsg" style="display:none;">
+        <div class="text-6xl mb-6">🔐</div>
+        <h2 class="h3 text-danger mb-4">Không có quyền truy cập</h2>
+        <p class="text-muted mb-8 max-w-sm">Chỉ tài khoản Admin mới được vào trang này.</p>
+        <a href="index.html" class="btn btn-primary">← Quay về trang chủ</a>
+    </div>
+
+    <!-- NEWS MODAL -->
+    <div class="modal-overlay" id="newsModal">
+        <div class="modal-box card max-w-2xl w-100 p-8">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="h4 text-primary m-0">📰 Thêm Bài viết Mới</h2>
+                <button class="text-2xl text-muted hover-text-primary" onclick="closeNewsModal()">×</button>
+            </div>
+            <div class="flex flex-column gap-5">
+                <div class="form-group">
+                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Tiêu đề *</label>
+                    <input type="text" id="newsTitle" class="form-control" placeholder="Nhập tiêu đề...">
+                </div>
+                <div class="form-group">
+                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Danh mục *</label>
+                    <select id="newsCategory" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Tóm tắt</label>
+                    <textarea id="newsSummary" class="form-control" placeholder="Tóm tắt ngắn" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Nội dung *</label>
+                    <textarea id="newsContent" class="form-control" placeholder="Nội dung chi tiết..." rows="6"></textarea>
+                </div>
+                <div class="flex gap-4 mt-4">
+                    <button class="btn btn-primary" onclick="submitNews()">Đăng bài ngay</button>
+                    <button class="btn btn-ghost" onclick="closeNewsModal()">Hủy bỏ</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="not-admin" id="notAdminMsg" style="display:none;">
-        <div style="font-size:64px;">🔐</div>
-        <h2 style="color:#c0392b;">Không có quyền truy cập</h2>
-        <p>Chỉ tài khoản Admin mới được vào trang này.</p>
-        <a href="index.html" class="btn-sm btn-primary">← Quay về trang chủ</a>
-    </div>
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
+                    </a>
+                    <p>Đề tài nghiên cứu: "Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi". Một giải pháp giáo dục hiện đại cho trẻ thơ.</p>
+                    <div class="footer-social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100090118347358" class="footer-social-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="https://x.com/daihocvinh" class="footer-social-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                        </a>
+                        <a href="#" class="footer-social-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                        </a>
+                    </div>
+                </div>
 
-    <!-- News Modal -->
-    <div class="modal" id="newsModal">
-        <div class="modal-box">
-            <h3>📰 Thêm Bài viết Mới</h3>
-            <input type="text" id="newsTitle" placeholder="Tiêu đề bài viết *">
-            <select id="newsCategory"></select>
-            <textarea id="newsSummary" placeholder="Tóm tắt (tùy chọn)"></textarea>
-            <textarea id="newsContent" placeholder="Nội dung bài viết (HTML được hỗ trợ) *" style="min-height:200px;"></textarea>
-            <div class="modal-actions">
-                <button class="btn-sm btn-primary" onclick="submitNews()">Đăng bài</button>
-                <button class="btn-sm btn-danger" onclick="closeNewsModal()">Hủy</button>
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="footer-column-title">Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="concepts.html">Khái niệm</a></li>
+                        <li><a href="objectives.html">Mục tiêu</a></li>
+                        <li><a href="significance.html">Ý nghĩa</a></li>
+                        <li><a href="resources.html">Kho học liệu AI</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="footer-column-title">Học Liệu</h4>
+                    <ul class="footer-links">
+                        <li><a href="content.html">Nội dung giáo dục</a></li>
+                        <li><a href="about-team.html">Về chúng tôi</a></li>
+                        <li><a href="news.html">Tin tức & Sự kiện</a></li>
+                        <li><a href="contact-us.html">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div>
+                    <h4 class="footer-column-title">Liên Hệ</h4>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <div class="footer-contact-text">
+                            <span>Địa chỉ</span>
+                            Số 182, đường Lê Duẩn, phường Trường Vinh, TP. Vinh, Nghệ An
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </div>
+                        <div class="footer-contact-text">
+                            <span>Điện thoại</span>
+                            0837 864 763
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div class="footer-contact-text">
+                            <span>Email</span>
+                            daihocvinh@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm 38-ĐATN</a>.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="mr-4">Chính sách bảo mật</a>
+                    <a href="#">Điều khoản sử dụng</a>
+                </div>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script src="assets/js/vendor/vendor.min.js"></script>
     <script src="assets/js/plugins/plugins.min.js"></script>
@@ -194,19 +319,21 @@
             const data = await res.json();
             const tb = document.getElementById('newsTable');
             if (!data.news || data.news.length === 0) {
-                tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">Chưa có bài viết nào.</td></tr>';
+                tb.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-muted">Chưa có bài viết nào.</td></tr>';
                 return;
             }
             tb.innerHTML = data.news.map(n => {
                 const date = new Date(n.created_at).toLocaleDateString('vi-VN');
-                return '<tr>' +
-                    '<td>' + n.id + '</td>' +
-                    '<td><strong>' + escHtml(n.title) + '</strong></td>' +
-                    '<td><span class="badge badge-published">' + escHtml(n.category_name || 'Không') + '</span></td>' +
-                    '<td>' + escHtml(n.author_name || 'Không rõ') + '</td>' +
-                    '<td>' + date + '</td>' +
-                    '<td><button class="btn-sm btn-danger" onclick="deleteNews(' + n.id + ')">🗑 Xóa</button></td>' +
-                    '</tr>';
+                return `
+                    <tr>
+                        <td>${n.id}</td>
+                        <td><strong class="text-primary">${escHtml(n.title)}</strong></td>
+                        <td><span class="badge badge-primary">${escHtml(n.category_name || 'Không')}</span></td>
+                        <td>${escHtml(n.author_name || 'Không rõ')}</td>
+                        <td>${date}</td>
+                        <td><button class="btn btn-ghost btn-sm text-danger" onclick="deleteNews(${n.id})">Xóa</button></td>
+                    </tr>
+                `;
             }).join('');
         } catch (e) {}
     }
@@ -217,26 +344,30 @@
             const data = await res.json();
             const tb = document.getElementById('usersTable');
             if (!data.users || data.users.length === 0) {
-                tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">Chưa có người dùng nào.</td></tr>';
+                tb.innerHTML = '<tr><td colspan="7" class="text-center py-12 text-muted">Chưa có người dùng nào.</td></tr>';
                 return;
             }
             tb.innerHTML = data.users.map(u => {
                 const roleClass = 'badge-' + u.role;
                 const date = new Date(u.created_at).toLocaleDateString('vi-VN');
-                return '<tr>' +
-                    '<td>' + u.id + '</td>' +
-                    '<td><strong>' + escHtml(u.username) + '</strong></td>' +
-                    '<td>' + escHtml(u.email || '-') + '</td>' +
-                    '<td><span class="badge ' + roleClass + '">' + escHtml(u.role) + '</span></td>' +
-                    '<td>' + date + '</td>' +
-                    '<td><select class="btn-sm" style="padding:4px 8px;border:1px solid #ddd;border-radius:6px;" onchange="changeRole(' + u.id + ',this.value)">' +
-                    '<option value="admin"' + (u.role==='admin'?' selected':'') + '>Admin</option>' +
-                    '<option value="teacher"' + (u.role==='teacher'?' selected':'') + '>Giáo viên</option>' +
-                    '<option value="student"' + (u.role==='student'?' selected':'') + '>Học sinh</option>' +
-                    '<option value="user"' + (u.role==='user'?' selected':'') + '>Người dùng</option>' +
-                    '</select></td>' +
-                    '<td><button class="btn-sm btn-danger" onclick="deleteUser(' + u.id + ')">🗑</button></td>' +
-                    '</tr>';
+                return `
+                    <tr>
+                        <td>${u.id}</td>
+                        <td><strong>${escHtml(u.username)}</strong></td>
+                        <td>${escHtml(u.email || '-')}</td>
+                        <td><span class="badge ${roleClass}">${escHtml(u.role)}</span></td>
+                        <td>${date}</td>
+                        <td>
+                            <select class="form-control" style="width:auto; height: 32px; padding: 0 8px; font-size: 11px;" onchange="changeRole(${u.id}, this.value)">
+                                <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+                                <option value="teacher" ${u.role==='teacher'?'selected':''}>Giáo viên</option>
+                                <option value="student" ${u.role==='student'?'selected':''}>Học sinh</option>
+                                <option value="user" ${u.role==='user'?'selected':''}>Người dùng</option>
+                            </select>
+                        </td>
+                        <td><button class="btn btn-ghost btn-sm text-danger" onclick="deleteUser(${u.id})">🗑</button></td>
+                    </tr>
+                `;
             }).join('');
         } catch (e) {}
     }
@@ -247,22 +378,24 @@
             const data = await res.json();
             const tb = document.getElementById('videosTable');
             if (!data.videos || data.videos.length === 0) {
-                tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">Chưa có video nào.</td></tr>';
+                tb.innerHTML = '<tr><td colspan="7" class="text-center py-12 text-muted">Chưa có video nào.</td></tr>';
                 return;
             }
             tb.innerHTML = data.videos.map(v => {
                 const date = new Date(v.created_at).toLocaleDateString('vi-VN');
                 const size = (v.size / (1024*1024)).toFixed(1);
                 const dl = API + '/videos/download/' + encodeURIComponent(v.filename);
-                return '<tr>' +
-                    '<td>' + v.id + '</td>' +
-                    '<td><strong>' + escHtml(v.title) + '</strong></td>' +
-                    '<td>' + escHtml(v.uploader_name || 'Không rõ') + '</td>' +
-                    '<td>' + size + ' MB</td>' +
-                    '<td>' + date + '</td>' +
-                    '<td><a href="' + dl + '" class="btn-sm btn-primary" download>⬇ ' + v.downloads + '</a></td>' +
-                    '<td><button class="btn-sm btn-danger" onclick="deleteVideo(' + v.id + ')">🗑</button></td>' +
-                    '</tr>';
+                return `
+                    <tr>
+                        <td>${v.id}</td>
+                        <td><strong>${escHtml(v.title)}</strong></td>
+                        <td>${escHtml(v.uploader_name || 'Không rõ')}</td>
+                        <td>${size} MB</td>
+                        <td>${date}</td>
+                        <td><a href="${dl}" class="btn btn-primary btn-sm" download>⬇ ${v.downloads}</a></td>
+                        <td><button class="btn btn-ghost btn-sm text-danger" onclick="deleteVideo(${v.id})">Xóa</button></td>
+                    </tr>
+                `;
             }).join('');
         } catch (e) {}
     }
@@ -273,7 +406,7 @@
             const data = await res.json();
             const sel = document.getElementById('newsCategory');
             sel.innerHTML = (data.categories || []).map(c =>
-                '<option value="' + c.id + '">' + escHtml(c.name) + '</option>').join('');
+                `<option value="${c.id}">${escHtml(c.name)}</option>`).join('');
         } catch (e) {}
     }
 
@@ -349,3 +482,7 @@
     </script>
 </body>
 </html>
+</body>
+</html>
+
+

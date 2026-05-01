@@ -149,7 +149,36 @@
                 </div>
             </div>
         </div>
-    </header>
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header-section d-xl-none">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    <a href="index.html" class="header-logo"><img src="assets/images/logo/logo_black.png"
+                            alt="KPMTXQ Logo"></a>
+                </div>
+                <div class="col-auto">
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobileNavOverlay" class="offcanvas-overlay" onclick="toggleMobileMenu()"></div>
+    <div id="mobileNav" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <button class="close-btn" onclick="toggleMobileMenu()">×</button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="index.html">Trang Chủ</a>
+            <a href="concepts.html">Khái niệm</a>
+            <a href="significance.html">Mục tiêu & Ý nghĩa</a>
+            <a href="content.html">Nội dung</a>
+            <a href="resources.html">Kho học liệu AI</a>
+            <a href="about-team.html">Về chúng tôi</a>
+        </nav>
+        <div id="mobileNavRight" class="mobile-menu-footer"></div>
+    </div>
 
     <!-- MAIN -->
     <main class="profile-container animate-in">
@@ -263,6 +292,13 @@
                     ${currentUser.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
                     <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
                 `;
+            }
+            const mnr = document.getElementById('mobileNavRight');
+            if (mnr && currentUser) {
+                mnr.innerHTML = `<div class="user-info" style="padding: 15px; background: var(--color-bg-alt); border-radius: 12px; margin-top: 15px;">
+                    <strong style="display: block; margin-bottom: 8px;">${escHtml(currentUser.username)}</strong>
+                    <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                </div>`;
             }
         }
 
@@ -388,6 +424,11 @@
         }
 
         function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
+        
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            document.getElementById('mobileNavOverlay').classList.toggle('active');
+        }
         
         init();
     </script>

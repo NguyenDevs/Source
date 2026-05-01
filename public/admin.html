@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="assets/css/admin.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Quill WYSIWYG -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 </head>
 <body class="admin-body">
     
@@ -193,14 +196,14 @@
 
     <!-- NEWS MODAL -->
     <div class="admin-modal-overlay" id="newsModal">
-        <div class="admin-modal animate-in">
+        <div class="admin-modal">
             <div class="admin-modal-header">
                 <h2 class="h4 m-0 flex items-center gap-2">
-                    <i data-lucide="plus-circle" class="text-primary"></i> Đăng Bài viết Mới
+                    <i data-lucide="plus-circle" class="text-primary"></i> <span id="newsModalTitle">Đăng Bài viết Mới</span>
                 </h2>
                 <button class="btn btn-ghost btn-sm" onclick="closeNewsModal()" style="padding: 0; width: 32px; height: 32px;">×</button>
             </div>
-            <div class="admin-modal-body">
+            <div class="admin-modal-body" style="max-height: 80vh; overflow-y: auto;">
                 <div class="flex flex-column gap-5">
                     <div class="form-group">
                         <label class="form-label">TIÊU ĐỀ *</label>
@@ -208,18 +211,25 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">DANH MỤC *</label>
-                        <select id="newsCategory" class="form-control"></select>
+                        <select id="newsCategory" class="form-control" style="color: #1e293b !important;"></select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">TÓM TẮT NGẮN</label>
                         <textarea id="newsSummary" class="form-control" placeholder="Mô tả sơ lược về bài viết..." rows="2"></textarea>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">THUMBNAIL (ẢNH ĐẠI DIỆN)</label>
+                        <input type="file" id="newsThumb" class="form-control" accept="image/*">
+                        <div id="newsThumbPreview" class="mt-2" style="display:none;">
+                            <img src="" style="width: 100px; height: 60px; object-fit: cover; border-radius: 8px;">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">NỘI DUNG CHI TIẾT *</label>
-                        <textarea id="newsContent" class="form-control" placeholder="Viết nội dung tại đây..." rows="8"></textarea>
+                        <div id="quillEditor" style="height: 200px; background: white; border-radius: 12px; border: 1px solid #e2e8f0;"></div>
                     </div>
                     <div class="flex gap-4 mt-6">
-                        <button class="btn btn-primary w-full" onclick="submitNews()">Xuất bản ngay</button>
+                        <button class="btn btn-primary w-full" id="btnSubmitNews" onclick="submitNews()">Xuất bản ngay</button>
                         <button class="btn btn-ghost w-full" onclick="closeNewsModal()">Hủy bỏ</button>
                     </div>
                 </div>
@@ -231,8 +241,33 @@
     <script src="assets/js/plugins/plugins.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-    // Initialize Icons
-    lucide.createIcons();
+    // Initialize Quill
+    let quill;
+    let editingNewsId = null;
+    function initQuill() {
+        if (quill) return;
+        quill = new Quill('#quillEditor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['link', 'blockquote', 'code-block'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            },
+            placeholder: 'Viết nội dung bài viết chuyên nghiệp tại đây...'
+        });
+    }
+
+    // Initialize Icons safely
+    function safeLucide() {
+        if (window.lucide) {
+            try { lucide.createIcons(); } catch(e) { console.error("Lucide error:", e); }
+        }
+    }
+    safeLucide();
 
     const API = '/api';
 
@@ -360,15 +395,22 @@
                         <td class="text-sm">${escHtml(n.author_name || '—')}</td>
                         <td class="text-sm opacity-70">${date}</td>
                         <td>
-                            <button class="btn btn-ghost btn-sm text-danger" onclick="deleteNews(${n.id})">
-                                <i data-lucide="trash-2" style="width: 14px;"></i> Xóa
-                            </button>
+                            <div class="flex gap-2">
+                                <button class="btn btn-ghost btn-sm text-primary" onclick="editNews(${n.id})">
+                                    <i data-lucide="edit-3" style="width: 14px;"></i> Sửa
+                                </button>
+                                <button class="btn btn-ghost btn-sm text-danger" onclick="deleteNews(${n.id})">
+                                    <i data-lucide="trash-2" style="width: 14px;"></i> Xóa
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `;
             }).join('');
-            lucide.createIcons();
-        } catch (e) {}
+            safeLucide();
+        } catch (e) {
+            console.error("loadNews error:", e);
+        }
     }
 
     async function loadUsers() {
@@ -441,7 +483,7 @@
                     </tr>
                 `;
             }).join('');
-            lucide.createIcons();
+            safeLucide();
         } catch (e) {}
     }
 
@@ -498,7 +540,7 @@
             tb.innerHTML = data.videos.map(v => {
                 const date = v.created_at ? new Date(v.created_at).toLocaleDateString('vi-VN') : '-';
                 const size = v.size ? (v.size / (1024*1024)).toFixed(1) + ' MB' : '-';
-                const dl = API + '/videos/download/' + encodeURIComponent(v.filename);
+                const dl = API + '/videos/download/' + encodeURIComponent(v.uploader || 'system') + '/' + encodeURIComponent(v.filename);
                 return `
                     <tr>
                         <td class="font-bold text-xs text-slate-400">#${v.id}</td>
@@ -519,18 +561,34 @@
                     </tr>
                 `;
             }).join('');
-            lucide.createIcons();
+            safeLucide();
         } catch (e) {}
     }
 
     async function loadCategories() {
+        const sel = document.getElementById('newsCategory');
         try {
             const res = await fetch(API + '/categories', { credentials: 'include' });
             const data = await res.json();
-            const sel = document.getElementById('newsCategory');
-            sel.innerHTML = (data.categories || []).map(c =>
-                `<option value="${c.id}">${escHtml(c.name)}</option>`).join('');
-        } catch (e) {}
+            
+            sel.innerHTML = '';
+            if (!data.categories || data.categories.length === 0) {
+                const opt = document.createElement('option');
+                opt.value = '';
+                opt.textContent = '(Không có danh mục)';
+                sel.appendChild(opt);
+                return;
+            }
+            
+            data.categories.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.textContent = c.name;
+                sel.appendChild(opt);
+            });
+        } catch (e) {
+            console.error("loadCategories error:", e);
+        }
     }
 
     async function changeRole(userId, role) {
@@ -562,27 +620,78 @@
         loadStats();
     }
 
-    function openNewsModal() {
+    async function openNewsModal() {
+        editingNewsId = null;
+        document.getElementById('newsModalTitle').textContent = 'Đăng Bài viết Mới';
+        document.getElementById('btnSubmitNews').textContent = 'Xuất bản ngay';
+        document.getElementById('newsTitle').value = '';
+        document.getElementById('newsSummary').value = '';
+        document.getElementById('newsThumb').value = '';
+        document.getElementById('newsThumbPreview').style.display = 'none';
+        if (quill) quill.root.innerHTML = '';
+        
+        // Always try to reload categories to be sure
+        await loadCategories();
+        
         document.getElementById('newsModal').classList.add('active');
+        initQuill();
+    }
+
+    async function editNews(id) {
+        editingNewsId = id;
+        try {
+            const res = await fetch(API + '/news');
+            const data = await res.json();
+            const article = data.news.find(n => n.id === id);
+            if (!article) return;
+
+            document.getElementById('newsModalTitle').textContent = 'Chỉnh sửa Bài viết';
+            document.getElementById('btnSubmitNews').textContent = 'Cập nhật bài viết';
+            document.getElementById('newsTitle').value = article.title;
+            document.getElementById('newsCategory').value = article.category_id || '';
+            document.getElementById('newsSummary').value = article.summary || '';
+            
+            document.getElementById('newsModal').classList.add('active');
+            initQuill();
+            quill.root.innerHTML = article.content;
+
+            if (article.thumbnail) {
+                const preview = document.getElementById('newsThumbPreview');
+                preview.style.display = 'block';
+                preview.querySelector('img').src = article.thumbnail;
+            } else {
+                document.getElementById('newsThumbPreview').style.display = 'none';
+            }
+            
+        } catch (e) { alert('Không thể tải thông tin bài viết.'); }
     }
 
     function closeNewsModal() {
         document.getElementById('newsModal').classList.remove('active');
-        document.getElementById('newsTitle').value = '';
-        document.getElementById('newsSummary').value = '';
-        document.getElementById('newsContent').value = '';
+        editingNewsId = null;
     }
 
     async function submitNews() {
         const title = document.getElementById('newsTitle').value.trim();
         const cat = document.getElementById('newsCategory').value;
         const summary = document.getElementById('newsSummary').value.trim();
-        const content = document.getElementById('newsContent').value;
-        if (!title || !content) { alert('Tiêu đề và nội dung không được trống.'); return; }
-        const res = await fetch(API + '/news', {
-            method: 'POST', credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, category_id: cat || null, summary, content })
+        const thumbFile = document.getElementById('newsThumb').files[0];
+        const content = quill ? quill.root.innerHTML : '';
+        if (!title || content === '<p><br></p>') { alert('Tiêu đề và nội dung không được trống.'); return; }
+        
+        const fd = new FormData();
+        fd.append('title', title);
+        fd.append('category_id', cat);
+        fd.append('summary', summary);
+        fd.append('content', content);
+        if (thumbFile) fd.append('thumbnail', thumbFile);
+
+        const url = editingNewsId ? API + '/news/' + editingNewsId : API + '/news';
+        const method = editingNewsId ? 'PUT' : 'POST';
+
+        const res = await fetch(url, {
+            method: method, credentials: 'include',
+            body: fd
         });
         const data = await res.json();
         if (data.success) {

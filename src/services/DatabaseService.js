@@ -82,9 +82,9 @@ class DatabaseService {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `);
 
-    this.migrateColumns();
-    this.seedAdmin();
-    this.seedCategories();
+    await this.migrateColumns();
+    await this.seedAdmin();
+    await this.seedCategories();
 
     console.log('Database initialized (MySQL).');
   }
@@ -122,6 +122,10 @@ class DatabaseService {
 
     try {
       await this.pool.query("ALTER TABLE users MODIFY COLUMN status ENUM('pending','approved','rejected','disabled') DEFAULT 'pending'");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE news ADD COLUMN thumbnail VARCHAR(255) DEFAULT '' AFTER summary");
     } catch (e) {}
   }
 

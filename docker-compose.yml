@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Database service (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: kpmtxq_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: kpmtxq_db
+    ports:
+      - "3307:3306" # Truy cập từ host qua 3307 để không bị trùng với Laragon
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # App service (Node.js/Express)
+  app:
+    build: .
+    container_name: kpmtxq_app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root_password
+      - DB_NAME=kpmtxq_db
+      - PORT=3000
+      - SESSION_SECRET=kpmtxq-secret-docker-2026
+    volumes:
+      - ./uploads:/app/uploads # Để lưu file upload bền vững trên host
+
+  # Công cụ quản lý Database qua web (tương tự Laragon)
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: kpmtxq_phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=root_password
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

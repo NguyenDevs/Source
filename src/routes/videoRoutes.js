@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const VideoController = require('../controllers/VideoController');
-const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
+const { requireAuth, requireAdmin, requireCreator } = require('../middleware/authMiddleware');
 const { UPLOADS_DIR, ALLOWED_VIDEO_EXT } = require('../config/constants');
 
 const videoStorage = multer.diskStorage({
@@ -36,7 +36,7 @@ const uploadVideo = multer({
 
 router.get('/', (req, res, next) => VideoController.getAll(req, res).catch(next));
 
-router.post('/upload', requireAuth, (req, res) => {
+router.post('/upload', requireCreator, (req, res) => {
   uploadVideo(req, res, async (err) => {
     console.log('[VideoUpload] err:', err ? err.message : 'none', 'req.file:', req.file ? 'yes' : 'no', 'body:', req.body);
     if (err) {

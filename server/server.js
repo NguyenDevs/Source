@@ -59,10 +59,34 @@ async function initDB() {
       username VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
       role ENUM('admin','teacher','student','user') DEFAULT 'user',
+      status ENUM('pending','approved','rejected') DEFAULT 'pending',
       email VARCHAR(255) DEFAULT '',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
   `);
+
+  // Migrate status column if it doesn't exist
+  try {
+    await pool.query(`
+      ALTER TABLE users ADD COLUMN status ENUM('pending','approved','rejected') DEFAULT 'pending'
+      AFTER role
+    `);
+  } catch (e) {
+    // column may already exist — ignore
+  }
+
+  // Migrate existing teachers from old data to pending
+  await pool.query("UPDATE users SET status = 'approved' WHERE status IS NULL OR status = ''");
+
+  // Seed admin (always approved)
+  const [admins] = await pool.query("SELECT id FROM users WHERE username = 'admin' LIMIT 1");
+  if (admins.length === 0) {
+    const hash = bcrypt.hashSync('admin123', 10);
+    await pool.query("INSERT INTO users (username, password, role, status) VALUES (?, ?, ?, ?)", ['admin', hash, 'admin', 'approved']);
+    console.log('✓ Admin account created: admin / admin123');
+  } else {
+    await pool.query("UPDATE users SET status = 'approved' WHERE username = 'admin' AND status != 'approved'");
+  }
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS categories (
@@ -110,25 +134,19 @@ async function initDB() {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
   `);
 
-  // Seed admin if not exists
-  const [admins] = await pool.query("SELECT id FROM users WHERE username = 'admin' LIMIT 1");
-  if (admins.length === 0) {
-    const hash = bcrypt.hashSync('admin123', 10);
-    await pool.query("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ['admin', hash, 'admin']);
-    console.log('✓ Admin account created: admin / admin123');
-  }
-
   // Seed default categories
-  const [cats] = await pool.query("SELECT id FROM categories LIMIT 1");
-  if (cats.length === 0) {
-    await pool.query(
-      "INSERT INTO categories (name, slug, description) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)",
-      ['Tin trong ngay', 'tin-trong-ngay', 'Tin tức trong ngày',
-       'Tin trong tuan', 'tin-trong-tuan', 'Tin tức trong tuần',
-       'Su kien chinh', 'su-kien-chinh', 'Các sự kiện chính của trường',
-       'Thong bao', 'thong-bao', 'Thông báo quan trọng']
-    );
-  }
+  try {
+    const [cats] = await pool.query("SELECT id FROM categories LIMIT 1");
+    if (cats.length === 0) {
+      await pool.query(
+        "INSERT INTO categories (name, slug, description) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)",
+        ['Tin trong ngay', 'tin-trong-ngay', 'Tin tức trong ngày',
+         'Tin trong tuan', 'tin-trong-tuan', 'Tin tức trong tuần',
+         'Su kien chinh', 'su-kien-chinh', 'Các sự kiện chính của trường',
+         'Thong bao', 'thong-bao', 'Thông báo quan trọng']
+      );
+    }
+  } catch (e) {}
 
   console.log('✓ MySQL connected — Database ready');
 }
@@ -203,6 +221,13 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     const user = rows[0];
+    if (user.status === 'pending') {
+      return res.json({ success: false, message: 'Tài khoản của bạn đang chờ phê duyệt. Vui lòng liên hệ admin.' });
+    }
+    if (user.status === 'rejected') {
+      return res.json({ success: false, message: 'Tài khoản của bạn đã bị từ chối.' });
+    }
+
     delete user.password;
     req.session.user = user;
     res.json({ success: true, message: 'Đăng nhập thành công.', user });
@@ -223,10 +248,15 @@ app.post('/api/auth/register', async (req, res) => {
     if (existing.length > 0) return res.json({ success: false, message: 'Tên đăng nhập đã tồn tại.' });
 
     const hash = bcrypt.hashSync(password, 10);
-    const userRole = (role === 'teacher' || role === 'student') ? role : 'user';
-    await pool.query('INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)',
-      [username, hash, email || '', userRole]);
+    const accountRole = (role === 'teacher') ? 'teacher' : 'user';
+    const accountStatus = accountRole === 'teacher' ? 'pending' : 'approved';
 
+    await pool.query('INSERT INTO users (username, password, email, role, status) VALUES (?, ?, ?, ?, ?)',
+      [username, hash, email || '', accountRole, accountStatus]);
+
+    if (accountRole === 'teacher') {
+      return res.json({ success: true, message: 'Đăng ký thành công. Tài khoản giáo viên cần được phê duyệt trước khi sử dụng.' });
+    }
     res.json({ success: true, message: 'Đăng ký thành công! Vui lòng đăng nhập.' });
   } catch (err) {
     console.error(err);
@@ -250,7 +280,7 @@ app.post('/api/auth/logout', (req, res) => {
 // ── USERS (admin) ──
 app.get('/api/users', requireAdmin, async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT id, username, email, role, created_at FROM users ORDER BY id DESC');
+    const [rows] = await pool.query('SELECT id, username, email, role, status, created_at FROM users ORDER BY id DESC');
     res.json({ success: true, users: rows });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Lỗi server.' });
@@ -274,8 +304,42 @@ app.post('/api/users/delete/:id', requireAdmin, async (req, res) => {
     if (parseInt(req.params.id) === req.session.user.id) {
       return res.json({ success: false, message: 'Không thể xóa tài khoản đang đăng nhập.' });
     }
+    const [rows] = await pool.query('SELECT username FROM users WHERE id = ?', [req.params.id]);
+    if (rows.length > 0 && rows[0].username === 'admin') {
+      return res.json({ success: false, message: 'Không thể xóa tài khoản admin.' });
+    }
     await pool.query('DELETE FROM users WHERE id = ?', [req.params.id]);
     res.json({ success: true, message: 'Đã xóa người dùng.' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Lỗi server.' });
+  }
+});
+
+// Admin: approve teacher account
+app.patch('/api/admin/users/:id/approve', requireAdmin, async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [req.params.id]);
+    if (rows.length === 0) return res.json({ success: false, message: 'Không tìm thấy người dùng.' });
+    const user = rows[0];
+    if (user.role !== 'teacher') return res.json({ success: false, message: 'Chỉ tài khoản giáo viên mới cần phê duyệt.' });
+    if (user.status === 'approved') return res.json({ success: false, message: 'Tài khoản đã được phê duyệt trước đó.' });
+    await pool.query("UPDATE users SET status = 'approved' WHERE id = ?", [req.params.id]);
+    res.json({ success: true, message: 'Phê duyệt tài khoản thành công.' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Lỗi server.' });
+  }
+});
+
+// Admin: reject teacher account
+app.patch('/api/admin/users/:id/reject', requireAdmin, async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [req.params.id]);
+    if (rows.length === 0) return res.json({ success: false, message: 'Không tìm thấy người dùng.' });
+    const user = rows[0];
+    if (user.role !== 'teacher') return res.json({ success: false, message: 'Chỉ tài khoản giáo viên mới có thể từ chối.' });
+    if (user.status === 'approved') return res.json({ success: false, message: 'Không thể từ chối tài khoản đã phê duyệt.' });
+    await pool.query("UPDATE users SET status = 'rejected' WHERE id = ?", [req.params.id]);
+    res.json({ success: true, message: 'Đã từ chối tài khoản.' });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Lỗi server.' });
   }
@@ -332,7 +396,7 @@ app.get('/api/news/:slug', async (req, res) => {
   }
 });
 
-app.post('/api/news', requireAuth, async (req, res) => {
+app.post('/api/news', requireAdmin, async (req, res) => {
   try {
     const { title, slug, summary, content, category_id, image, status } = req.body;
     if (!title || !content) return res.json({ success: false, message: 'Tiêu đề và nội dung không được trống.' });
@@ -428,7 +492,7 @@ app.post('/api/videos/delete/:id', requireAdmin, async (req, res) => {
 });
 
 // ── Dashboard stats ──
-app.get('/api/stats', requireAuth, async (req, res) => {
+app.get('/api/stats', requireAdmin, async (req, res) => {
   try {
     const [[newsCount]] = await pool.query('SELECT COUNT(*) as c FROM news');
     const [[videoCount]] = await pool.query('SELECT COUNT(*) as c FROM videos');

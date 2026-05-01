@@ -2,16 +2,17 @@
   "name": "kham-pha-mt",
   "version": "1.0.0",
   "description": "Website hoat dong Kham pha moi truong xung quanh cho tre 24-36 thang tuoi",
-  "main": "server.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node src/app.js",
+    "dev": "node src/app.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
     "express-session": "^1.17.3",
     "bcryptjs": "^2.4.3",
-    "sql.js": "^1.10.0"
+    "mysql2": "^3.9.0",
+    "dotenv": "^16.4.0"
   }
 }

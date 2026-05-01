@@ -18,310 +18,461 @@
     <link rel="stylesheet" href="assets/css/style.min.css">
     <link rel="stylesheet" href="assets/css/design-system.css">
     <style>
-        /* Specialized styles for Resources Page */
-        .resources-header-minimal {
-            background-color: var(--color-bg);
-            padding: 40px 0 60px;
-            border-bottom: 1px solid var(--color-border-light);
-            position: relative;
-            overflow: hidden;
+        :root {
+            --color-primary-soft: rgba(139, 29, 29, 0.08);
+            --transition-base: 0.25s ease;
         }
 
-        .resources-header-minimal::before {
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── AUTH ERR ─── */
+        .auth-error {
+            background: #FFF5F5; border: 1px solid #FED7D7; color: #C53030;
+            padding: 10px 12px; border-radius: var(--radius-sm); font-size: 13px;
+            font-weight: 600; display: none; margin-top: 10px;
+        }
+
+        /* ─── HERO REDESIGN ─── */
+        .resources-hero-cinematic {
+            background: linear-gradient(135deg, #1a0505 0%, #300a0a 100%);
+            padding: 40px 0 60px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        .resources-hero-cinematic::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
-            opacity: 0.5;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 29, 29, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(214, 158, 46, 0.1) 0%, transparent 50%);
             z-index: 0;
         }
 
-        .breadcrumb-pill {
-            display: inline-flex;
-            align-items: center;
-            background: var(--color-primary-light);
-            padding: 6px 16px;
-            border-radius: 100px;
-            gap: 8px;
-            margin-bottom: 20px;
-            transition: all var(--transition-base);
-        }
-
-        .breadcrumb-pill:hover {
-            background: #f8d7da;
-        }
-
-        .breadcrumb-pill a,
-        .breadcrumb-pill span {
-            font-size: 11px;
-            font-weight: var(--weight-bold);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--color-primary);
-        }
-
-        .breadcrumb-pill .sep {
-            opacity: 0.3;
-        }
-
-        .page-title-main {
-            font-family: var(--font-heading);
-            font-size: clamp(2rem, 5vw, 2.75rem);
-            font-weight: 800;
-            color: var(--color-primary-dark);
-            margin: 0;
-            line-height: 1.1;
-        }
-
-        .page-subtitle {
-            font-size: var(--text-base);
-            color: var(--color-text-muted);
-            max-width: 600px;
-            margin-top: 16px;
-            opacity: 0.8;
-        }
-
-        .sidebar-sticky {
-            position: sticky;
-            top: 100px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+        .hero-glass-card {
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-sm);
-            transition: all var(--transition-base);
-        }
-
-        .glass-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-4px);
-        }
-
-        .nav-link-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            color: var(--color-text-muted);
-            font-weight: var(--weight-semibold);
-            transition: all var(--transition-fast);
-            margin-bottom: 4px;
-        }
-
-        .nav-link-item:hover,
-        .nav-link-item.active {
-            background-color: var(--color-primary-light);
-            color: var(--color-primary);
-            text-decoration: none;
-        }
-
-        .nav-link-item .icon {
-            margin-right: 12px;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .resource-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid var(--color-border-light);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-primary-light);
-        }
-
-        .resource-thumb {
-            height: 180px;
-            background-color: var(--color-bg-alt);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-2xl);
+            padding: 30px;
+            display: inline-block;
+            max-width: 800px;
+            width: 100%;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
 
-        .resource-thumb .play-icon {
-            width: 54px;
-            height: 54px;
-            background: rgba(139, 29, 29, 0.9);
-            border-radius: 50%;
+        .breadcrumb-cinematic {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            z-index: 2;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-cinematic a {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
             transition: all 0.3s ease;
         }
 
-        .resource-card:hover .play-icon {
-            transform: scale(1.1);
+        .breadcrumb-cinematic a:hover {
+            color: var(--color-primary-soft);
+            text-decoration: none;
+        }
+
+        .breadcrumb-cinematic .sep {
+            width: 4px;
+            height: 4px;
             background: var(--color-primary);
+            border-radius: 50%;
         }
 
-        .resource-content {
-            padding: 24px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .resource-meta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: var(--text-xs);
-            color: var(--color-text-muted);
-            margin-bottom: 12px;
+        .breadcrumb-cinematic .curr {
+            color: white;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: var(--weight-bold);
+            letter-spacing: 2px;
+            font-weight: 700;
         }
 
-        .resource-title {
+        .hero-title-modern {
             font-family: var(--font-heading);
-            font-size: var(--text-lg);
-            font-weight: var(--weight-bold);
-            margin-bottom: 12px;
-            line-height: 1.4;
-            color: var(--color-text);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1;
+            background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .resource-desc {
-            font-size: var(--text-sm);
-            color: var(--color-text-muted);
+        .hero-desc-modern {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.6;
-            margin-bottom: 20px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+        }
+
+
+        /* ─── MAIN LAYOUT ─── */
+        .resources-main { padding: 48px 0 80px; }
+        .resources-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 40px;
+            align-items: start;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        @media (max-width: 1024px) {
+            .resources-grid { grid-template-columns: 1fr; }
+            .sidebar { order: -1; }
+        }
+
+        /* ─── SIDEBAR ─── */
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+        .sidebar-card {
+            background: white; border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-xl); padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+        .sidebar-card-title {
+            font-family: var(--font-heading); font-size: 17px; font-weight: 700;
+            color: var(--color-text); margin: 0 0 16px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--color-border-light);
+        }
+
+        /* Auth panel */
+        .auth-panel { border-top: 3px solid var(--color-primary); }
+        .auth-user-info {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+        }
+        .auth-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--color-primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 18px;
+        }
+        .auth-avatar.admin { background: linear-gradient(135deg, #8B1D1D, #C0392B); }
+        .auth-user-name { font-weight: 700; font-size: 15px; color: var(--color-text); }
+        .auth-user-role { font-size: 12px; color: var(--color-text-muted); }
+
+        .form-input {
+            width: 100%; padding: 11px 14px; border: 1.5px solid var(--color-border);
+            border-radius: var(--radius-md); font-size: 14px; font-family: var(--font-body);
+            background: var(--color-bg); color: var(--color-text); outline: none;
+            transition: border-color var(--transition-base), box-shadow var(--transition-base);
+        }
+        .form-input:focus {
+            border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(139,29,29,0.1);
+        }
+        .form-label {
+            display: block; font-size: 12px; font-weight: 700;
+            color: var(--color-text-muted); text-transform: uppercase;
+            letter-spacing: 0.5px; margin-bottom: 6px;
+        }
+        .form-group { margin-bottom: 14px; }
+        .form-group:last-child { margin-bottom: 0; }
+
+        .btn-sidebar-primary {
+            background: var(--color-primary); color: white; border: none;
+            padding: 12px 20px; border-radius: 12px; font-size: 13px;
+            font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; width: 100%; transition: background var(--transition-base);
+            font-family: var(--font-body);
+        }
+        .btn-sidebar-primary:hover { background: #6B1515; }
+        .btn-sidebar-secondary {
+            background: white; color: var(--color-text); border: 1.5px solid #E5DDD8;
+            padding: 12px 20px; border-radius: 12px; font-size: 13px;
+            font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; width: 100%; transition: all var(--transition-base);
+            font-family: var(--font-body);
+        }
+        .btn-sidebar-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); }
+        .btn-sidebar-ghost { background: none; border: none; cursor: pointer; font-family: var(--font-body); }
+
+        .auth-divider { text-align: center; margin: 12px 0; position: relative; }
+        .auth-divider::before {
+            content: ''; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1px; background: var(--color-border-light);
+        }
+        .auth-divider span {
+            background: white; padding: 0 12px; position: relative;
+            font-size: 12px; color: var(--color-text-muted);
+        }
+        .auth-link { font-size: 13px; color: var(--color-primary); text-decoration: none; font-weight: 600; }
+        .auth-link:hover { text-decoration: underline; }
+
+        /* Filter panel */
+        .filter-nav { display: flex; flex-direction: column; gap: 4px; }
+        .filter-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 12px; border-radius: var(--radius-md);
+            color: var(--color-text-muted); font-size: 14px; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: all var(--transition-base);
+            border: 1px solid transparent;
+        }
+        .filter-item:hover { background: var(--color-bg-alt); color: var(--color-text); }
+        .filter-item.active {
+            background: var(--color-primary-soft); color: var(--color-primary);
+            border-color: rgba(139,29,29,0.15);
+        }
+        .filter-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .filter-count {
+            margin-left: auto; background: var(--color-bg-alt); color: var(--color-text-muted);
+            padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 700;
+        }
+        .filter-item.active .filter-count { background: rgba(139,29,29,0.12); color: var(--color-primary); }
+
+        /* Upload panel */
+        .upload-panel { border-top: 3px solid var(--color-primary); }
+        .upload-panel-header {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+        }
+        .upload-icon {
+            width: 36px; height: 36px; border-radius: var(--radius-sm);
+            background: var(--color-primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .upload-panel-title { font-size: 15px; font-weight: 700; color: var(--color-text); }
+        .upload-dropzone {
+            border: 2px dashed var(--color-border); border-radius: var(--radius-md);
+            padding: 24px 16px; text-align: center; cursor: pointer;
+            transition: all var(--transition-base); background: var(--color-bg);
+            margin-bottom: 14px;
+        }
+        .upload-dropzone:hover, .upload-dropzone.dragover {
+            border-color: var(--color-primary); background: var(--color-primary-soft);
+        }
+        .upload-dropzone-icon { font-size: 32px; margin-bottom: 8px; }
+        .upload-dropzone-text { font-size: 13px; color: var(--color-text-muted); font-weight: 600; }
+        .upload-dropzone-text strong { color: var(--color-primary); }
+        .upload-filename { font-size: 12px; color: var(--color-primary); font-weight: 700; margin-top: 6px; }
+
+        .upload-progress { display: none; margin-top: 12px; }
+        .upload-progress-bar {
+            height: 4px; background: var(--color-border); border-radius: 4px; overflow: hidden;
+        }
+        .upload-progress-fill {
+            height: 100%; background: var(--color-primary); width: 0%;
+            transition: width 0.3s ease; border-radius: 4px;
+        }
+        .upload-progress-text { font-size: 12px; color: var(--color-text-muted); margin-top: 6px; text-align: center; }
+
+        .upload-success {
+            display: none; text-align: center; padding: 20px;
+            background: rgba(39, 174, 96, 0.08); border-radius: var(--radius-md);
+            border: 1px solid rgba(39,174,96,0.2);
+        }
+        .upload-success-icon { font-size: 36px; margin-bottom: 8px; }
+        .upload-success-text { font-size: 14px; font-weight: 700; color: #27AE60; }
+
+        /* ─── CONTENT AREA ─── */
+        .content-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        }
+        .content-title-wrap { display: flex; align-items: center; gap: 14px; }
+        .content-count {
+            background: var(--color-primary); color: white; padding: 4px 12px;
+            border-radius: 100px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .content-title {
+            font-family: var(--font-heading); font-size: 22px; font-weight: 700;
+            color: var(--color-text); margin: 0;
+        }
+
+        .search-bar {
+            display: flex; background: white; border: 1.5px solid var(--color-border-light);
+            border-radius: 100px; padding: 6px 6px 6px 20px; align-items: center;
+            box-shadow: var(--shadow-sm); max-width: 360px; flex: 1;
+            transition: border-color var(--transition-base), box-shadow var(--transition-base);
+        }
+        .search-bar:focus-within {
+            border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(139,29,29,0.1);
+        }
+        .search-input {
+            border: none; outline: none; flex: 1; font-size: 14px;
+            font-family: var(--font-body); color: var(--color-text); background: transparent;
+        }
+        .search-btn {
+            background: var(--color-primary); color: white; border: none;
+            padding: 8px 18px; border-radius: 100px; font-size: 12px;
+            font-weight: 700; letter-spacing: 0.5px; cursor: pointer;
+            transition: background var(--transition-base); font-family: var(--font-body);
+        }
+        .search-btn:hover { background: var(--color-primary-dark); }
+
+        /* Video grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* Video card */
+        .video-card {
+            background: white; border-radius: var(--radius-xl);
+            overflow: hidden; border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex; flex-direction: column;
+        }
+        .video-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .video-thumb {
+            position: relative; aspect-ratio: 16/9; background: #1a1a1a; overflow: hidden;
+        }
+        .video-thumb video, .video-thumb img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .video-duration {
+            position: absolute; bottom: 8px; right: 8px;
+            background: rgba(0,0,0,0.75); color: white; padding: 2px 6px;
+            border-radius: 4px; font-size: 11px; font-weight: 700;
+        }
+        .video-thumb-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .video-thumb:hover .video-thumb-overlay { opacity: 1; }
+        .play-btn {
+            width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.9);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        .play-btn svg { fill: var(--color-primary); }
+
+        .video-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .video-meta-top {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+        }
+        .video-tag {
+            background: var(--color-primary-soft); color: var(--color-primary);
+            padding: 2px 10px; border-radius: 100px; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .video-size { font-size: 12px; color: var(--color-text-muted); font-weight: 600; }
+        .video-title {
+            font-family: var(--font-heading); font-size: 17px; font-weight: 700;
+            color: var(--color-text); margin: 0 0 8px; line-height: 1.35;
+            flex: 1;
+        }
+        .video-desc {
+            font-size: 13px; color: var(--color-text-muted); line-height: 1.6;
+            margin: 0 0 16px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        .resource-footer {
-            margin-top: auto;
-            padding-top: 16px;
+        .video-footer {
+            margin-top: auto; padding-top: 14px;
             border-top: 1px solid var(--color-border-light);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between; gap: 8px;
         }
-
-        .uploader {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .video-uploader { display: flex; align-items: center; gap: 8px; }
+        .video-uploader-avatar {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: var(--color-primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 12px; flex-shrink: 0;
         }
-
-        .uploader-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background-color: var(--color-primary-light);
-            color: var(--color-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: var(--weight-bold);
-            font-size: 10px;
+        .video-uploader-info { display: flex; flex-direction: column; }
+        .video-uploader-name { font-size: 13px; font-weight: 700; color: var(--color-text); line-height: 1.2; }
+        .video-uploader-role { font-size: 11px; color: var(--color-text-muted); }
+        .video-date { font-size: 12px; color: var(--color-text-muted); white-space: nowrap; }
+        .video-actions { display: flex; gap: 8px; align-items: center; }
+        .btn-download {
+            background: var(--color-primary); color: white; border: none;
+            padding: 7px 16px; border-radius: var(--radius-sm); font-size: 12px;
+            font-weight: 700; letter-spacing: 0.5px; text-decoration: none;
+            transition: background var(--transition-base); display: inline-flex;
+            align-items: center; gap: 6px; font-family: var(--font-body); cursor: pointer;
         }
-
-        .uploader-name {
-            font-size: var(--text-xs);
-            font-weight: var(--weight-bold);
-            color: var(--color-text);
+        .btn-download:hover { background: var(--color-primary-dark); }
+        .btn-delete {
+            background: none; border: 1.5px solid #FFEAEA; color: #e53e3e;
+            padding: 7px 10px; border-radius: var(--radius-sm); font-size: 12px;
+            font-weight: 700; cursor: pointer; transition: all var(--transition-base);
+            display: inline-flex; align-items: center; font-family: var(--font-body);
         }
+        .btn-delete:hover { background: #e53e3e; color: white; border-color: #e53e3e; }
 
-        .search-bar-container {
-            background: white;
-            border-radius: 100px;
-            padding: 6px 6px 6px 20px;
-            display: flex;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
+        /* Empty state */
+        .empty-state {
+            text-align: center; padding: 80px 20px;
+            background: white; border-radius: var(--radius-xl);
             border: 1px solid var(--color-border-light);
-            width: 100%;
-            max-width: 500px;
-            transition: all var(--transition-base);
+        }
+        .empty-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.4; }
+        .empty-title { font-family: var(--font-heading); font-size: 20px; font-weight: 700; margin: 0 0 8px; }
+        .empty-desc { font-size: 14px; color: var(--color-text-muted); margin: 0; }
+
+        /* Loading */
+        .loading-state {
+            text-align: center; padding: 60px 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 16px;
+        }
+        .spinner {
+            width: 40px; height: 40px; border: 3px solid var(--color-border);
+            border-top-color: var(--color-primary); border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text {
+            font-size: 13px; font-weight: 600; color: var(--color-text-muted);
+            letter-spacing: 0.5px; text-transform: uppercase;
         }
 
-        .search-bar-container:focus-within {
-            box-shadow: var(--shadow-md);
-            border-color: var(--color-primary-light);
+        /* ─── MISC ─── */
+
+
+        /* Auth error */
+        .auth-error {
+            background: #FFF5F5; border: 1px solid #FED7D7; color: #C53030;
+            padding: 10px 12px; border-radius: var(--radius-sm); font-size: 13px;
+            font-weight: 600; display: none; margin-top: 10px;
         }
 
-        .search-input {
-            border: none;
-            outline: none;
-            flex-grow: 1;
-            font-size: var(--text-sm);
-            color: var(--color-text);
-            background: transparent;
+        /* Inline video player modal */
+        .video-modal {
+            display: none; position: fixed; inset: 0; z-index: 1000;
+            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
         }
-
-        .upload-dropzone {
-            border: 2px dashed var(--color-border);
-            border-radius: var(--radius-lg);
-            padding: 30px 20px;
-            text-align: center;
-            transition: all var(--transition-base);
-            cursor: pointer;
-            background: var(--color-bg-alt);
+        .video-modal.active { display: flex; }
+        .video-modal-content {
+            background: #000; border-radius: var(--radius-lg); overflow: hidden;
+            max-width: 90vw; max-height: 90vh; width: 100%;
         }
-
-        .upload-dropzone:hover {
-            border-color: var(--color-primary);
-            background: var(--color-primary-light);
+        .video-modal-content video { width: 100%; height: auto; display: block; max-height: 85vh; }
+        .video-modal-close {
+            position: absolute; top: 16px; right: 20px; background: rgba(255,255,255,0.15);
+            border: none; color: white; width: 40px; height: 40px; border-radius: 50%;
+            font-size: 24px; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; transition: background 0.2s;
         }
-
-        .badge-count {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px 10px;
-            background: var(--color-primary);
-            color: white;
-            border-radius: 100px;
-            font-size: 10px;
-            font-weight: var(--weight-bold);
-            letter-spacing: 1px;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
+        .video-modal-close:hover { background: rgba(255,255,255,0.3); }
     </style>
 </head>
 
@@ -331,6 +482,7 @@
         <div class="header-bottom">
             <div class="container">
                 <div class="row align-items-center">
+
                     <div class="col d-flex justify-content-center">
                         <nav class="main-menu">
                             <ul>
@@ -344,7 +496,9 @@
                         </nav>
                     </div>
                     <div class="col-auto">
-                        <div id="navRight" class="header-action-link"></div>
+                        <div id="navRight" class="header-action-link">
+                            <!-- Injected via JS -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,15 +510,19 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-auto">
-                    <a href="index.html" class="header-logo"><img src="assets/images/logo/logo_black.png"
-                            alt="KPMTXQ Logo"></a>
+                    <a href="index.html" class="header-logo">
+                        <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
+                    </a>
                 </div>
                 <div class="col-auto">
-                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                        <span class="icon-menu">☰</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div id="mobileNavOverlay" class="offcanvas-overlay" onclick="toggleMobileMenu()"></div>
     <div id="mobileNav" class="mobile-menu">
@@ -379,197 +537,165 @@
             <a href="resources.html" class="active">Kho học liệu AI</a>
             <a href="about-team.html">Về chúng tôi</a>
         </nav>
-        <div id="mobileNavRight" class="mobile-menu-footer"></div>
+        <div id="mobileNavRight" class="mobile-menu-footer">
+            <!-- Injected via JS -->
+        </div>
     </div>
 
-    <!-- MODERN COMPACT HEADER -->
-    <div class="resources-header-minimal">
-        <div class="container relative z-10">
-            <div class="animate-up">
-                <div class="breadcrumb-pill">
+    <!-- HERO SECTION (Redesigned) -->
+    <div class="resources-hero-cinematic">
+        <div class="container">
+            <div class="hero-glass-card animate-in">
+                <nav class="breadcrumb-cinematic">
                     <a href="index.html">Trang chủ</a>
-                    <span class="sep">/</span>
-                    <span>Kho học liệu AI</span>
-                </div>
-                <h1 class="page-title-main">Thư Viện Học Liệu Số</h1>
-                <p class="page-subtitle">
-                    Hệ thống tài nguyên đa phương tiện ứng dụng AI hỗ trợ trẻ 24-36 tháng tuổi khám phá môi trường xung
-                    quanh.
+                    <div class="sep"></div>
+                    <span class="curr">Kho học liệu AI</span>
+                </nav>
+                <h1 class="hero-title-modern">Kho Học Liệu AI</h1>
+                <p class="hero-desc-modern">
+                    Hệ thống tài nguyên đa phương tiện ứng dụng AI hỗ trợ trẻ 24-36 tháng tuổi khám phá môi trường xung quanh một cách trực quan và sinh động.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <section class="section py-16 bg-light">
-        <div class="container">
-            <div class="row">
-                <!-- Sidebar -->
-                <div class="col-lg-4 mb-12 mb-lg-0">
-                    <div class="sidebar-sticky">
 
-                        <!-- Auth Panel -->
-                        <div id="authPanel" class="glass-card p-8">
-                            <div id="loginPanel">
-                                <div class="text-center mb-8">
-                                    <div class="icon-circle bg-primary-light text-primary mx-auto mb-4"
-                                        style="width: 48px; height: 48px;">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2.5">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                    </div>
-                                    <h4 class="h6 font-bold m-0 tracking-tight">Đăng nhập thành viên</h4>
-                                    <p class="text-xs text-muted mt-2">Truy cập để quản lý & đóng góp học liệu</p>
-                                </div>
-                                <form onsubmit="event.preventDefault(); doLogin();" class="d-flex flex-column gap-4">
-                                    <div class="form-group mb-0">
-                                        <input type="text" id="loginUsername" class="form-control"
-                                            placeholder="Tên đăng nhập" style="border-radius: 12px; height: 48px;">
-                                    </div>
-                                    <div class="form-group mb-0">
-                                        <input type="password" id="loginPassword" class="form-control"
-                                            placeholder="Mật khẩu" style="border-radius: 12px; height: 48px;">
-                                    </div>
-                                    <div id="loginError" class="text-xs text-danger text-center font-bold"
-                                        style="display:none; padding: 10px; background: #fff5f5; border-radius: 8px;">
-                                    </div>
-                                    <button type="submit"
-                                        class="btn btn-primary w-100 py-3 font-bold tracking-widest text-xs"
-                                        style="border-radius: 12px; height: 48px;">ĐĂNG NHẬP</button>
-                                </form>
-                                <div class="mt-6 text-center pt-6 border-top">
-                                    <a href="register.html"
-                                        class="text-xs font-bold text-muted hover-text-primary transition-all">Chưa có
-                                        tài khoản? Đăng ký ngay</a>
-                                </div>
-                            </div>
+    <!-- MAIN -->
+    <main class="resources-main">
+        <div class="resources-grid">
 
-                            <div id="adminPanel" style="display:none;" class="text-center">
-                                <div class="icon-circle bg-primary text-white mx-auto mb-6"
-                                    style="width: 54px; height: 54px;">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                    </svg>
-                                </div>
-                                <h4 class="h5 font-bold mb-6">Quản trị viên</h4>
-                                <div class="d-flex flex-column gap-3">
-                                    <a href="admin.html" class="btn btn-primary w-100 font-bold text-xs tracking-widest"
-                                        style="border-radius: 12px; height: 46px;">TRANG QUẢN TRỊ</a>
-                                    <button onclick="doLogout()"
-                                        class="btn btn-secondary w-100 font-bold text-xs tracking-widest"
-                                        style="border-radius: 12px; height: 46px;">ĐĂNG XUẤT</button>
-                                </div>
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+
+                <!-- Auth Card -->
+                <div class="sidebar-card auth-panel" id="authCard">
+                    <!-- Logged out -->
+                    <div id="loginForm">
+                        <p class="sidebar-card-title" style="margin-bottom:14px;">Đăng nhập thành viên</p>
+                        <div class="form-group">
+                            <label class="form-label">Tên đăng nhập</label>
+                            <input type="text" id="loginUsername" class="form-input" placeholder="Username...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mật khẩu</label>
+                            <input type="password" id="loginPassword" class="form-input" placeholder="Password...">
+                        </div>
+                        <div id="loginError" class="auth-error"></div>
+                        <div class="form-group" style="margin-top:14px;">
+                            <button class="btn-sidebar-primary" onclick="doLogin()">ĐĂNG NHẬP</button>
+                        </div>
+                        <div class="auth-divider"><span>hoặc</span></div>
+                        <p style="text-align:center;font-size:13px;color:var(--color-text-muted);">
+                            Chưa có tài khoản? <a href="register.html" class="auth-link">Đăng ký ngay</a>
+                        </p>
+                    </div>
+                    <!-- Logged in -->
+                    <div id="userPanel" style="display:none;">
+                        <div class="auth-user-info">
+                            <div class="auth-avatar" id="userAvatar">U</div>
+                            <div>
+                                <div class="auth-user-name" id="userName">User</div>
+                                <div class="auth-user-role" id="userRole">Thành viên</div>
                             </div>
                         </div>
-
-                        <!-- Categories -->
-                        <div class="glass-card p-6">
-                            <h6 class="text-xs font-bold text-muted text-uppercase tracking-widest mb-6 opacity-60">Danh
-                                mục tài nguyên</h6>
-                            <nav class="d-flex flex-column">
-                                <a href="#" class="nav-link-item active" onclick="filterByCategory('')">
-                                    <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <rect x="3" y="3" width="7" height="7"></rect>
-                                            <rect x="14" y="3" width="7" height="7"></rect>
-                                            <rect x="14" y="14" width="7" height="7"></rect>
-                                            <rect x="3" y="14" width="7" height="7"></rect>
-                                        </svg></span>
-                                    <span>Tất cả học liệu</span>
-                                </a>
-                                <a href="#" class="nav-link-item" onclick="filterByCategory('video')">
-                                    <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                                        </svg></span>
-                                    <span>Video trực quan</span>
-                                </a>
-                                <a href="#" class="nav-link-item" onclick="filterByCategory('doc')">
-                                    <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                            <polyline points="14 2 14 8 20 8"></polyline>
-                                        </svg></span>
-                                    <span>Tài liệu hướng dẫn</span>
-                                </a>
-                            </nav>
+                        <div class="form-group">
+                            <a href="admin.html" id="adminLink" class="btn-sidebar-secondary" style="display:none;text-align:center;text-decoration:none;">TRANG QUẢN TRỊ</a>
                         </div>
-
-                        <!-- Upload Panel -->
-                        <div id="uploadPanel" class="glass-card p-8 animate-up"
-                            style="display:none; border-left: 4px solid var(--color-primary);">
-                            <div class="d-flex align-items-center gap-3 mb-6">
-                                <div class="icon-circle bg-primary text-white" style="width: 40px; height: 40px;">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <polyline points="17 8 12 3 7 8"></polyline>
-                                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                                    </svg>
-                                </div>
-                                <h5 class="m-0 font-bold tracking-tight">Đóng góp học liệu</h5>
-                            </div>
-                            <form id="uploadForm" onsubmit="event.preventDefault(); doUpload();"
-                                class="d-flex flex-column gap-4">
-                                <div class="form-group mb-0">
-                                    <label class="text-xs font-bold text-muted mb-2 text-uppercase tracking-wider">Tiêu
-                                        đề</label>
-                                    <input type="text" id="videoTitle" class="form-control"
-                                        placeholder="Tên học liệu..." required style="border-radius: 10px;">
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label class="text-xs font-bold text-muted mb-2 text-uppercase tracking-wider">Mô tả
-                                        ngắn</label>
-                                    <textarea id="videoDesc" class="form-control"
-                                        placeholder="Mô tả sơ lược về nội dung..." rows="2"
-                                        style="border-radius: 10px; height: auto;"></textarea>
-                                </div>
-                                <div class="upload-dropzone" onclick="document.getElementById('videoFile').click()">
-                                    <input type="file" id="videoFile" class="d-none" accept="video/*"
-                                        onchange="document.getElementById('fileNameLabel').textContent = this.files[0].name">
-                                    <div class="text-3xl mb-2">📥</div>
-                                    <div id="fileNameLabel" class="text-xs font-bold text-muted opacity-60">Nhấn để chọn
-                                        file video</div>
-                                </div>
-                                <button type="submit"
-                                    class="btn btn-primary w-100 py-3 font-bold text-xs tracking-widest"
-                                    style="border-radius: 10px;">TẢI LÊN NGAY</button>
-                            </form>
-                        </div>
+                        <button class="btn-sidebar-ghost" onclick="doLogout()">ĐĂNG XUẤT</button>
                     </div>
                 </div>
 
-                <!-- Gallery -->
-                <div class="col-lg-8">
-                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-12 gap-6">
-                        <div class="d-flex align-items-center gap-4">
-                            <span class="badge-count" id="videoCountLabel">0 HỌC LIỆU</span>
-                            <h2 class="h3 m-0 font-bold tracking-tight">Thư viện tài nguyên</h2>
+                <!-- Filter Card -->
+                <div class="sidebar-card">
+                    <p class="sidebar-card-title">Danh mục</p>
+                    <nav class="filter-nav" id="filterNav">
+                        <div class="filter-item active" data-filter="" onclick="setFilter('', this)">
+                            <span class="filter-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></span>
+                            <span>Tất cả</span>
+                            <span class="filter-count" id="countAll">0</span>
                         </div>
-                        <div class="search-bar-container">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="3" class="text-muted mr-3 opacity-40">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                            <input type="text" class="search-input" placeholder="Tìm kiếm tên tài liệu, chủ đề...">
-                            <button class="btn btn-primary btn-sm px-4" style="border-radius: 100px;">TÌM</button>
+                        <div class="filter-item" data-filter="video" onclick="setFilter('video', this)">
+                            <span class="filter-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></span>
+                            <span>Video</span>
+                            <span class="filter-count" id="countVideo">0</span>
                         </div>
-                    </div>
+                        <div class="filter-item" data-filter="doc" onclick="setFilter('doc', this)">
+                            <span class="filter-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span>
+                            <span>Tài liệu</span>
+                            <span class="filter-count" id="countDoc">0</span>
+                        </div>
+                    </nav>
+                </div>
 
-                    <div id="videoWrapper" class="row g-8">
-                        <div class="col-12 text-center py-32 opacity-40">
-                            <div class="spinner-border text-primary mb-6" style="width: 3rem; height: 3rem;"></div>
-                            <p class="text-sm font-bold tracking-widest text-uppercase">Đang kết nối thư viện số...</p>
+                <!-- Upload Card -->
+                <div class="sidebar-card upload-panel" id="uploadCard" style="display:none;">
+                    <div class="upload-panel-header">
+                        <div class="upload-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                         </div>
+                        <span class="upload-panel-title">Đóng góp học liệu</span>
+                    </div>
+                    <div id="uploadForm">
+                        <div class="form-group">
+                            <label class="form-label">Tiêu đề</label>
+                            <input type="text" id="videoTitle" class="form-input" placeholder="Tên học liệu...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mô tả</label>
+                            <textarea id="videoDesc" class="form-input" placeholder="Mô tả ngắn..." rows="2" style="resize:none;"></textarea>
+                        </div>
+                        <div class="upload-dropzone" id="dropzone" onclick="document.getElementById('videoFile').click()">
+                            <div class="upload-dropzone-icon">📂</div>
+                            <div class="upload-dropzone-text">Kéo thả hoặc <strong>chọn file</strong><br><span style="font-size:11px;color:var(--color-text-muted);">mp4, mov, avi, mkv, webm (tối đa 500MB)</span></div>
+                            <div class="upload-filename" id="fileNameLabel"></div>
+                            <input type="file" id="videoFile" class="d-none" accept="video/*" onchange="onFileSelected(this)">
+                        </div>
+                        <div id="uploadProgress" class="upload-progress">
+                            <div class="upload-progress-bar"><div class="upload-progress-fill" id="progressFill"></div></div>
+                            <div class="upload-progress-text" id="progressText">Đang tải lên...</div>
+                        </div>
+                        <div id="uploadSuccess" class="upload-success">
+                            <div class="upload-success-icon">✅</div>
+                            <div class="upload-success-text">Tải lên thành công!</div>
+                        </div>
+                        <button class="btn-sidebar-primary" id="uploadBtn" onclick="doUpload()">TẢI LÊN NGAY</button>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <div class="content-header">
+                    <div class="content-title-wrap">
+                        <span class="content-count" id="videoCountLabel">0</span>
+                        <h2 class="content-title">Học liệu</h2>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm học liệu..." oninput="onSearch(this.value)">
+                        <button class="search-btn">TÌM</button>
+                    </div>
+                </div>
+
+                <div id="videoWrapper">
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Đang tải thư viện...</div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
+
+    <!-- VIDEO MODAL -->
+    <div class="video-modal" id="videoModal" onclick="if(event.target===this)closeVideoModal()">
+        <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+        <div class="video-modal-content">
+            <video id="modalVideo" controls controlsList="nodownload" style="width:100%;background:#000;">
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer-section">
@@ -580,35 +706,16 @@
                     <a href="index.html" class="logo">
                         <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
                     </a>
-                    <p>Đề tài nghiên cứu: "Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho
-                        trẻ 24-36 tháng tuổi". Một giải pháp giáo dục hiện đại cho trẻ thơ.</p>
+                    <p>Đề tài nghiên cứu: "Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi". Một giải pháp giáo dục hiện đại cho trẻ thơ.</p>
                     <div class="footer-social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100090118347358" class="footer-social-btn"
-                            target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                            </svg>
+                        <a href="https://www.facebook.com/profile.php?id=100090118347358" class="footer-social-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                         </a>
                         <a href="https://x.com/daihocvinh" class="footer-social-btn" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path
-                                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
-                                </path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
                         </a>
                         <a href="#" class="footer-social-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path
-                                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
-                                </path>
-                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                         </a>
                     </div>
                 </div>
@@ -640,12 +747,7 @@
                     <h4 class="footer-column-title">Liên Hệ</h4>
                     <div class="footer-contact-item">
                         <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         </div>
                         <div class="footer-contact-text">
                             <span>Địa chỉ</span>
@@ -654,13 +756,7 @@
                     </div>
                     <div class="footer-contact-item">
                         <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                                </path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                         </div>
                         <div class="footer-contact-text">
                             <span>Điện thoại</span>
@@ -669,13 +765,7 @@
                     </div>
                     <div class="footer-contact-item">
                         <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                </path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         </div>
                         <div class="footer-contact-text">
                             <span>Email</span>
@@ -687,8 +777,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm
-                        38-ĐATN</a>.
+                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm 38-ĐATN</a>.
                 </div>
                 <div class="footer-bottom-links">
                     <a href="#" class="mr-4">Chính sách bảo mật</a>
@@ -704,7 +793,11 @@
     <script>
         const API = '/api';
         let currentUser = null;
+        let allVideos = [];
+        let currentFilter = '';
+        let currentSearch = '';
 
+        // ── Session ──────────────────────────────────────────────
         async function checkSession() {
             try {
                 const res = await fetch(API + '/auth/session', { credentials: 'include' });
@@ -719,48 +812,85 @@
             const nr = document.getElementById('navRight');
             if (nr) {
                 if (currentUser) {
-                    nr.innerHTML = `<span class="btn btn-primary btn-sm">${escHtml(currentUser.username)}</span><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>`;
+                    nr.innerHTML = `
+                        <span class="btn btn-primary btn-sm">${escHtml(currentUser.username)}</span>
+                        ${currentUser.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
+                        <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                    `;
                 } else {
-                    nr.innerHTML = `<div class="flex"><a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a><a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a></div>`;
+                    nr.innerHTML = `
+                        <div class="flex">
+                            <a href="login.html" class="btn btn-ghost btn-sm">Đăng nhập</a>
+                            <a href="register.html" class="btn btn-primary btn-sm">Đăng ký</a>
+                        </div>
+                    `;
+                }
+            }
+            const mnr = document.getElementById('mobileNavRight');
+            if (mnr) {
+                if (currentUser) {
+                    mnr.innerHTML = `
+                        <div class="user-info">
+                            <strong>${escHtml(currentUser.username)}</strong>
+                            <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                        </div>
+                    `;
+                } else {
+                    mnr.innerHTML = `<a href="login.html" class="btn btn-primary w-100">Đăng nhập</a>`;
                 }
             }
 
-            const mnr = document.getElementById('mobileNavRight');
-            if (mnr) {
-                if (currentUser) mnr.innerHTML = `<div class="user-info"><strong>${escHtml(currentUser.username)}</strong><button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button></div>`;
-                else mnr.innerHTML = `<a href="login.html" class="btn btn-primary w-100">Đăng nhập</a>`;
-            }
+            // Auth sidebar
+            const loginForm = document.getElementById('loginForm');
+            const userPanel = document.getElementById('userPanel');
+            const uploadCard = document.getElementById('uploadCard');
+            
+            if(loginForm) loginForm.style.display = currentUser ? 'none' : 'block';
+            if(userPanel) userPanel.style.display = currentUser ? 'block' : 'none';
+            if(uploadCard) uploadCard.style.display = currentUser ? 'block' : 'none';
 
-            document.getElementById('uploadPanel').style.display = currentUser ? 'block' : 'none';
-            document.getElementById('loginPanel').style.display = currentUser ? 'none' : 'block';
-            document.getElementById('adminPanel').style.display = (currentUser && currentUser.role === 'admin') ? 'block' : 'none';
+            if (currentUser && userPanel) {
+                const initial = currentUser.username.charAt(0).toUpperCase();
+                const avatar = document.getElementById('userAvatar');
+                const name = document.getElementById('userName');
+                const role = document.getElementById('userRole');
+                const adminLink = document.getElementById('adminLink');
+
+                if(avatar) {
+                    avatar.textContent = initial;
+                    avatar.className = 'auth-avatar' + (currentUser.role === 'admin' ? ' admin' : '');
+                }
+                if(name) name.textContent = escHtml(currentUser.username);
+                const roleLabels = { admin: 'Quản trị viên', teacher: 'Giáo viên', student: 'Học sinh', user: 'Thành viên' };
+                if(role) role.textContent = roleLabels[currentUser.role] || 'Thành viên';
+                if(adminLink) adminLink.style.display = currentUser.role === 'admin' ? 'block' : 'none';
+            }
         }
 
+        // ── Login / Logout ──────────────────────────────────────
         async function doLogin() {
             const u = document.getElementById('loginUsername').value.trim();
             const p = document.getElementById('loginPassword').value;
             const err = document.getElementById('loginError');
+            if (!u || !p) { err.textContent = 'Vui lòng nhập đầy đủ thông tin.'; err.style.display = 'block'; return; }
             try {
                 const res = await fetch(API + '/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                    body: JSON.stringify({ username: u, password: p })
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include', body: JSON.stringify({ username: u, password: p })
                 });
                 const data = await res.json();
                 if (data.success) {
                     currentUser = data.user;
                     err.style.display = 'none';
-                    updateNavUI();
                     document.getElementById('loginUsername').value = '';
                     document.getElementById('loginPassword').value = '';
+                    updateNavUI();
                 } else {
-                    err.textContent = data.message;
+                    err.textContent = data.message || 'Đăng nhập thất bại.';
                     err.style.display = 'block';
                 }
             } catch (e) {
-                err.textContent = 'Lỗi kết nối server.';
-                err.style.display = 'block';
+                err.textContent = 'Lỗi kết nối server.'; err.style.display = 'block';
             }
         }
 
@@ -770,113 +900,230 @@
             updateNavUI();
         }
 
+        // ── Upload ──────────────────────────────────────────────
+        function onFileSelected(input) {
+            const label = document.getElementById('fileNameLabel');
+            label.textContent = input.files[0] ? '📄 ' + input.files[0].name : '';
+        }
+
         async function doUpload() {
             if (!currentUser) { alert('Vui lòng đăng nhập.'); return; }
             const title = document.getElementById('videoTitle').value.trim();
             const desc = document.getElementById('videoDesc').value.trim();
             const fileInput = document.getElementById('videoFile');
-            if (!title || !fileInput.files[0]) { alert('Vui lòng nhập tiêu đề và chọn file.'); return; }
+            if (!title) { alert('Vui lòng nhập tiêu đề.'); return; }
+            if (!fileInput.files[0]) { alert('Vui lòng chọn file video.'); return; }
+
+            const btn = document.getElementById('uploadBtn');
+            const progress = document.getElementById('uploadProgress');
+            const success = document.getElementById('uploadSuccess');
+            const form = document.getElementById('uploadForm');
+
+            btn.disabled = true;
+            btn.textContent = 'ĐANG TẢI LÊN...';
+            progress.style.display = 'block';
+            success.style.display = 'none';
+
             const formData = new FormData();
             formData.append('title', title);
             formData.append('description', desc);
             formData.append('file', fileInput.files[0]);
+
             try {
-                const res = await fetch(API + '/videos/upload', { method: 'POST', credentials: 'include', body: formData });
+                const res = await fetch(API + '/videos/upload', {
+                    method: 'POST', credentials: 'include', body: formData
+                });
                 const data = await res.json();
                 if (data.success) {
-                    alert('Tải video lên thành công!');
+                    progress.style.display = 'none';
+                    success.style.display = 'block';
                     document.getElementById('videoTitle').value = '';
                     document.getElementById('videoDesc').value = '';
                     document.getElementById('videoFile').value = '';
-                    document.getElementById('fileNameLabel').textContent = 'Nhấn để chọn file video';
+                    document.getElementById('fileNameLabel').textContent = '';
                     loadVideos();
+                    setTimeout(() => { success.style.display = 'none'; }, 3000);
                 } else {
                     alert(data.message || 'Tải lên thất bại.');
+                    progress.style.display = 'none';
                 }
-            } catch (e) { alert('Lỗi kết nối server.'); }
+            } catch (e) {
+                alert('Lỗi kết nối server: ' + e.message);
+                progress.style.display = 'none';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'TẢI LÊN NGAY';
+            }
         }
 
+        // ── Video list ─────────────────────────────────────────
         async function loadVideos() {
             try {
                 const res = await fetch(API + '/videos', { credentials: 'include' });
                 const data = await res.json();
-                if (!data.success) return;
-                const videos = data.videos || [];
-                document.getElementById('videoCountLabel').textContent = videos.length + ' HỌC LIỆU';
-                const w = document.getElementById('videoWrapper');
-                if (videos.length === 0) {
-                    w.innerHTML = '<div class="col-12 text-center py-20 text-muted"><div class="text-5xl mb-4">📭</div><p class="text-lg font-semibold">Chưa có học liệu nào được chia sẻ.</p></div>';
-                    return;
-                }
-                w.innerHTML = videos.map(v => {
-                    const sizeMB = (v.size / (1024 * 1024)).toFixed(1);
-                    const date = new Date(v.created_at).toLocaleDateString('vi-VN');
-                    const downloadUrl = API + '/videos/download/' + encodeURIComponent(v.filename);
-                    const isAdmin = currentUser && currentUser.role === 'admin';
-                    return `
-                    <div class="col-md-6">
-                        <article class="resource-card animate-up">
-                            <div class="resource-thumb">
-                                <div class="play-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                            </div>
-                            <div class="resource-content">
-                                <div class="resource-meta">
-                                    <span class="text-primary">Digital Asset</span>
-                                    <span class="opacity-20">•</span>
-                                    <span>${sizeMB} MB</span>
-                                </div>
-                                <h4 class="resource-title">${escHtml(v.title)}</h4>
-                                <p class="resource-desc">${escHtml(v.description || 'Học liệu số hỗ trợ giáo dục mầm non, kích thích khả năng quan sát và nhận biết thế giới xung quanh.')}</p>
-                                
-                                <div class="resource-footer">
-                                    <div class="uploader">
-                                        <div class="uploader-avatar">${v.uploader_name.charAt(0).toUpperCase()}</div>
-                                        <span class="uploader-name">${escHtml(v.uploader_name)}</span>
-                                    </div>
-                                    <span class="text-xs text-muted opacity-60">${date}</span>
-                                </div>
-
-                                <div class="mt-6 d-flex gap-3">
-                                    <a href="${downloadUrl}" class="btn btn-primary btn-sm flex-grow font-bold text-xs tracking-widest" style="border-radius: 8px; height: 40px;" download>TẢI XUỐNG</a>
-                                    ${isAdmin ? `<button class="btn btn-secondary btn-sm px-3" onclick="deleteVideo(${v.id})" style="border-radius: 8px; height: 40px; border-color: #ffeaea; color: #e53e3e;" title="Xóa tài nguyên"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>` : ''}
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                `;
-                }).join('');
+                allVideos = data.videos || [];
+                applyFilters();
             } catch (e) {
-                document.getElementById('videoWrapper').innerHTML = '<div class="col-12 text-center py-20 text-danger font-bold">Lỗi kết nối dữ liệu. Vui lòng thử lại sau.</div>';
+                document.getElementById('videoWrapper').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">⚠️</div>
+                        <div class="empty-title">Không thể tải dữ liệu</div>
+                        <div class="empty-desc">Vui lòng kiểm tra kết nối và thử lại.</div>
+                    </div>`;
             }
         }
 
+        function applyFilters() {
+            const filtered = allVideos.filter(v => {
+                const matchFilter = !currentFilter || currentFilter === 'video';
+                const matchSearch = !currentSearch ||
+                    v.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    (v.description || '').toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    (v.uploader_name || '').toLowerCase().includes(currentSearch.toLowerCase());
+                return matchFilter && matchSearch;
+            });
+
+            document.getElementById('videoCountLabel').textContent = filtered.length;
+            document.getElementById('countAll').textContent = allVideos.length;
+            document.getElementById('countVideo').textContent = allVideos.length;
+            document.getElementById('countDoc').textContent = '0';
+
+            const w = document.getElementById('videoWrapper');
+            if (filtered.length === 0) {
+                w.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <div class="empty-title">Chưa có học liệu nào</div>
+                        <div class="empty-desc">${currentUser ? 'Hãy là người đầu tiên đóng góp!' : 'Đăng nhập để đóng góp học liệu.'}</div>
+                    </div>`;
+                return;
+            }
+
+            w.innerHTML = `<div class="video-grid">${filtered.map(v => renderVideoCard(v)).join('')}</div>`;
+        }
+
+        function renderVideoCard(v) {
+            const sizeMB = (v.size / (1024 * 1024)).toFixed(1);
+            const date = new Date(v.created_at);
+            const formattedDate = date.toLocaleDateString('vi-VN', { day: '2-digit', month: 'short', year: 'numeric' });
+            const videoUrl = '/uploads/' + encodeURIComponent(v.path);
+            const dlUrl = API + '/videos/download/' + encodeURIComponent(v.uploader) + '/' + encodeURIComponent(v.filename);
+            const isAdmin = currentUser && currentUser.role === 'admin';
+            const initial = (v.uploader_name || v.uploader || 'U').charAt(0).toUpperCase();
+            const roleLabel = { admin: 'Quản trị viên', teacher: 'Giáo viên' }[v.uploader_role] || 'Thành viên';
+
+            return `
+            <div class="video-card">
+                <div class="video-thumb" onclick="playVideo('${videoUrl.replace(/'/g, "\\'")}')">
+                    <video muted preload="metadata" onmouseenter="this.play(); this.pause();" style="cursor:pointer;">
+                        <source src="${videoUrl}" type="video/mp4">
+                    </video>
+                    <div class="video-thumb-overlay">
+                        <div class="play-btn">
+                            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="video-duration">${sizeMB} MB</div>
+                </div>
+                <div class="video-body">
+                    <div class="video-meta-top">
+                        <span class="video-tag">Video</span>
+                    </div>
+                    <h4 class="video-title">${escHtml(v.title)}</h4>
+                    <p class="video-desc">${escHtml(v.description || 'Học liệu số hỗ trợ giáo dục mầm non.')}</p>
+                    <div class="video-footer">
+                        <div class="video-uploader">
+                            <div class="video-uploader-avatar">${initial}</div>
+                            <div class="video-uploader-info">
+                                <span class="video-uploader-name">${escHtml(v.uploader_name || v.uploader)}</span>
+                                <span class="video-uploader-role">${roleLabel}</span>
+                            </div>
+                        </div>
+                        <div class="video-actions">
+                            <span class="video-date">${formattedDate}</span>
+                            <a href="${dlUrl}" class="btn-download" download title="Tải xuống">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg>
+                                Tải
+                            </a>
+                            ${isAdmin ? `<button class="btn-delete" onclick="event.stopPropagation(); deleteVideo(${v.id})" title="Xóa">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function playVideo(url) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            video.src = url;
+            modal.classList.add('active');
+            video.play().catch(() => {});
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            video.pause();
+            video.src = '';
+            modal.classList.remove('active');
+        }
+
+        // ── Delete ─────────────────────────────────────────────
         async function deleteVideo(id) {
-            if (!confirm('Bạn có chắc chắn muốn xóa học liệu này không?')) return;
+            if (!confirm('Xóa học liệu này?')) return;
             try {
-                const res = await fetch(API + '/videos/delete/' + id, { method: 'POST', credentials: 'include' });
+                const res = await fetch(API + '/videos/' + id + '/delete', { method: 'POST', credentials: 'include' });
                 const data = await res.json();
                 if (data.success) loadVideos();
-                else alert(data.message || 'Lỗi xóa video.');
+                else alert(data.message || 'Lỗi xóa.');
             } catch (e) { alert('Lỗi kết nối server.'); }
         }
 
-        function toggleMobileMenu() {
-            document.getElementById('mobileNav').classList.toggle('active');
-            document.getElementById('mobileNavOverlay').classList.toggle('active');
+        // ── Filter & Search ─────────────────────────────────────
+        function setFilter(filter, el) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-item').forEach(e => e.classList.remove('active'));
+            el.classList.add('active');
+            applyFilters();
+        }
+
+        function onSearch(q) {
+            currentSearch = q;
+            applyFilters();
+        }
+
+        function toggleMobileMenu() { 
+            const m = document.getElementById('mobileNav'); 
+            const o = document.getElementById('mobileNavOverlay');
+            if (m && o) {
+                m.classList.toggle('active');
+                o.classList.toggle('active');
+            }
         }
         function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
-        function filterByCategory(cat) {
-            // Simple visual feedback for category selection
-            document.querySelectorAll('.nav-link-item').forEach(el => el.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            loadVideos();
+
+        // Drag & drop
+        const dropzone = document.getElementById('dropzone');
+        if (dropzone) {
+            dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+            dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+            dropzone.addEventListener('drop', e => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('video/')) {
+                    const input = document.getElementById('videoFile');
+                    const dt = new DataTransfer();
+                    dt.items.add(file);
+                    input.files = dt.files;
+                    onFileSelected(input);
+                }
+            });
         }
 
         checkSession();
     </script>
 </body>
-
 </html>

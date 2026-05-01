@@ -1,87 +1,151 @@
-const fs = require('fs');
-const initSqlJs = require('sql.js');
-const bcrypt = require('bcryptjs');
-const { DB_PATH } = require('../config/constants');
+require('dotenv').config();
+const mysql = require('mysql2/promise');
+
+const DB_CONFIG = {
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'kpmtxq_db',
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+};
 
 class DatabaseService {
   constructor() {
-    this.db = null;
+    this.pool = null;
+    this._ready = null;
   }
 
   async init() {
-    const SQL = await initSqlJs();
-    if (fs.existsSync(DB_PATH)) {
-      const buf = fs.readFileSync(DB_PATH);
-      this.db = new SQL.Database(buf);
-    } else {
-      this.db = new SQL.Database();
-    }
-    this.createTables();
-    this.seedAdmin();
-    this.save();
-    console.log('Database initialized.');
-  }
+    // Create database if not exists
+    const tempConfig = { ...DB_CONFIG };
+    delete tempConfig.database;
+    const tempPool = mysql.createPool(tempConfig);
+    await tempPool.query(`CREATE DATABASE IF NOT EXISTS \`${DB_CONFIG.database}\``);
+    await tempPool.end();
 
-  createTables() {
-    this.db.run(`
+    // Create main pool
+    this.pool = mysql.createPool(DB_CONFIG);
+
+    // Create tables
+    await this.pool.query(`
       CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        role TEXT DEFAULT 'user'
-      )
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        role ENUM('admin','teacher','student','user') DEFAULT 'user',
+        status ENUM('pending','approved','rejected') DEFAULT 'pending',
+        email VARCHAR(255) DEFAULT '',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `);
-    this.db.run(`
+
+    await this.pool.query(`
+      CREATE TABLE IF NOT EXISTS categories (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(200) NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    `);
+
+    await this.pool.query(`
+      CREATE TABLE IF NOT EXISTS news (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        summary TEXT,
+        category_id INT,
+        author_id INT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL,
+        FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    `);
+
+    await this.pool.query(`
       CREATE TABLE IF NOT EXISTS videos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         title TEXT NOT NULL,
         description TEXT,
         filename TEXT NOT NULL,
         originalname TEXT NOT NULL,
-        size INTEGER,
+        size BIGINT DEFAULT 0,
         uploader TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
+        uploader_id INT,
+        path TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (uploader_id) REFERENCES users(id) ON DELETE SET NULL
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `);
+
+    this.migrateColumns();
+    this.seedAdmin();
+    this.seedCategories();
+
+    console.log('Database initialized (MySQL).');
   }
 
-  seedAdmin() {
-    const adminExists = this.db.exec("SELECT id FROM users WHERE username = 'admin'");
-    if (adminExists.length === 0 || adminExists[0].values.length === 0) {
+  async migrateColumns() {
+    try {
+      await this.pool.query(`
+        ALTER TABLE users ADD COLUMN status ENUM('pending','approved','rejected') DEFAULT 'pending' AFTER role
+      `);
+    } catch (e) {}
+
+    try {
+      await this.pool.query("UPDATE users SET status = 'approved' WHERE status IS NULL OR status = ''");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE videos ADD COLUMN uploader_id INT AFTER uploader");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE videos ADD COLUMN path TEXT AFTER uploader_id");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE videos MODIFY COLUMN size BIGINT DEFAULT 0");
+    } catch (e) {}
+  }
+
+  async seedAdmin() {
+    const [rows] = await this.pool.query("SELECT id FROM users WHERE username = 'admin' LIMIT 1");
+    if (rows.length === 0) {
+      const bcrypt = require('bcryptjs');
       const hash = bcrypt.hashSync('admin123', 10);
-      this.db.run("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ['admin', hash, 'admin']);
+      await this.pool.query(
+        "INSERT INTO users (username, password, role, status) VALUES (?, ?, ?, ?)",
+        ['admin', hash, 'admin', 'approved']
+      );
+    } else {
+      await this.pool.query("UPDATE users SET status = 'approved' WHERE username = 'admin' AND status != 'approved'");
     }
   }
 
-  save() {
-    const data = this.db.export();
-    const buf = Buffer.from(data);
-    fs.writeFileSync(DB_PATH, buf);
-  }
-
-  get(sql, params = []) {
-    const stmt = this.db.prepare(sql);
-    stmt.bind(params);
-    if (stmt.step()) {
-      const row = stmt.getAsObject();
-      stmt.free();
-      return row;
+  async seedCategories() {
+    const [rows] = await this.pool.query("SELECT id FROM categories LIMIT 1");
+    if (rows.length === 0) {
+      const cats = ['Tin tức', 'Sự kiện', 'Giáo dục', 'Hoạt động', 'Thông báo'];
+      for (const name of cats) {
+        await this.pool.query('INSERT INTO categories (name) VALUES (?)', [name]);
+      }
     }
-    stmt.free();
-    return null;
   }
 
-  run(sql, params = []) {
-    this.db.run(sql, params);
-    this.save();
+  async get(sql, params = []) {
+    const [rows] = await this.pool.query(sql, params);
+    return rows[0] || null;
   }
 
-  all(sql, params = []) {
-    const stmt = this.db.prepare(sql);
-    stmt.bind(params);
-    const rows = [];
-    while (stmt.step()) rows.push(stmt.getAsObject());
-    stmt.free();
+  async run(sql, params = []) {
+    await this.pool.query(sql, params);
+  }
+
+  async all(sql, params = []) {
+    const [rows] = await this.pool.query(sql, params);
     return rows;
   }
 }

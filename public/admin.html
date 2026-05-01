@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard — KPMTXQ 24-36T</title>
+    <title>Hệ thống Quản trị — KPMTXQ 24-36T</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,72 +13,108 @@
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
     <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <!-- HEADER -->
-    <header class="header-section sticky-header">
-        <div class="header-bottom">
-            <div class="container">
-                <div class="row align-items-center">
-
-                    <div class="col d-flex justify-content-center">
-                        <nav class="main-menu">
-                            <ul>
-                                <li><a href="index.html">Trang Chủ</a></li>
-                                <li><a href="concepts.html">Khái niệm</a></li>
-                                <li><a href="significance.html">Mục tiêu & Ý nghĩa</a></li>
-                                <li><a href="content.html">Nội dung</a></li>
-                                <li><a href="resources.html">Kho học liệu AI</a></li>
-                                <li><a href="about-team.html">Về chúng tôi</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-auto">
-                        <div class="header-action-link">
-                            <a href="index.html" class="btn btn-ghost btn-sm">← Trang chủ</a>
-                        </div>
-                    </div>
-                </div>
+<body class="admin-body">
+    
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="sidebar">
+        <div class="admin-sidebar-header">
+            <div class="admin-sidebar-logo">K</div>
+            <div class="admin-sidebar-info">
+                <div style="font-weight: 800; font-size: 1.1rem; line-height: 1.2;">ADMIN</div>
+                <div style="font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px;">KPMTXQ 24-36T</div>
             </div>
         </div>
-    </header>
+        
+        <nav class="admin-nav">
+            <a href="#dashboard" class="admin-nav-item active">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Tổng quan</span>
+            </a>
+            <a href="#news" class="admin-nav-item">
+                <i data-lucide="newspaper"></i>
+                <span>Bài viết</span>
+            </a>
+            <a href="#users" class="admin-nav-item">
+                <i data-lucide="users"></i>
+                <span>Người dùng</span>
+            </a>
+            <a href="#videos" class="admin-nav-item">
+                <i data-lucide="video"></i>
+                <span>Video học liệu</span>
+            </a>
+            <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                <a href="index.html" class="admin-nav-item">
+                    <i data-lucide="home"></i>
+                    <span>Về trang chủ</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
 
-    <!-- ADMIN CONTENT -->
-    <main class="container py-12" id="adminContent" style="display:none;">
-        <div class="animate-in mb-10">
-            <div class="flex items-center gap-6">
-                <div class="icon-circle bg-primary text-white" style="width: 64px; height: 64px; font-size: 1.5rem;">⚙️</div>
-                <div>
-                    <h1 class="h2 text-primary m-0">Admin Dashboard</h1>
-                    <p class="text-muted m-0">Hệ thống quản trị nội dung và người dùng</p>
+    <!-- MAIN CONTENT -->
+    <main class="admin-main admin-hidden" id="adminContent">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header-title">
+                <h1>Hệ thống Quản trị</h1>
+                <p id="welcomeMsg">Chào mừng trở lại, Quản trị viên</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="admin-mobile-toggle" onclick="toggleSidebar()">
+                    <i data-lucide="menu"></i>
+                </button>
+                <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">A</div>
+                    <span class="text-sm font-bold text-slate-700">Admin</span>
                 </div>
             </div>
-        </div>
+        </header>
 
         <!-- Stats -->
-        <div class="grid grid-3 mb-10 animate-in stagger-1">
-            <div class="card text-center py-8">
-                <div class="h2 text-primary mb-2" id="statNews">-</div>
-                <div class="text-xs font-bold tracking-widest text-muted uppercase">BÀI VIẾT</div>
+        <div class="admin-stats-grid animate-in">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statNews">-</span>
+                    <span class="stat-label">Bài viết</span>
+                </div>
             </div>
-            <div class="card text-center py-8">
-                <div class="h2 text-primary mb-2" id="statVideos">-</div>
-                <div class="text-xs font-bold tracking-widest text-muted uppercase">VIDEO</div>
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i data-lucide="play-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statVideos">-</span>
+                    <span class="stat-label">Video</span>
+                </div>
             </div>
-            <div class="card text-center py-8">
-                <div class="h2 text-primary mb-2" id="statUsers">-</div>
-                <div class="text-xs font-bold tracking-widest text-muted uppercase">NGƯỜI DÙNG</div>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i data-lucide="users"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statUsers">-</span>
+                    <span class="stat-label">Thành viên</span>
+                </div>
             </div>
         </div>
 
         <!-- News Section -->
-        <div class="card mb-10 animate-in stagger-2">
-            <div class="flex items-center justify-between mb-8 border-b pb-4">
-                <h2 class="h4 text-primary m-0 flex items-center gap-2">📰 Quản lý Bài viết</h2>
-                <button class="btn btn-primary btn-sm" onclick="openNewsModal()">+ Thêm bài viết</button>
+        <section id="newsSection" class="admin-section-card animate-in stagger-1">
+            <div class="admin-section-header">
+                <h2><i data-lucide="newspaper" class="text-primary"></i> Quản lý Bài viết</h2>
+                <button class="btn btn-primary btn-sm" onclick="openNewsModal()">
+                    <i data-lucide="plus-circle" style="width: 16px;"></i> Thêm bài viết
+                </button>
             </div>
-            <div class="overflow-x-auto">
-                <table class="table-modern">
+            <div class="admin-table-container">
+                <table class="admin-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -92,201 +128,147 @@
                     <tbody id="newsTable"></tbody>
                 </table>
             </div>
-        </div>
+        </section>
 
         <!-- Users Section -->
-        <div class="card mb-10 animate-in stagger-3">
-            <div class="flex items-center justify-between mb-8 border-b pb-4">
-                <h2 class="h4 text-primary m-0 flex items-center gap-2">👥 Quản lý Người dùng</h2>
+        <section id="usersSection" class="admin-section-card animate-in stagger-2">
+            <div class="admin-section-header">
+                <h2><i data-lucide="users" class="text-primary"></i> Quản lý Người dùng</h2>
             </div>
-            <div class="overflow-x-auto">
-                <table class="table-modern">
+            <div class="admin-table-container">
+                <table class="admin-table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tên</th>
+                            <th>Email</th>
                             <th>Vai trò</th>
+                            <th>Trạng thái</th>
                             <th>Ngày tạo</th>
                             <th>Đổi vai trò</th>
-                            <th>Xóa</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="usersTable"></tbody>
                 </table>
             </div>
-        </div>
+        </section>
 
         <!-- Videos Section -->
-        <div class="card animate-in stagger-4">
-            <div class="flex items-center justify-between mb-8 border-b pb-4">
-                <h2 class="h4 text-primary m-0 flex items-center gap-2">🎬 Quản lý Video</h2>
+        <section id="videosSection" class="admin-section-card animate-in stagger-3">
+            <div class="admin-section-header">
+                <h2><i data-lucide="video" class="text-primary"></i> Quản lý Video học liệu</h2>
             </div>
-            <div class="overflow-x-auto">
-                <table class="table-modern">
+            <div class="admin-table-container">
+                <table class="admin-table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tiêu đề</th>
                             <th>Người tải</th>
                             <th>Dung lượng</th>
-                            <th>Tải về</th>
+                            <th>Ngày đăng</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="videosTable"></tbody>
                 </table>
             </div>
-        </div>
+        </section>
     </main>
 
+    <style>
+        .admin-hidden { display: none !important; }
+    </style>
+
     <!-- NOT ADMIN MESSAGE -->
-    <div class="flex flex-column items-center justify-center py-24 text-center" id="notAdminMsg" style="display:none;">
-        <div class="text-6xl mb-6">🔐</div>
+    <div class="flex flex-column items-center justify-center py-24 text-center admin-hidden" id="notAdminMsg">
+        <div class="bg-red-50 w-24 h-24 rounded-full flex items-center justify-center text-red-500 mb-8 text-4xl">
+            <i data-lucide="lock"></i>
+        </div>
         <h2 class="h3 text-danger mb-4">Không có quyền truy cập</h2>
-        <p class="text-muted mb-8 max-w-sm">Chỉ tài khoản Admin mới được vào trang này.</p>
+        <p class="text-muted mb-8 max-w-sm">Chỉ tài khoản Admin mới được vào khu vực này. Vui lòng quay lại hoặc đăng nhập bằng tài khoản quản trị.</p>
         <a href="index.html" class="btn btn-primary">← Quay về trang chủ</a>
     </div>
 
     <!-- NEWS MODAL -->
-    <div class="modal-overlay" id="newsModal">
-        <div class="modal-box card max-w-2xl w-100 p-8">
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="h4 text-primary m-0">📰 Thêm Bài viết Mới</h2>
-                <button class="text-2xl text-muted hover-text-primary" onclick="closeNewsModal()">×</button>
+    <div class="admin-modal-overlay" id="newsModal">
+        <div class="admin-modal animate-in">
+            <div class="admin-modal-header">
+                <h2 class="h4 m-0 flex items-center gap-2">
+                    <i data-lucide="plus-circle" class="text-primary"></i> Đăng Bài viết Mới
+                </h2>
+                <button class="btn btn-ghost btn-sm" onclick="closeNewsModal()" style="padding: 0; width: 32px; height: 32px;">×</button>
             </div>
-            <div class="flex flex-column gap-5">
-                <div class="form-group">
-                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Tiêu đề *</label>
-                    <input type="text" id="newsTitle" class="form-control" placeholder="Nhập tiêu đề...">
-                </div>
-                <div class="form-group">
-                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Danh mục *</label>
-                    <select id="newsCategory" class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Tóm tắt</label>
-                    <textarea id="newsSummary" class="form-control" placeholder="Tóm tắt ngắn" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="text-xs font-bold text-muted mb-2 block uppercase">Nội dung *</label>
-                    <textarea id="newsContent" class="form-control" placeholder="Nội dung chi tiết..." rows="6"></textarea>
-                </div>
-                <div class="flex gap-4 mt-4">
-                    <button class="btn btn-primary" onclick="submitNews()">Đăng bài ngay</button>
-                    <button class="btn btn-ghost" onclick="closeNewsModal()">Hủy bỏ</button>
+            <div class="admin-modal-body">
+                <div class="flex flex-column gap-5">
+                    <div class="form-group">
+                        <label class="form-label">TIÊU ĐỀ *</label>
+                        <input type="text" id="newsTitle" class="form-control" placeholder="Nhập tiêu đề hấp dẫn...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">DANH MỤC *</label>
+                        <select id="newsCategory" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">TÓM TẮT NGẮN</label>
+                        <textarea id="newsSummary" class="form-control" placeholder="Mô tả sơ lược về bài viết..." rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">NỘI DUNG CHI TIẾT *</label>
+                        <textarea id="newsContent" class="form-control" placeholder="Viết nội dung tại đây..." rows="8"></textarea>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <button class="btn btn-primary w-full" onclick="submitNews()">Xuất bản ngay</button>
+                        <button class="btn btn-ghost w-full" onclick="closeNewsModal()">Hủy bỏ</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="footer-section">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Column 1: Brand -->
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
-                    </a>
-                    <p>Đề tài nghiên cứu: "Thực trạng và biện pháp tổ chức hoạt động khám phá môi trường xung quanh cho trẻ 24-36 tháng tuổi". Một giải pháp giáo dục hiện đại cho trẻ thơ.</p>
-                    <div class="footer-social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100090118347358" class="footer-social-btn" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                        </a>
-                        <a href="https://x.com/daihocvinh" class="footer-social-btn" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-                        </a>
-                        <a href="#" class="footer-social-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Column 2: Quick Links -->
-                <div>
-                    <h4 class="footer-column-title">Liên Kết Nhanh</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Trang Chủ</a></li>
-                        <li><a href="significance.html">Mục tiêu & Ý nghĩa</a></li>
-                        <li><a href="resources.html">Kho học liệu AI</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Resources -->
-                <div>
-                    <h4 class="footer-column-title">Học Liệu</h4>
-                    <ul class="footer-links">
-                        <li><a href="content.html">Nội dung giáo dục</a></li>
-                        <li><a href="about-team.html">Về chúng tôi</a></li>
-                        <li><a href="news.html">Tin tức & Sự kiện</a></li>
-                        <li><a href="contact-us.html">Liên hệ hỗ trợ</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Contact Info -->
-                <div>
-                    <h4 class="footer-column-title">Liên Hệ</h4>
-                    <div class="footer-contact-item">
-                        <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        </div>
-                        <div class="footer-contact-text">
-                            <span>Địa chỉ</span>
-                            Số 182, đường Lê Duẩn, phường Trường Vinh, TP. Vinh, Nghệ An
-                        </div>
-                    </div>
-                    <div class="footer-contact-item">
-                        <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        </div>
-                        <div class="footer-contact-text">
-                            <span>Điện thoại</span>
-                            0837 864 763
-                        </div>
-                    </div>
-                    <div class="footer-contact-item">
-                        <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </div>
-                        <div class="footer-contact-text">
-                            <span>Email</span>
-                            daihocvinh@gmail.com
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm 38-ĐATN</a>.
-                </div>
-                <div class="footer-bottom-links">
-                    <a href="#" class="mr-4">Chính sách bảo mật</a>
-                    <a href="#">Điều khoản sử dụng</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="assets/js/vendor/vendor.min.js"></script>
     <script src="assets/js/plugins/plugins.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+    // Initialize Icons
+    lucide.createIcons();
+
     const API = '/api';
+
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('mobile-active');
+    }
 
     async function checkAdmin() {
         try {
             const res = await fetch(API + '/auth/session', { credentials: 'include' });
             const data = await res.json();
-            if (!data.success || !data.user || data.user.role !== 'admin') {
-                document.getElementById('adminContent').style.display = 'none';
-                document.getElementById('notAdminMsg').style.display = 'flex';
+            
+            if (!data.user || data.user.role !== 'admin') {
+                document.getElementById('adminContent').classList.add('admin-hidden');
+                document.getElementById('sidebar').classList.add('admin-hidden');
+                document.getElementById('notAdminMsg').classList.remove('admin-hidden');
                 return;
             }
-            document.getElementById('adminContent').style.display = 'block';
-            document.getElementById('notAdminMsg').style.display = 'none';
-            loadAll();
+            
+            // Is Admin
+            document.getElementById('adminContent').classList.remove('admin-hidden');
+            document.getElementById('sidebar').classList.remove('admin-hidden');
+            document.getElementById('notAdminMsg').classList.add('admin-hidden');
+            
+            if (data.user.username) {
+                document.getElementById('welcomeMsg').textContent = `Chào mừng trở lại, ${data.user.username}`;
+            }
+            
+            // Load data separately to not trigger "No Access" msg on data fetch errors
+            loadAll().catch(err => console.error("Data loading error:", err));
+            
         } catch (e) {
-            document.getElementById('notAdminMsg').style.display = 'flex';
+            console.error("Auth check error:", e);
+            document.getElementById('adminContent').classList.add('admin-hidden');
+            document.getElementById('sidebar').classList.add('admin-hidden');
+            document.getElementById('notAdminMsg').classList.remove('admin-hidden');
         }
     }
 
@@ -323,15 +305,20 @@
                 const date = new Date(n.created_at).toLocaleDateString('vi-VN');
                 return `
                     <tr>
-                        <td>${n.id}</td>
+                        <td class="font-bold text-xs text-slate-400">#${n.id}</td>
                         <td><strong class="text-primary">${escHtml(n.title)}</strong></td>
-                        <td><span class="badge badge-primary">${escHtml(n.category_name || 'Không')}</span></td>
-                        <td>${escHtml(n.author_name || 'Không rõ')}</td>
-                        <td>${date}</td>
-                        <td><button class="btn btn-ghost btn-sm text-danger" onclick="deleteNews(${n.id})">Xóa</button></td>
+                        <td><span class="badge badge-primary">${escHtml(n.category_name || 'Khác')}</span></td>
+                        <td class="text-sm">${escHtml(n.author_name || '—')}</td>
+                        <td class="text-sm opacity-70">${date}</td>
+                        <td>
+                            <button class="btn btn-ghost btn-sm text-danger" onclick="deleteNews(${n.id})">
+                                <i data-lucide="trash-2" style="width: 14px;"></i> Xóa
+                            </button>
+                        </td>
                     </tr>
                 `;
             }).join('');
+            lucide.createIcons();
         } catch (e) {}
     }
 
@@ -341,32 +328,76 @@
             const data = await res.json();
             const tb = document.getElementById('usersTable');
             if (!data.users || data.users.length === 0) {
-                tb.innerHTML = '<tr><td colspan="7" class="text-center py-12 text-muted">Chưa có người dùng nào.</td></tr>';
+                tb.innerHTML = '<tr><td colspan="8" class="text-center py-12 text-muted">Chưa có người dùng nào.</td></tr>';
                 return;
             }
             tb.innerHTML = data.users.map(u => {
-                const roleClass = 'badge-' + u.role;
-                const date = new Date(u.created_at).toLocaleDateString('vi-VN');
+                const date = u.created_at ? new Date(u.created_at).toLocaleDateString('vi-VN') : '-';
+                let statusBadge = '';
+                if (u.role === 'teacher') {
+                    if (u.status === 'approved') statusBadge = '<span class="badge badge-success" style="background: #ecfdf5; color: #059669;">Đã duyệt</span>';
+                    else if (u.status === 'pending') statusBadge = '<span class="badge badge-warning" style="background: #fffbeb; color: #d97706;">Chờ duyệt</span>';
+                    else if (u.status === 'rejected') statusBadge = '<span class="badge badge-danger" style="background: #fef2f2; color: #dc2626;">Từ chối</span>';
+                } else if (u.role === 'admin') {
+                    statusBadge = '<span class="badge badge-primary" style="background: #eff6ff; color: #2563eb;">Quản trị</span>';
+                } else {
+                    statusBadge = '<span class="badge badge-secondary" style="background: #f1f5f9; color: #64748b;">Mặc định</span>';
+                }
+                const approveBtn = (u.role === 'teacher' && u.status === 'pending')
+                    ? `<button class="btn btn-primary btn-sm" onclick="approveUser(${u.id})">Duyệt</button>
+                       <button class="btn btn-ghost btn-sm text-danger" onclick="rejectUser(${u.id})">Từ chối</button>`
+                    : '';
+                const roleSelect = u.username !== 'admin'
+                    ? `<select class="form-control" style="width:auto; height: 32px; padding: 0 8px; font-size: 11px; border-radius: 8px;" onchange="changeRole(${u.id}, this.value)">
+                        <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+                        <option value="teacher" ${u.role==='teacher'?'selected':''}>Giáo viên</option>
+                        <option value="user" ${u.role==='user'?'selected':''}>Người dùng</option>
+                       </select>`
+                    : '<span class="text-muted text-xs">—</span>';
+                const deleteBtn = u.username !== 'admin'
+                    ? `<button class="btn btn-ghost btn-sm text-danger" onclick="deleteUser(${u.id})" title="Xóa người dùng"><i data-lucide="user-minus" style="width: 14px;"></i></button>`
+                    : '';
                 return `
                     <tr>
-                        <td>${u.id}</td>
-                        <td><strong>${escHtml(u.username)}</strong></td>
-                        <td>${escHtml(u.email || '-')}</td>
-                        <td><span class="badge ${roleClass}">${escHtml(u.role)}</span></td>
-                        <td>${date}</td>
-                        <td>
-                            <select class="form-control" style="width:auto; height: 32px; padding: 0 8px; font-size: 11px;" onchange="changeRole(${u.id}, this.value)">
-                                <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
-                                <option value="teacher" ${u.role==='teacher'?'selected':''}>Giáo viên</option>
-                                <option value="student" ${u.role==='student'?'selected':''}>Học sinh</option>
-                                <option value="user" ${u.role==='user'?'selected':''}>Người dùng</option>
-                            </select>
-                        </td>
-                        <td><button class="btn btn-ghost btn-sm text-danger" onclick="deleteUser(${u.id})">🗑</button></td>
+                        <td class="font-bold text-xs text-slate-400">#${u.id}</td>
+                        <td><div class="flex flex-column"><strong>${escHtml(u.username)}</strong><span class="text-xxs opacity-50">${u.role.toUpperCase()}</span></div></td>
+                        <td class="text-sm">${escHtml(u.email || '-')}</td>
+                        <td><span class="font-bold text-xs">${u.role.toUpperCase()}</span></td>
+                        <td>${statusBadge}</td>
+                        <td class="text-sm opacity-70">${date}</td>
+                        <td>${roleSelect}</td>
+                        <td><div class="flex gap-2">${approveBtn}${deleteBtn}</div></td>
                     </tr>
                 `;
             }).join('');
+            lucide.createIcons();
         } catch (e) {}
+    }
+
+    async function approveUser(id) {
+        if (!confirm('Phê duyệt tài khoản giáo viên này?')) return;
+        try {
+            const res = await fetch(API + '/admin/users/' + id + '/approve', { method: 'PATCH', credentials: 'include' });
+            const data = await res.json();
+            if (data.success) {
+                loadUsers();
+            } else {
+                alert(data.message || 'Lỗi.');
+            }
+        } catch (e) { alert('Lỗi kết nối.'); }
+    }
+
+    async function rejectUser(id) {
+        if (!confirm('Từ chối tài khoản giáo viên này?')) return;
+        try {
+            const res = await fetch(API + '/admin/users/' + id + '/reject', { method: 'PATCH', credentials: 'include' });
+            const data = await res.json();
+            if (data.success) {
+                loadUsers();
+            } else {
+                alert(data.message || 'Lỗi.');
+            }
+        } catch (e) { alert('Lỗi kết nối.'); }
     }
 
     async function loadVideos() {
@@ -375,25 +406,34 @@
             const data = await res.json();
             const tb = document.getElementById('videosTable');
             if (!data.videos || data.videos.length === 0) {
-                tb.innerHTML = '<tr><td colspan="7" class="text-center py-12 text-muted">Chưa có video nào.</td></tr>';
+                tb.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-muted">Chưa có video nào.</td></tr>';
                 return;
             }
             tb.innerHTML = data.videos.map(v => {
-                const date = new Date(v.created_at).toLocaleDateString('vi-VN');
-                const size = (v.size / (1024*1024)).toFixed(1);
+                const date = v.created_at ? new Date(v.created_at).toLocaleDateString('vi-VN') : '-';
+                const size = v.size ? (v.size / (1024*1024)).toFixed(1) + ' MB' : '-';
                 const dl = API + '/videos/download/' + encodeURIComponent(v.filename);
                 return `
                     <tr>
-                        <td>${v.id}</td>
+                        <td class="font-bold text-xs text-slate-400">#${v.id}</td>
                         <td><strong>${escHtml(v.title)}</strong></td>
-                        <td>${escHtml(v.uploader_name || 'Không rõ')}</td>
-                        <td>${size} MB</td>
-                        <td>${date}</td>
-                        <td><a href="${dl}" class="btn btn-primary btn-sm" download>⬇ ${v.downloads}</a></td>
-                        <td><button class="btn btn-ghost btn-sm text-danger" onclick="deleteVideo(${v.id})">Xóa</button></td>
+                        <td class="text-sm">${escHtml(v.uploader || '-')}</td>
+                        <td class="text-sm font-medium text-slate-500">${size}</td>
+                        <td class="text-sm opacity-70">${date}</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <a href="${dl}" class="btn btn-primary btn-sm" download title="Tải xuống">
+                                    <i data-lucide="download" style="width: 14px;"></i>
+                                </a>
+                                <button class="btn btn-ghost btn-sm text-danger" onclick="deleteVideo(${v.id})" title="Xóa video">
+                                    <i data-lucide="trash-2" style="width: 14px;"></i>
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 `;
             }).join('');
+            lucide.createIcons();
         } catch (e) {}
     }
 

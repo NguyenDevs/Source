@@ -1,24 +1,30 @@
 const db = require('../services/DatabaseService');
 
 class VideoRepository {
-  getAll() {
-    return db.all('SELECT * FROM videos ORDER BY created_at DESC');
+  async getAll() {
+    return db.all(`
+      SELECT v.id, v.title, v.description, v.filename, v.originalname, v.size,
+             v.uploader, v.uploader_id, v.path, v.created_at,
+             u.username AS uploader_name, u.role AS uploader_role
+      FROM videos v
+      LEFT JOIN users u ON v.uploader_id = u.id
+      ORDER BY v.created_at DESC
+    `);
   }
 
-  getById(id) {
+  async getById(id) {
     return db.get('SELECT * FROM videos WHERE id = ?', [id]);
   }
 
-  create(videoData) {
-    const { title, description, filename, originalname, size, uploader } = videoData;
-    return db.run(
-      'INSERT INTO videos (title, description, filename, originalname, size, uploader) VALUES (?, ?, ?, ?, ?, ?)',
-      [title, description, filename, originalname, size, uploader]
+  async create({ title, description, filename, originalname, size, uploader, uploader_id, path: videoPath }) {
+    await db.run(
+      'INSERT INTO videos (title, description, filename, originalname, size, uploader, uploader_id, path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [title, description, filename, originalname, size, uploader, uploader_id, videoPath]
     );
   }
 
-  delete(id) {
-    return db.run('DELETE FROM videos WHERE id = ?', [id]);
+  async delete(id) {
+    await db.run('DELETE FROM videos WHERE id = ?', [id]);
   }
 }
 

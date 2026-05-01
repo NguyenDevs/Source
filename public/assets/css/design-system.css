@@ -405,25 +405,48 @@ li {
    5. MOBILE HEADER
    ============================================================ */
 .mobile-header-section {
-    background-color: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--space-3) 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.mobile-header-section .header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .mobile-header-section .header-logo img {
-    height: 36px;
+    height: 38px;
+    width: auto;
 }
 
 .mobile-menu-toggle {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 1.4rem;
     cursor: pointer;
-    color: var(--color-text);
-    padding: var(--space-2);
+    color: #1e293b;
+    padding: 6px 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.mobile-menu-toggle:hover, .mobile-menu-toggle:active {
+    background: #fee2e2;
+    color: var(--color-primary);
+    border-color: #fca5a5;
+    transform: translateY(-1px);
 }
 
 .mobile-menu {
@@ -3462,3 +3485,31 @@ to {
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
+
+/* ============================================================
+   MOBILE FIXES CHO CONCEPT 2 (CARD--HORIZONTAL)
+   ============================================================ */
+@media (max-width: 768px) {
+    .card--horizontal .p-12 {
+        padding: var(--space-6) !important;
+    }
+    
+    .card--horizontal .bg-primary-pale {
+        padding-bottom: var(--space-8) !important;
+    }
+    
+    .card--horizontal .highlight-box {
+        padding: var(--space-5) var(--space-4) !important;
+        border-radius: var(--radius-lg);
+        margin-bottom: 0 !important;
+    }
+    
+    .card--horizontal h2.h2 {
+        font-size: var(--text-2xl) !important;
+        margin-bottom: var(--space-4) !important;
+    }
+    
+    .card--horizontal .list-unstyled li {
+        margin-bottom: var(--space-3) !important;
+    }
+}

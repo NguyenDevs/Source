@@ -540,12 +540,12 @@
             tb.innerHTML = data.videos.map(v => {
                 const date = v.created_at ? new Date(v.created_at).toLocaleDateString('vi-VN') : '-';
                 const size = v.size ? (v.size / (1024*1024)).toFixed(1) + ' MB' : '-';
-                const dl = API + '/videos/download/' + encodeURIComponent(v.uploader || 'system') + '/' + encodeURIComponent(v.filename);
+                const dl = API + '/videos/download/' + encodeURIComponent(v.filename);
                 return `
                     <tr>
                         <td class="font-bold text-xs text-slate-400">#${v.id}</td>
                         <td><strong>${escHtml(v.title)}</strong></td>
-                        <td class="text-sm">${escHtml(v.uploader || '-')}</td>
+                        <td class="text-sm">${escHtml(v.uploader_name || '-')}</td>
                         <td class="text-sm font-medium text-slate-500">${size}</td>
                         <td class="text-sm opacity-70">${date}</td>
                         <td>
@@ -562,7 +562,9 @@
                 `;
             }).join('');
             safeLucide();
-        } catch (e) {}
+        } catch (e) {
+            console.error('loadVideos error:', e);
+        }
     }
 
     async function loadCategories() {
@@ -615,9 +617,18 @@
 
     async function deleteVideo(id) {
         if (!confirm('Xóa video này?')) return;
-        await fetch(API + '/videos/delete/' + id, { method: 'POST', credentials: 'include' });
-        loadVideos();
-        loadStats();
+        try {
+            const res = await fetch(API + '/videos/delete/' + id, { method: 'POST', credentials: 'include' });
+            const data = await res.json();
+            if (data.success) {
+                loadVideos();
+                loadStats();
+            } else {
+                alert(data.message || 'Không thể xóa video.');
+            }
+        } catch (e) {
+            alert('Lỗi kết nối. Vui lòng thử lại.');
+        }
     }
 
     async function openNewsModal() {

@@ -540,7 +540,7 @@
             tb.innerHTML = data.videos.map(v => {
                 const date = v.created_at ? new Date(v.created_at).toLocaleDateString('vi-VN') : '-';
                 const size = v.size ? (v.size / (1024*1024)).toFixed(1) + ' MB' : '-';
-                const dl = API + '/videos/download/' + encodeURIComponent(v.filename);
+                const dl = API + '/videos/download/' + encodeURIComponent(v.uploader || 'unknown') + '/' + encodeURIComponent(v.filename);
                 return `
                     <tr>
                         <td class="font-bold text-xs text-slate-400">#${v.id}</td>
@@ -618,7 +618,7 @@
     async function deleteVideo(id) {
         if (!confirm('Xóa video này?')) return;
         try {
-            const res = await fetch(API + '/videos/delete/' + id, { method: 'POST', credentials: 'include' });
+            const res = await fetch(API + '/videos/' + id + '/delete', { method: 'POST', credentials: 'include' });
             const data = await res.json();
             if (data.success) {
                 loadVideos();

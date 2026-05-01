@@ -22,6 +22,10 @@ class AuthController {
       return res.status(401).json({ success: false, message: 'Tên đăng nhập hoặc mật khẩu không đúng.' });
     }
 
+    if (user.status === 'disabled') {
+      return res.status(403).json({ success: false, message: 'Tài khoản của bạn đã bị vô hiệu hóa.' });
+    }
+
     if (user.status !== 'approved') {
       return res.status(403).json({ success: false, message: 'Tài khoản của bạn chưa được phê duyệt.' });
     }

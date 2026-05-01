@@ -5,7 +5,7 @@ class VideoRepository {
     return db.all(`
       SELECT v.id, v.title, v.description, v.filename, v.originalname, v.size,
              v.uploader, v.uploader_id, v.path, v.created_at,
-             u.username AS uploader_name, u.role AS uploader_role
+             u.username AS uploader_name, u.role AS uploader_role, u.avatar AS uploader_avatar
       FROM videos v
       LEFT JOIN users u ON v.uploader_id = u.id
       ORDER BY v.created_at DESC

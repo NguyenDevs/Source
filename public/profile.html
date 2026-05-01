@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Cá Nhân — KPMTXQ 24-36T</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <style>
+        .profile-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .profile-grid { grid-template-columns: 1fr; }
+        }
+        .profile-sidebar-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-sm);
+        }
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: white;
+            font-size: 48px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 4px solid var(--color-primary-light);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+        .profile-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-name-large {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .profile-role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .profile-settings-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            border: 1px solid var(--color-border-light);
+            box-shadow: var(--shadow-sm);
+        }
+        .settings-section {
+            margin-bottom: 40px;
+        }
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+        .settings-title {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-bg-alt);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .settings-title i {
+            color: var(--color-primary);
+        }
+        .btn-save {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-save:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .msg {
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .msg-success { background: #E6FFFA; color: #2C7A7B; border: 1px solid #B2F5EA; }
+        .msg-error { background: #FFF5F5; color: #C53030; border: 1px solid #FED7D7; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header-section d-none d-xl-block sticky-header">
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col d-flex justify-content-center">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="index.html">Trang Chủ</a></li>
+                                <li><a href="concepts.html">Khái niệm</a></li>
+                                <li><a href="significance.html">Mục tiêu & Ý nghĩa</a></li>
+                                <li><a href="content.html">Nội dung</a></li>
+                                <li><a href="resources.html">Kho học liệu AI</a></li>
+                                <li><a href="about-team.html">Về chúng tôi</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto">
+                        <div id="navRight" class="header-action-link"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="profile-container animate-in">
+        <div class="profile-grid">
+            <!-- Sidebar -->
+            <aside>
+                <div class="profile-sidebar-card">
+                    <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
+                    <h1 class="profile-name-large" id="profileNameDisplay">User</h1>
+                    <span class="profile-role-badge" id="profileRoleBadge">Thành viên</span>
+                    <p style="font-size: 13px; color: var(--color-text-muted);" id="profileJoinDate">Tham gia từ: --/--/----</p>
+                    <div style="margin-top: 20px;">
+                        <a href="resources.html" class="btn btn-secondary btn-sm w-full">Về kho học liệu</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Settings -->
+            <div class="profile-settings-card">
+                <div id="statusMsg" class="msg"></div>
+
+                <!-- Info Section -->
+                <div class="settings-section">
+                    <h2 class="settings-title">Thông tin cá nhân</h2>
+                    <div class="form-group">
+                        <label class="form-label">Họ và tên</label>
+                        <input type="text" id="fullNameInput" class="form-control" placeholder="Nhập họ tên đầy đủ...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ảnh đại diện</label>
+                        <div class="flex items-center gap-4">
+                            <input type="file" id="avatarFileInput" class="form-control" accept="image/*" style="display: none;" onchange="uploadAvatar(this)">
+                            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('avatarFileInput').click()">Tải ảnh lên</button>
+                            <span id="avatarFileName" class="text-xs text-muted">Chưa chọn tệp</span>
+                        </div>
+                    </div>
+                    <button class="btn-save" onclick="updateInfo()">Lưu thông tin</button>
+                </div>
+
+                <!-- Email Section -->
+                <div class="settings-section">
+                    <h2 class="settings-title">Tài khoản & Email</h2>
+                    <div class="form-group">
+                        <label class="form-label">Tên đăng nhập (không thể đổi)</label>
+                        <input type="text" id="usernameInput" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="emailInput" class="form-control" placeholder="example@email.com">
+                    </div>
+                    <button class="btn-save" onclick="updateEmail()">Cập nhật Email</button>
+                </div>
+
+                <!-- Password Section -->
+                <div class="settings-section">
+                    <h2 class="settings-title">Bảo mật</h2>
+                    <div class="form-group">
+                        <label class="form-label">Mật khẩu cũ</label>
+                        <input type="password" id="oldPassInput" class="form-control" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mật khẩu mới</label>
+                        <input type="password" id="newPassInput" class="form-control" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Xác nhận mật khẩu mới</label>
+                        <input type="password" id="confirmPassInput" class="form-control" placeholder="••••••••">
+                    </div>
+                    <button class="btn-save" onclick="updatePassword()">Đổi mật khẩu</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="footer-copyright">&copy; 2026 KPMTXQ 24-36T. Bản quyền thuộc về Nhóm 38-ĐATN.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API = '/api';
+        let currentUser = null;
+
+        async function init() {
+            await checkSession();
+            if (!currentUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+            loadProfile();
+        }
+
+        async function checkSession() {
+            try {
+                const res = await fetch(API + '/auth/session', { credentials: 'include' });
+                const data = await res.json();
+                currentUser = data.user || null;
+                updateNavUI();
+            } catch (e) { currentUser = null; }
+        }
+
+        function updateNavUI() {
+            const nr = document.getElementById('navRight');
+            if (nr && currentUser) {
+                nr.innerHTML = `
+                    <a href="profile.html" class="btn btn-primary btn-sm">${escHtml(currentUser.username)}</a>
+                    ${currentUser.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
+                    <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                `;
+            }
+        }
+
+        async function doLogout() {
+            await fetch(API + '/auth/logout', { method: 'POST', credentials: 'include' });
+            window.location.href = 'index.html';
+        }
+
+        async function loadProfile() {
+            try {
+                const res = await fetch(API + '/users/profile', { credentials: 'include' });
+                const data = await res.json();
+                if (data.success) {
+                    const u = data.user;
+                    document.getElementById('profileNameDisplay').textContent = u.full_name || u.username;
+                    document.getElementById('usernameInput').value = u.username;
+                    document.getElementById('fullNameInput').value = u.full_name || '';
+                    document.getElementById('emailInput').value = u.email || '';
+                    
+                    const roleLabels = { admin: 'Quản trị viên', teacher: 'Giáo viên', student: 'Học sinh', user: 'Thành viên' };
+                    document.getElementById('profileRoleBadge').textContent = roleLabels[u.role] || 'Thành viên';
+                    
+                    const date = new Date(u.created_at);
+                    document.getElementById('profileJoinDate').textContent = `Tham gia từ: ${date.toLocaleDateString('vi-VN')}`;
+                    
+                    const avatar = document.getElementById('profileAvatarLarge');
+                    if (u.avatar) {
+                        avatar.innerHTML = `<img src="${u.avatar}" onerror="this.parentElement.textContent='${u.username[0].toUpperCase()}'">`;
+                    } else {
+                        avatar.textContent = u.username[0].toUpperCase();
+                    }
+                }
+            } catch (e) { showMsg('Lỗi tải thông tin cá nhân.', true); }
+        }
+
+        async function uploadAvatar(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            document.getElementById('avatarFileName').textContent = file.name;
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            try {
+                const res = await fetch(API + '/users/upload-avatar', {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMsg('Đã tải lên ảnh đại diện mới!');
+                    loadProfile();
+                } else {
+                    showMsg(data.message, true);
+                }
+            } catch (e) {
+                showMsg('Lỗi khi tải ảnh lên.', true);
+            }
+        }
+
+        async function updateInfo() {
+            const full_name = document.getElementById('fullNameInput').value.trim();
+            
+            try {
+                const res = await fetch(API + '/users/update-profile', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include', body: JSON.stringify({ full_name })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMsg('Đã cập nhật họ tên thành công!');
+                    loadProfile();
+                } else { showMsg(data.message, true); }
+            } catch (e) { showMsg('Lỗi kết nối server.', true); }
+        }
+
+        async function updateEmail() {
+            const email = document.getElementById('emailInput').value.trim();
+            if (!email) return showMsg('Vui lòng nhập email.', true);
+            
+            try {
+                const res = await fetch(API + '/users/update-email', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include', body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+                if (data.success) showMsg('Đã cập nhật email thành công!');
+                else showMsg(data.message, true);
+            } catch (e) { showMsg('Lỗi kết nối server.', true); }
+        }
+
+        async function updatePassword() {
+            const oldPassword = document.getElementById('oldPassInput').value;
+            const newPassword = document.getElementById('newPassInput').value;
+            const confirmPass = document.getElementById('confirmPassInput').value;
+            
+            if (!oldPassword || !newPassword) return showMsg('Vui lòng nhập đầy đủ mật khẩu.', true);
+            if (newPassword !== confirmPass) return showMsg('Mật khẩu mới không khớp.', true);
+            
+            try {
+                const res = await fetch(API + '/users/update-password', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include', body: JSON.stringify({ oldPassword, newPassword })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMsg('Đã đổi mật khẩu thành công!');
+                    document.getElementById('oldPassInput').value = '';
+                    document.getElementById('newPassInput').value = '';
+                    document.getElementById('confirmPassInput').value = '';
+                } else showMsg(data.message, true);
+            } catch (e) { showMsg('Lỗi kết nối server.', true); }
+        }
+
+        function showMsg(txt, isErr = false) {
+            const m = document.getElementById('statusMsg');
+            m.textContent = txt;
+            m.className = 'msg ' + (isErr ? 'msg-error' : 'msg-success');
+            m.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => { m.style.display = 'none'; }, 5000);
+        }
+
+        function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
+        
+        init();
+    </script>
+</body>
+</html>

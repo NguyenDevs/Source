@@ -14,7 +14,7 @@ class UserRepository {
   }
 
   async findAll() {
-    return db.all('SELECT id, username, role, status, created_at FROM users ORDER BY id DESC');
+    return db.all('SELECT id, username, role, status, email, full_name, avatar, created_at FROM users ORDER BY id DESC');
   }
 
   async findPendingTeachers() {
@@ -23,6 +23,20 @@ class UserRepository {
 
   async updateStatus(id, status) {
     await db.run('UPDATE users SET status = ? WHERE id = ?', [status, id]);
+  }
+
+  async updateProfile(id, data) {
+    const fields = [];
+    const values = [];
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== undefined) {
+        fields.push(`${key} = ?`);
+        values.push(value);
+      }
+    }
+    if (fields.length === 0) return;
+    values.push(id);
+    await db.run(`UPDATE users SET ${fields.join(', ')} WHERE id = ?`, values);
   }
 }
 

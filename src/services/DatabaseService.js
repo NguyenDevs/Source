@@ -36,8 +36,10 @@ class DatabaseService {
         username VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         role ENUM('admin','teacher','student','user') DEFAULT 'user',
-        status ENUM('pending','approved','rejected') DEFAULT 'pending',
+        status ENUM('pending','approved','rejected','disabled') DEFAULT 'pending',
         email VARCHAR(255) DEFAULT '',
+        full_name VARCHAR(255) DEFAULT '',
+        avatar VARCHAR(255) DEFAULT '',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `);
@@ -108,6 +110,18 @@ class DatabaseService {
 
     try {
       await this.pool.query("ALTER TABLE videos MODIFY COLUMN size BIGINT DEFAULT 0");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE users ADD COLUMN full_name VARCHAR(255) DEFAULT '' AFTER email");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE users ADD COLUMN avatar VARCHAR(255) DEFAULT '' AFTER full_name");
+    } catch (e) {}
+
+    try {
+      await this.pool.query("ALTER TABLE users MODIFY COLUMN status ENUM('pending','approved','rejected','disabled') DEFAULT 'pending'");
     } catch (e) {}
   }
 

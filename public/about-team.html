@@ -525,7 +525,7 @@
             if (!nr) return;
             if (user) {
                 nr.innerHTML = `
-                    <span class="btn btn-primary btn-sm">${escHtml(user.username)}</span>
+                    <a href="profile.html" class="btn btn-primary btn-sm">${escHtml(user.username)}</a>
                     ${user.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm">Quản trị</a>' : ''}
                     <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
                 `;

@@ -605,9 +605,10 @@
             if (mnr) {
                 if (user) {
                     mnr.innerHTML = `
-                    <div class="user-info">
-                        <strong>${escHtml(user.username)}</strong>
-                        <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
+                    <div class="user-info" style="text-align: center;">
+                        <a href="profile.html" style="font-weight: bold; color: var(--color-primary); font-size: 1.1rem; text-decoration: none; margin-bottom: 8px; display: block;">${escHtml(user.username)}</a>
+                        ${user.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;">Quản trị</a>' : ''}
+                        <button onclick="doLogout()" class="btn btn-ghost btn-sm" style="width: 100%;">Đăng xuất</button>
                     </div>
                 `;
                 } else {

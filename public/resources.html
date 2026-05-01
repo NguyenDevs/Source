@@ -881,11 +881,12 @@
             if (mnr) {
                 if (currentUser) {
                     mnr.innerHTML = `
-                        <div class="user-info">
-                            <strong>${escHtml(currentUser.username)}</strong>
-                            <button onclick="doLogout()" class="btn btn-ghost btn-sm">Đăng xuất</button>
-                        </div>
-                    `;
+                    <div class="user-info" style="text-align: center;">
+                        <a href="profile.html" style="font-weight: bold; color: var(--color-primary); font-size: 1.1rem; text-decoration: none; margin-bottom: 8px; display: block;">${escHtml(currentUser.username)}</a>
+                        ${currentUser.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;">Quản trị</a>' : ''}
+                        <button onclick="doLogout()" class="btn btn-ghost btn-sm" style="width: 100%;">Đăng xuất</button>
+                    </div>
+                `;
                 } else {
                     mnr.innerHTML = `<a href="login.html" class="btn btn-primary w-100">Đăng nhập</a>`;
                 }

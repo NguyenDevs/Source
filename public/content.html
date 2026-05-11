@@ -119,6 +119,27 @@
             font-weight: 700;
             display: inline-block;
         }
+        .theme-table tbody td:last-child {
+            text-align: left !important;
+        }
+        .theme-table ul {
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+        .theme-table ul li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .theme-table ul li::before {
+            content: "•";
+            color: var(--color-primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -266,11 +287,11 @@
                                     <td class="text-center stt-col">1</td>
                                     <td class="text-center"><span class="badge-theme">Trường mầm non</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Dạy trẻ nhận biết và gọi tên trường, tên lớp, tên cô giáo, tên các bạn trong lớp.</li>
-                                            <li>• Biết 1 - 2 hoạt động chính của cô và các bạn.</li>
-                                            <li>• Biết tên của cô hiệu trưởng, hiệu phó, bảo vệ và bác sỹ trong trường.</li>
-                                            <li>• Giáo dục trẻ biết yêu quý và nghe lời cô. Yêu thích đến trường.</li>
+                                        <ul class="text-muted">
+                                            <li>Dạy trẻ nhận biết và gọi tên trường, tên lớp, tên cô giáo, tên các bạn trong lớp.</li>
+                                            <li>Biết 1 - 2 hoạt động chính của cô và các bạn.</li>
+                                            <li>Biết tên của cô hiệu trưởng, hiệu phó, bảo vệ và bác sỹ trong trường.</li>
+                                            <li>Giáo dục trẻ biết yêu quý và nghe lời cô. Yêu thích đến trường.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -278,11 +299,11 @@
                                     <td class="text-center stt-col">2</td>
                                     <td class="text-center"><span class="badge-theme">Bản thân</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Dạy trẻ nhận biết và gọi tên mình.</li>
-                                            <li>• Bước đầu nhận biết giới tính của mình (bé trai hay bé gái).</li>
-                                            <li>• Nhận biết các bộ phận chính trên cơ thể, nói được chức năng, số lượng.</li>
-                                            <li>• Bước đầu giáo dục trẻ biết vệ sinh bảo vệ các bộ phận.</li>
+                                        <ul class="text-muted">
+                                            <li>Dạy trẻ nhận biết và gọi tên mình.</li>
+                                            <li>Bước đầu nhận biết giới tính của mình (bé trai hay bé gái).</li>
+                                            <li>Nhận biết các bộ phận chính trên cơ thể, nói được chức năng, số lượng.</li>
+                                            <li>Bước đầu giáo dục trẻ biết vệ sinh bảo vệ các bộ phận.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -290,11 +311,11 @@
                                     <td class="text-center stt-col">3</td>
                                     <td class="text-center"><span class="badge-theme">Gia đình</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Nhận biết họ và tên những người thân; biết xưng hô đúng mực.</li>
-                                            <li>• Nhận biết tên gọi và công dụng của các đồ dùng quen thuộc (thìa, cốc, bát...).</li>
-                                            <li>• Nhận biết thái độ người thân (vui, buồn); biết thể hiện tình cảm.</li>
-                                            <li>• Giáo dục trẻ bước đầu tự phục vụ và yêu thương gia đình.</li>
+                                        <ul class="text-muted">
+                                            <li>Nhận biết họ và tên những người thân; biết xưng hô đúng mực.</li>
+                                            <li>Nhận biết tên gọi và công dụng của các đồ dùng quen thuộc (thìa, cốc, bát...).</li>
+                                            <li>Nhận biết thái độ người thân (vui, buồn); biết thể hiện tình cảm.</li>
+                                            <li>Giáo dục trẻ bước đầu tự phục vụ và yêu thương gia đình.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -302,11 +323,11 @@
                                     <td class="text-center stt-col">4</td>
                                     <td class="text-center"><span class="badge-theme">Động vật</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Nhận biết tên gọi và đặc điểm nổi bật (cấu tạo, tiếng kêu, vận động, thức ăn...).</li>
-                                            <li>• Bắt chước âm thanh, tiếng kêu và các động tác vận động.</li>
-                                            <li>• Biết được ý nghĩa, ích lợi cơ bản của các loài động vật.</li>
-                                            <li>• Giáo dục trẻ sự hứng thú, yêu thích quan sát thế giới động vật.</li>
+                                        <ul class="text-muted">
+                                            <li>Nhận biết tên gọi và đặc điểm nổi bật (cấu tạo, tiếng kêu, vận động, thức ăn...).</li>
+                                            <li>Bắt chước âm thanh, tiếng kêu và các động tác vận động.</li>
+                                            <li>Biết được ý nghĩa, ích lợi cơ bản của các loài động vật.</li>
+                                            <li>Giáo dục trẻ sự hứng thú, yêu thích quan sát thế giới động vật.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -314,11 +335,11 @@
                                     <td class="text-center stt-col">5</td>
                                     <td class="text-center"><span class="badge-theme">Thực vật - Tết & Mùa xuân</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Nhận biết tên gọi và đặc điểm rõ nét của một số cây, rau, hoa, quả gần gũi.</li>
-                                            <li>• Nhận biết các dấu hiệu đặc trưng của ngày Tết và không khí mùa xuân.</li>
-                                            <li>• Biết ích lợi cơ bản của từng loại rau, quả đối với sức khỏe.</li>
-                                            <li>• Giáo dục trẻ bước đầu biết chăm sóc, bảo vệ thực vật.</li>
+                                        <ul class="text-muted">
+                                            <li>Nhận biết tên gọi và đặc điểm rõ nét của một số cây, rau, hoa, quả gần gũi.</li>
+                                            <li>Nhận biết các dấu hiệu đặc trưng của ngày Tết và không khí mùa xuân.</li>
+                                            <li>Biết ích lợi cơ bản của từng loại rau, quả đối với sức khỏe.</li>
+                                            <li>Giáo dục trẻ bước đầu biết chăm sóc, bảo vệ thực vật.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -326,10 +347,10 @@
                                     <td class="text-center stt-col">6</td>
                                     <td class="text-center"><span class="badge-theme">Phương tiện giao thông</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Nhận biết và gọi tên một số phương tiện giao thông đường bộ, thủy, hàng không.</li>
-                                            <li>• Biết đặc điểm cơ bản (cấu tạo, màu sắc, âm thanh) và ích lợi của phương tiện.</li>
-                                            <li>• Phân biệt đồ dùng - đồ chơi; thói quen giữ gìn, cất dọn đúng nơi quy định.</li>
+                                        <ul class="text-muted">
+                                            <li>Nhận biết và gọi tên một số phương tiện giao thông đường bộ, thủy, hàng không.</li>
+                                            <li>Biết đặc điểm cơ bản (cấu tạo, màu sắc, âm thanh) và ích lợi của phương tiện.</li>
+                                            <li>Phân biệt đồ dùng - đồ chơi; thói quen giữ gìn, cất dọn đúng nơi quy định.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -337,10 +358,10 @@
                                     <td class="text-center stt-col">7</td>
                                     <td class="text-center"><span class="badge-theme">Mùa hè của bé</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Nhận biết đặc điểm thời tiết mùa hè.</li>
-                                            <li>• Tìm hiểu đặc điểm trang phục mùa hè.</li>
-                                            <li>• Giáo dục trẻ mặc quần áo phù hợp và bảo vệ sức khỏe bản thân.</li>
+                                        <ul class="text-muted">
+                                            <li>Nhận biết đặc điểm thời tiết mùa hè.</li>
+                                            <li>Tìm hiểu đặc điểm trang phục mùa hè.</li>
+                                            <li>Giáo dục trẻ mặc quần áo phù hợp và bảo vệ sức khỏe bản thân.</li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -348,9 +369,9 @@
                                     <td class="text-center stt-col">8</td>
                                     <td class="text-center"><span class="badge-theme">Bé lên mẫu giáo</span></td>
                                     <td class="py-4">
-                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted text-start">
-                                            <li>• Nhận biết các đồ dùng, đồ chơi và hoạt động giáo dục đặc trưng lớp mẫu giáo.</li>
-                                            <li>• Tạo tâm thế vui vẻ, tự tin và sẵn sàng để trẻ chuyển sang mẫu giáo.</li>
+                                        <ul class="text-muted">
+                                            <li>Nhận biết các đồ dùng, đồ chơi và hoạt động giáo dục đặc trưng lớp mẫu giáo.</li>
+                                            <li> Tạo tâm thế vui vẻ, tự tin và sẵn sàng để trẻ chuyển sang mẫu giáo.</li>
                                         </ul>
                                     </td>
                                 </tr>

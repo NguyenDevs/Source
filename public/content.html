@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="assets/css/style.min.css">
     <link rel="stylesheet" href="assets/css/design-system.css">
     <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-soft: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        }
         .table-responsive table.table,
         .table-responsive table.table td,
         .table-responsive table.table th,
@@ -21,15 +27,105 @@
         .table-responsive table.table span {
             text-transform: none !important;
         }
+        .hero-section {
+            background: var(--gradient-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--color-primary);
+            border-radius: 2px;
+        }
+        .program-item {
+            padding: 1.5rem;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        .program-item:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
+        }
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--color-primary-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        .theme-table thead th {
+            background: var(--color-primary);
+            color: #fff !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border: none;
+        }
+        .theme-table tbody tr {
+            transition: background 0.2s ease;
+        }
+        .theme-table tbody tr:hover {
+            background-color: rgba(118, 75, 162, 0.02);
+        }
+        .stt-col {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            font-weight: 800;
+        }
+        .badge-theme {
+            background: var(--color-primary-pale);
+            color: var(--color-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header class="header-section d-none d-xl-block sticky-header">
         <div class="header-bottom">
             <div class="container">
                 <div class="row align-items-center">
-
                     <div class="col d-flex justify-content-center">
                         <nav class="main-menu">
                             <ul>
@@ -50,7 +146,6 @@
         </div>
     </header>
 
-    <!-- MOBILE HEADER -->
     <div class="mobile-header-section d-xl-none">
         <div class="container">
             <div class="row align-items-center justify-content-between">
@@ -80,123 +175,191 @@
         <div id="mobileNavRight" class="mobile-menu-footer"></div>
     </div>
 
-    <!-- BREADCRUMB SECTION (Height Aligned with Resources) -->
-    <div class="hero-section" style="background-color: var(--color-bg-alt); padding: 40px 0 60px;">
+    <div class="hero-section" style="padding: 60px 0 100px;">
         <div class="container text-center">
-            <div class="hero-content text-center" style="text-align: center;">
-                <nav class="breadcrumb-nav justify-content-center mb-4" style="justify-content: center;">
+            <div class="hero-content">
+                <nav class="breadcrumb-nav justify-content-center mb-4">
                     <a href="index.html" class="text-muted text-sm">Trang chủ</a>
                     <span class="separator">/</span>
-                    <span class="text-primary font-semibold text-sm">Chương trình nội dung</span>
+                    <span class="text-primary font-semibold text-sm">Nội dung giáo dục</span>
                 </nav>
-                <h1 class="display-1 text-primary mb-0" style="font-size: 2.2rem; text-align: center; line-height: 1.3;">1.3.3. Nội dung hoạt động khám phá môi trường xung quanh cho trẻ 24 – 36 tháng</h1>
+                <h1 class="display-4 text-primary mb-4" style="font-weight: 800; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.2;">Nội dung hoạt động khám phá môi trường xung quanh cho trẻ 24 – 36 tháng</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 800px; font-size: 1.1rem; line-height: 1.7; text-align: justify;">
+                    Nội dung KPMTXQ của trẻ 24 – 36 tháng tuổi được thiết kế dựa trên các căn cứ: đặc điểm tâm sinh lý, tư duy trực quan – hành động, sự phong phú đa dạng của các sự vật, hiện tượng gần gũi và mối quan hệ trực tiếp của trẻ với môi trường sống hằng ngày.
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT (Learning Table) -->
-    <section class="section" style="margin-top: -50px;">
+    <section class="section" style="margin-top: -60px; padding-bottom: 80px;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card border-0 shadow-lg p-0 overflow-hidden animate-in" style="border-radius: 20px;">
-                        <div class="p-8 p-md-10 bg-white">
-                            <div class="mb-8">
-                                <p class="text-muted text-base mb-3" style="text-align: justify; font-style: italic;">Theo Chương trình Giáo dục mầm non (Ban hành kèm theo Thông tư số 17/2009/TT-BGDĐT và sửa đổi, bổ sung bởi Thông tư số 51/2020/TT-BGDĐT, Thông tư số 01/2021/TT-BGDĐT)</p>
-                                <p class="text-muted text-base mb-6" style="text-align: justify;">Trong lĩnh vực Giáo dục phát triển nhận thức dành cho trẻ nhà trẻ 24 – 36 tháng tuổi, nội dung giáo dục khám phá môi trường xung quanh được quy định tại mục Phát triển nhận thức được tổng hợp, phân tích và trình bày theo từng chủ đề như sau:</p>
-                                <h2 class="h3 text-primary mb-4 text-center">Bảng 1.1. Nội dung hoạt động KP MTXQ cho trẻ 24 – 36 tháng</h2>
+            <div class="content-card p-6 p-md-10 mb-10 animate-in">
+                <div class="text-center mb-8">
+                    <h2 class="h3 text-primary section-title">Theo Chương trình Giáo dục mầm non</h2>
+                    <p class="text-muted italic" style="font-size: 0.9rem;">(Ban hành kèm theo Thông tư số 17/2009/TT-BGDĐT và sửa đổi, bổ sung bởi Thông tư số 51/2020/TT-BGDĐT, Thông tư số 01/2021/TT-BGDĐT)</p>
+                </div>
+                
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4 col-lg-2">
+                        <div class="program-item text-center">
+                            <div class="icon-circle mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle border-bottom mb-0" style="min-width: 800px;">
-                                    <thead style="background-color: var(--color-primary-pale);">
-                                        <tr>
-                                            <th class="text-center text-primary font-bold py-4" style="width: 80px; border-bottom: 2px solid var(--color-primary);">STT</th>
-                                            <th class="text-primary font-bold py-4" style="width: 280px; border-bottom: 2px solid var(--color-primary);">Tên chủ đề</th>
-                                            <th class="text-primary font-bold py-4" style="border-bottom: 2px solid var(--color-primary);">Nội dung giáo dục chi tiết</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-sm">
-                                        <!-- Row 1 -->
-                                        <tr>
-                                            <td class="text-center font-semibold text-muted py-4">1</td>
-                                            <td class="font-semibold text-dark py-4">Trường mầm non</td>
-                                            <td class="text-muted py-4" style="text-align: justify;">
-                                                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                                                    <li><span class="text-primary mr-2">•</span>Dạy trẻ nhận biết và gọi tên trường, tên lớp, tên cô giáo, tên các bạn trong lớp.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Biết 1 - 2 hoạt động chính của cô và các bạn.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Biết tên của cô hiệu trưởng, hiệu phó, bảo vệ và bác sỹ trong trường.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Giáo dục trẻ biết yêu quý và nghe lời cô. Yêu thích đến trường. Yêu quý bạn, không tranh giành đồ chơi với các bạn.</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 2 -->
-                                        <tr>
-                                            <td class="text-center font-semibold text-muted py-4">2</td>
-                                            <td class="font-semibold text-dark py-4">Bản thân</td>
-                                            <td class="text-muted py-4" style="text-align: justify;">
-                                                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                                                    <li><span class="text-primary mr-2">•</span>Dạy trẻ nhận biết và gọi tên mình.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Bước đầu nhận biết giới tính của mình (bé trai hay bé gái).</li>
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết các bộ phận chính trên cơ thể, nói được chức năng, số lượng của các bộ phận trên cơ thể (Ví dụ: mắt để nhìn, mắt có 2 mắt, mắt màu đen...).</li>
-                                                    <li><span class="text-primary mr-2">•</span>Bước đầu giáo dục trẻ biết vệ sinh bảo vệ các bộ phận.</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 3 -->
-                                        <tr>
-                                            <td class="text-center font-semibold text-muted py-4">3</td>
-                                            <td class="font-semibold text-dark py-4">Gia đình</td>
-                                            <td class="text-muted py-4" style="text-align: justify;">
-                                                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết họ và tên những người thân trong gia đình; biết xưng hô đúng mực với người thân, họ hàng gần gũi.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết tên gọi và công dụng của các đồ dùng quen thuộc (thìa, cốc, bát...).</li>
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết thái độ người thân (vui, buồn); biết thể hiện tình cảm và vâng lời người lớn.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Giáo dục trẻ bước đầu tự phục vụ (xúc cơm, lấy nước) và yêu thương, gắn bó với gia đình.</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 4 -->
-                                        <tr>
-                                            <td class="text-center font-semibold text-muted py-4">4</td>
-                                            <td class="font-semibold text-dark py-4">Động vật</td>
-                                            <td class="text-muted py-4" style="text-align: justify;">
-                                                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết tên gọi và đặc điểm nổi bật (cấu tạo, tiếng kêu, vận động, thức ăn...) của các con vật quen thuộc.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Bắt chước âm thanh, tiếng kêu và các động tác vận động của một số con vật.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Biết được ý nghĩa, ích lợi cơ bản của các loài động vật đối với con người.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Giáo dục trẻ sự hứng thú, yêu thích quan sát và tìm hiểu thế giới động vật.</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 5 -->
-                                        <tr>
-                                            <td class="text-center font-semibold text-muted py-4">5</td>
-                                            <td class="font-semibold text-dark py-4">Thực vật</td>
-                                            <td class="text-muted py-4" style="text-align: justify;">
-                                                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết tên gọi và đặc điểm rõ nét (cấu tạo, màu sắc, mùi vị, hình dạng) của một số cây, rau, hoa, quả gần gũi.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Biết ích lợi cơ bản của từng loại rau, quả đối với sức khỏe của trẻ.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Giáo dục trẻ bước đầu biết chăm sóc, bảo vệ thực vật và kích thích tính tò mò khám phá.</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 6 -->
-                                        <tr>
-                                            <td class="text-center font-semibold text-muted py-4">6</td>
-                                            <td class="font-semibold text-dark py-4">Phương tiện giao thông</td>
-                                            <td class="text-muted py-4" style="text-align: justify;">
-                                                <ul class="list-unstyled m-0 d-flex flex-column gap-2">
-                                                    <li><span class="text-primary mr-2">•</span>Nhận biết và gọi tên một số phương tiện giao thông đường bộ, đường thủy, đường hàng không quen thuộc.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Biết đặc điểm cơ bản (cấu tạo, màu sắc, hình dạng, âm thanh đặc trưng) và ích lợi của phương tiện.</li>
-                                                    <li><span class="text-primary mr-2">•</span>Phân biệt đồ dùng - đồ chơi; giáo dục trẻ thói quen giữ gìn, cất dọn đồ chơi đúng nơi quy định.</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <p class="mb-0 font-semibold text-dark text-sm">Bộ phận cơ thể con người</p>
                         </div>
                     </div>
+                    <div class="col-md-4 col-lg-2">
+                        <div class="program-item text-center">
+                            <div class="icon-circle mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            </div>
+                            <p class="mb-0 font-semibold text-dark text-sm">Đồ dùng, đồ chơi, Giao thông</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-2">
+                        <div class="program-item text-center">
+                            <div class="icon-circle mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            </div>
+                            <p class="mb-0 font-semibold text-dark text-sm">Con vật, hoa, quả quen thuộc</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-2">
+                        <div class="program-item text-center">
+                            <div class="icon-circle mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                            </div>
+                            <p class="mb-0 font-semibold text-dark text-sm">Một số màu sắc cơ bản</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-2">
+                        <div class="program-item text-center">
+                            <div class="icon-circle mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <p class="mb-0 font-semibold text-dark text-sm">Bản thân và người gần gũi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card p-0 overflow-hidden animate-in">
+                <div class="p-6 p-md-10">
+                    <div class="mb-8">
+                        <h2 class="h3 text-primary mb-3">Hệ thống chủ đề trải nghiệm</h2>
+                        <p class="text-muted text-base" style="text-align: justify;">
+                            Theo các nhà sư phạm mầm non (tiêu biểu như tác giả Hoàng Thị Oanh, Nguyễn Thị Xuân (2008), PGS.TS. Lê Thu Hương (2010)), nội dung KPMTXQ để đạt hiệu quả tối ưu cần được phân chia thành các mạch nội dung và cụ thể hóa qua các chủ đề trải nghiệm thực tế:
+                        </p>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table theme-table align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center py-4" style="width: 80px; border-top-left-radius: 12px;">STT</th>
+                                    <th class="py-4" style="width: 250px;">Tên chủ đề</th>
+                                    <th class="py-4" style="border-top-right-radius: 12px;">Nội dung giáo dục chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr>
+                                    <td class="text-center stt-col">1</td>
+                                    <td><span class="badge-theme">Trường mầm non</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Dạy trẻ nhận biết và gọi tên trường, tên lớp, tên cô giáo, tên các bạn trong lớp.</li>
+                                            <li>• Biết 1 - 2 hoạt động chính của cô và các bạn.</li>
+                                            <li>• Biết tên của cô hiệu trưởng, hiệu phó, bảo vệ và bác sỹ trong trường.</li>
+                                            <li>• Giáo dục trẻ biết yêu quý và nghe lời cô. Yêu thích đến trường.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">2</td>
+                                    <td><span class="badge-theme">Bản thân</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Dạy trẻ nhận biết và gọi tên mình.</li>
+                                            <li>• Bước đầu nhận biết giới tính của mình (bé trai hay bé gái).</li>
+                                            <li>• Nhận biết các bộ phận chính trên cơ thể, nói được chức năng, số lượng.</li>
+                                            <li>• Bước đầu giáo dục trẻ biết vệ sinh bảo vệ các bộ phận.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">3</td>
+                                    <td><span class="badge-theme">Gia đình</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Nhận biết họ và tên những người thân; biết xưng hô đúng mực.</li>
+                                            <li>• Nhận biết tên gọi và công dụng của các đồ dùng quen thuộc (thìa, cốc, bát...).</li>
+                                            <li>• Nhận biết thái độ người thân (vui, buồn); biết thể hiện tình cảm.</li>
+                                            <li>• Giáo dục trẻ bước đầu tự phục vụ và yêu thương gia đình.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">4</td>
+                                    <td><span class="badge-theme">Động vật</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Nhận biết tên gọi và đặc điểm nổi bật (cấu tạo, tiếng kêu, vận động, thức ăn...).</li>
+                                            <li>• Bắt chước âm thanh, tiếng kêu và các động tác vận động.</li>
+                                            <li>• Biết được ý nghĩa, ích lợi cơ bản của các loài động vật.</li>
+                                            <li>• Giáo dục trẻ sự hứng thú, yêu thích quan sát thế giới động vật.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">5</td>
+                                    <td><span class="badge-theme">Thực vật - Tết & Mùa xuân</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Nhận biết tên gọi và đặc điểm rõ nét của một số cây, rau, hoa, quả gần gũi.</li>
+                                            <li>• Nhận biết các dấu hiệu đặc trưng của ngày Tết và không khí mùa xuân.</li>
+                                            <li>• Biết ích lợi cơ bản của từng loại rau, quả đối với sức khỏe.</li>
+                                            <li>• Giáo dục trẻ bước đầu biết chăm sóc, bảo vệ thực vật.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">6</td>
+                                    <td><span class="badge-theme">Phương tiện giao thông</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Nhận biết và gọi tên một số phương tiện giao thông đường bộ, thủy, hàng không.</li>
+                                            <li>• Biết đặc điểm cơ bản (cấu tạo, màu sắc, âm thanh) và ích lợi của phương tiện.</li>
+                                            <li>• Phân biệt đồ dùng - đồ chơi; thói quen giữ gìn, cất dọn đúng nơi quy định.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">7</td>
+                                    <td><span class="badge-theme">Mùa hè của bé</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Nhận biết đặc điểm thời tiết mùa hè.</li>
+                                            <li>• Tìm hiểu đặc điểm trang phục mùa hè.</li>
+                                            <li>• Giáo dục trẻ mặc quần áo phù hợp và bảo vệ sức khỏe bản thân.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center stt-col">8</td>
+                                    <td><span class="badge-theme">Bé lên mẫu giáo</span></td>
+                                    <td class="py-4">
+                                        <ul class="list-unstyled m-0 d-flex flex-column gap-2 text-muted">
+                                            <li>• Nhận biết các đồ dùng, đồ chơi và hoạt động giáo dục đặc trưng lớp mẫu giáo.</li>
+                                            <li>• Tạo tâm thế vui vẻ, tự tin và sẵn sàng để trẻ chuyển sang mẫu giáo.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bg-light p-4 text-center">
+                    <p class="mb-0 text-muted text-sm">Bảng 1.1. Nội dung hoạt động KP MTXQ cho trẻ 24 – 36 tháng</p>
                 </div>
             </div>
         </div>
@@ -205,7 +368,6 @@
     <footer class="footer-section">
         <div class="container">
             <div class="footer-grid">
-                <!-- Column 1: Brand -->
                 <div class="footer-brand">
                     <a href="index.html" class="logo">
                         <img src="assets/images/logo/logo_black.png" alt="KPMTXQ Logo">
@@ -218,13 +380,9 @@
                         <a href="https://x.com/daihocvinh" class="footer-social-btn" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
                         </a>
-                        <a href="#" class="footer-social-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Column 2: Quick Links -->
                 <div>
                     <h4 class="footer-column-title">Liên Kết Nhanh</h4>
                     <ul class="footer-links">
@@ -235,18 +393,15 @@
                     </ul>
                 </div>
 
-                <!-- Column 3: Resources -->
                 <div>
                     <h4 class="footer-column-title">Học Liệu</h4>
                     <ul class="footer-links">
                         <li><a href="content.html">Nội dung giáo dục</a></li>
                         <li><a href="about-team.html">Về chúng tôi</a></li>
                         <li><a href="news.html">Tin tức & Sự kiện</a></li>
-                        <li><a href="contact-us.html">Liên hệ hỗ trợ</a></li>
                     </ul>
                 </div>
 
-                <!-- Column 4: Contact Info -->
                 <div>
                     <h4 class="footer-column-title">Liên Hệ</h4>
                     <div class="footer-contact-item">
@@ -255,16 +410,7 @@
                         </div>
                         <div class="footer-contact-text">
                             <span>Địa chỉ</span>
-                            Số 182, đường Lê Duẩn, phường Trường Vinh, TP. Vinh, Nghệ An
-                        </div>
-                    </div>
-                    <div class="footer-contact-item">
-                        <div class="footer-contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        </div>
-                        <div class="footer-contact-text">
-                            <span>Điện thoại</span>
-                            0354 770 661
+                            Số 182, đường Lê Duẩn, TP. Vinh, Nghệ An
                         </div>
                     </div>
                     <div class="footer-contact-item">
@@ -281,11 +427,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về <a href="about-team.html">Nhóm 38-ĐATN</a>.
-                </div>
-                <div class="footer-bottom-links">
-                    <a href="#" class="mr-4">Chính sách bảo mật</a>
-                    <a href="#">Điều khoản sử dụng</a>
+                    &copy; 2026 <strong>KPMTXQ 24-36T</strong>. Bản quyền thuộc về Nhóm 38-ĐATN.
                 </div>
             </div>
         </div>
@@ -317,7 +459,6 @@
             if (user) mnr.innerHTML = `
                     <div class="user-info" style="text-align: center;">
                         <a href="profile.html" style="font-weight: bold; color: var(--color-primary); font-size: 1.1rem; text-decoration: none; margin-bottom: 8px; display: block;">${escHtml(user.username)}</a>
-                        ${user.role === 'admin' ? '<a href="admin.html" class="btn btn-primary btn-sm" style="width: 100%; margin-bottom: 8px;">Quản trị</a>' : ''}
                         <button onclick="doLogout()" class="btn btn-ghost btn-sm" style="width: 100%;">Đăng xuất</button>
                     </div>
                 `;
@@ -332,7 +473,6 @@
     function escHtml(str) { if (!str) return ''; const el = document.createElement('span'); el.textContent = str; return el.innerHTML; }
     checkSession();
     </script>
-
 </body>
 </html>
 
